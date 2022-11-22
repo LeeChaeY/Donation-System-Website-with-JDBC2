@@ -18,7 +18,7 @@ public class RequestMapping {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
         mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/homepage", new ForwardController("/homepage.jsp"));
-        mappings.put("/donationList/donationFeed", new ForwardController("/donationList/donaionFeed.jsp"));
+        mappings.put("/donationList/donationFeed", new DonationArticleController()); // 1123 by 채연
         
         //mypage section
         mappings.put("/user/login", new LoginController());
@@ -34,9 +34,18 @@ public class RequestMapping {
         mappings.put("/donationForm/animal", new AnimalArticleController());
         mappings.put("/donationForm/disaster", new DisasterArticleController());
         mappings.put("/donationForm/socialGroup", new SocialGroupArticleController());
-
+        
+        // donation Article View
+        mappings.put("/donationList/animal", new ViewAnimalArticleController()); // 1123 by 채연
+        
         //donation Article Update
         mappings.put("/donationList/animalArticleUpdate", new UpdateAnimalArticleController());
+        
+        // comment controller // 1123 by 채연
+        mappings.put("/donationList/comment", new CommentController());
+        mappings.put("/donationList/commentDelete", new DeleteCommentController());
+        mappings.put("/donationList/commentUpdate", new UpdateCommentController());
+
         
         logger.info("Initialized Request Mapping!");
     }
