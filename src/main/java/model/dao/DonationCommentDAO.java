@@ -109,10 +109,10 @@ private JDBCUtil jdbcUtil = null;
 	}
 	
 	//	댓글 수정, id나 createDate는 수정되지 않고 content, updateDate만 수정, 수정한 DonationComment 객체 입력
-	public int updateDonationComment(DonationComment comment) throws SQLException {
+	public int update(int commentId, String content) throws SQLException {
 		try {
-			String update = "UPDATE DONATION_COMMENT SET (content, update_date) = (?, ?) WHERE comment_id = ?";		
-			Object[] param = new Object[] {comment.getContent(), comment.getUpdateDate(), comment.getCommentId()};
+			String update = "UPDATE DONATION_COMMENT SET content = ?, update_date = sysdate WHERE comment_id = ?";		
+			Object[] param = new Object[] {content, commentId};
 			
 			jdbcUtil.setSqlAndParameters(update, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 			jdbcUtil.executeUpdate();
@@ -127,8 +127,27 @@ private JDBCUtil jdbcUtil = null;
 		return 1;			
 	}
 	
+	//	댓글 1개 삭제, comment_id로 삭제(입력)
+	public int remove(int commentId) throws SQLException {
+		try {
+			String remove = "DELETE FROM DONATION_COMMENT WHERE comment_id = ?";		
+			Object[] param = new Object[] {commentId};
+			
+			jdbcUtil.setSqlAndParameters(remove, param);	// JDBCUtil 에 insert문과 매개 변수 설정
+			jdbcUtil.executeUpdate();
+		
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {		
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 1;			
+	}
+	
 	//	후원 인증글 내 댓글들 삭제, donation_article이 삭제되면 같이 삭제되므로 article_id로 삭제(입력)
-	public int removeDonationComment(int articleId) throws SQLException {
+	public int removeAllComment(int articleId) throws SQLException {
 		try {
 			String remove = "DELETE FROM DONATION_COMMENT WHERE article_id = ?";		
 			Object[] param = new Object[] {articleId};

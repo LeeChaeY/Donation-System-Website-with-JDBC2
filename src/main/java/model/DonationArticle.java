@@ -62,6 +62,19 @@ public class DonationArticle {
 		this.userId = userId;
 		this.totalAmount = totalAmount;
 	}
+	
+	public DonationArticle(int articleId, String title, String category, String deadline, 
+			String createDate, String updateDate, int totalAmount, String userId) {
+		super();
+		this.articleId = articleId;
+		this.title = title;
+		this.category = category;
+		this.deadline = deadline;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+		this.totalAmount = totalAmount;
+		this.userId = userId;
+	}
 
 	public int getArticleId() {
 		return articleId;

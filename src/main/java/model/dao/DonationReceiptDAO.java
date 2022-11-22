@@ -90,7 +90,7 @@ public class DonationReceiptDAO {
 	//	후원 인증글 수정, id나 createDate는 수정되지 않고 content, updateDate만 수정, 수정한 DonationReceipt 객체 입력
 	public int update(DonationReceipt receipt) throws SQLException {
 		try {
-			String update = "UPDATE DONATION_RECEIPT SET (content, update_date) = (?, ?) WHERE receipt_id = ?";		
+			String update = "UPDATE DONATION_RECEIPT SET content = ?, update_date = ? WHERE receipt_id = ?";		
 			Object[] param = new Object[] {receipt.getContent(), receipt.getUpdateDate(), receipt.getReceiptId()};
 			
 			jdbcUtil.setSqlAndParameters(update, param);	// JDBCUtil 에 insert문과 매개 변수 설정
