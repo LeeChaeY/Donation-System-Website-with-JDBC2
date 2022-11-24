@@ -30,6 +30,7 @@ public class User {
 		this.reportNum = report_num;
 	}
 
+	//Register
 	public User(String userId ,String name, String password, String phone, String birthday, String email, String addr) {
 		this.userId = userId;
 		this.name = name;
@@ -40,31 +41,14 @@ public class User {
 		this.address = addr;
 	}
 	
-	public User(String userId, String password, String name, String email, String phone, int commId) {
+	// Update
+	public User(String userId , String password, String phone, String email, String addr) {
 		this.userId = userId;
 		this.pwd = password;
-		this.name = name;
-		this.email = email;
 		this.phoneNum = phone;
-	}
-	
-	public User(String userId, String password, String name, String email, String phone, int commId, String commName) {
-		this(userId, password, name, email, phone, commId);
-	}
-
-	public User(String userId, String name, String email, String phone) {
-		this.userId = userId;
-		this.name = name;
 		this.email = email;
-		this.phoneNum = phone;		
+		this.address = addr;
 	}
-	
-	/*public void update(User updateUser) {
-        this.password = updateUser.password;
-        this.name = updateUser.name;
-        this.email = updateUser.email;
-        this.phone = updateUser.phone;
-    }*/
 	
 	public String getUserId() {
 		return userId;
