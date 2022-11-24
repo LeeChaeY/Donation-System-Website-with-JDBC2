@@ -116,6 +116,11 @@
             text-align: right;
             font-style: italic;
         }
+        
+        .container .updateDate{
+       		text-align: right;
+            font-style: italic;
+        }
 
         .container .declare {
             text-align: right;
@@ -362,6 +367,10 @@
         <h2 class="container-title">${article.title }</h2>
 
         <div class="writer">작성자 id : ${article.userId }</div>
+        
+        <c:if test="${not empty article.updateDate}">
+        	<div class="updateDate">수정된 날짜: ${article.updateDate }</div>	
+        </c:if>
 		
 		<!-- [20221120] insert, delete 추가, 신고 수정(글쓴이는 자신을 신고x) from 나현  -->
 		<c:if test="${sessionScope.userId eq article.userId }">
