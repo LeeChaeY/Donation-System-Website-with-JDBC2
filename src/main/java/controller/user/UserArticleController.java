@@ -25,7 +25,6 @@ public class UserArticleController implements Controller {
         try {
             UserManager manager = UserManager.getInstance();
             List<DonationArticle> articles = manager.findMyArticleList(userId);
-           
             request.setAttribute("myArticles", articles);
             return "/user/myArticle.jsp";
         }catch (UserNotFoundException e) {

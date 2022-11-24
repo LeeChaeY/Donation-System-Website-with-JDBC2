@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,11 +24,11 @@
 
         th {
             border: 1px solid goldenrod;
-            background-color: gold;
+            background-color: #fab1a0;
         }
 
         td {
-            border: 1px solid goldenrod;
+            border: 1px solid #e17055;
         }
 
         td:nth-child(1) {
@@ -50,8 +50,8 @@
         td:nth-child(6) {
             width: 10%;
         }
-
-        button {
+        
+        .update {
             background-color: gray;
             color: white;
             border-radius: 3px;
@@ -60,7 +60,12 @@
             padding: 10px;
         }
 
-        button:hover {
+		.update > a {
+			text-decoration: none;
+			color: white;
+		}
+		
+        .update:hover {
             background-color: lightgray;
             color: black;
             cursor: pointer;
@@ -72,58 +77,42 @@
     <jsp:include page="./../navigation.jsp"/>
 
     <div class="container">
-        <h2>≥ª∞° ª˝º∫«— ±‚∫Œ ∏Ò∑œ</h2>
+        <h2>ÎÇ¥Í∞Ä ÏÉùÏÑ±Ìïú Í∏∞Î∂Ä Î™©Î°ù</h2>
 
         <hr>
 
         <table>
             <tr>
-                <th>ªÁ¡¯</th>
-                <th>¡¶∏Ò</th>
-                <th>¿€º∫ ≥Ø¬•</th>
-                <th>«ˆ¿Á ∏±›æ◊(¥‹¿ß : ø¯)</th>
-                <th>øµºˆ¡ı ¿Œ¡ı ø©∫Œ</th>
-                <th>ºˆ¡§</th>
+                <th>ÏÇ¨ÏßÑ</th>
+                <th>Ï†úÎ™©</th>
+                <th>ÏûëÏÑ± ÎÇ†Ïßú</th>
+                <th>ÌòÑÏû¨ Î™®Í∏àÏï°(Îã®ÏúÑ: Ïõê)</th>
+                <th>ÏòÅÏàòÏ¶ù Ïù∏Ï¶ù Ïó¨Î∂Ä</th>
+                <th>ÏàòÏ†ï</th>
             </tr>
 
-            <tr>
-                <td>
-                    <img src="../img/animal.png" alt="">
-                </td>
-                <td>µø¥ˆø©¥Î ¿Œ±Ÿ ¿Ø±‚∞ﬂ</td>
-                <td>2022-10-01</td>
-                <td>5000000</td>
-                <td>¿Œ¡ı</td>
-                <td>
-                    <button>UPDATE</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <img src="../img/cat.jpg" alt="">
-                </td>
-                <td>±≥≈ÎªÁ∞Ì ¥Á«— ∞ÌæÁ¿Ã∏¶ ¿ß«— ∫¥ø¯∫Ò∞° « ø‰«’¥œ¥Ÿ</td>
-                <td>2022-10-29</td>
-                <td>150000000</td>
-                <td>πÃ¿Œ¡ı</td>
-                <td>
-                    <button>UPDATE</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <img src="../img/rain.jpg" alt="">
-                </td>
-                <td>¿Ãπ¯ ∆¯øÏ∑Œ ¿Œ«ÿ ¡˝¿Ã ∏¡∞°¡≥Ω¿¥œ¥Ÿ.</td>
-                <td>2022-10-02</td>
-                <td>1500000</td>
-                <td>πÃ¿Œ¡ı</td>
-                <td>
-                    <button>UPDATE</button>
-                </td>
-            </tr>
+			<c:forEach var="article" items="${myArticles}">
+				<tr>
+	                <td><img src="../img/animal.png" alt=""></td>
+	                <td onclick="location.href='<c:url value='/donationList/${article.category}' >
+			  							<c:param name='articleId' value='${article.articleId}'/>
+			  						</c:url>'">
+	                		${article.title }
+	                </td>
+	                <td>${article.createDate }</td>
+	                <td>${article.totalAmount }</td>
+	                <td>${article.receiptCheck }</td>
+	                <td> 
+	                	<span class="update">
+			  				<a href="<c:url value='/donationForm/${article.category }ArticleUpdate' >
+			  					<c:param name='userId' value='${article.userId}'/>
+			  					<c:param name='articleId' value='${article.articleId}'/>
+			  				</c:url>">UPDATE</a> 
+			  			</span>
+			  		</td>
+	                <!--  <td><button>UPDATE</button></td> -->
+	            </tr>
+			</c:forEach>
         </table>
     </div>
 </body>

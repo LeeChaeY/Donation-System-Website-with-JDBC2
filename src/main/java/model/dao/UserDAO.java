@@ -129,7 +129,7 @@ public class UserDAO {
 	// 사용자가 작성한 글의 리스트
 	public List<DonationArticle> findMyArticleList(String userId) throws SQLException{
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT title, TO_CHAR(create_date, 'YYYY-MM-DD') create_date, total_amount, receipt_check ");
+		sb.append("SELECT article_id, title, category, TO_CHAR(create_date, 'YYYY-MM-DD') create_date, total_amount, receipt_check ");
 		sb.append("FROM donation_article ");
 		sb.append("WHERE user_id = ? ");
 		
@@ -142,10 +142,13 @@ public class UserDAO {
 			ResultSet rs = jdbcUtil.executeQuery();	
 			while(rs.next()) {
 				DonationArticle donation = new DonationArticle(
+						rs.getInt("article_id"),
 						rs.getString("title"),
+						rs.getString("category"),
 						rs.getString("create_date"),
 						rs.getInt("total_amount"),
-						rs.getString("receipt_check")
+						rs.getString("receipt_check"),
+						userId
 						);
 				list.add(donation);
 			}

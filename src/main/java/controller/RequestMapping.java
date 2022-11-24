@@ -39,7 +39,7 @@ public class RequestMapping {
         mappings.put("/donationList/animal", new ViewAnimalArticleController()); // 1123 by 채연
         
         //donation Article Update
-        mappings.put("/donationList/animalArticleUpdate", new UpdateAnimalArticleController());
+        mappings.put("/donationForm/animalArticleUpdate", new UpdateAnimalArticleController());
         
         // comment controller // 1123 by 채연
         mappings.put("/donationList/comment", new CommentController());

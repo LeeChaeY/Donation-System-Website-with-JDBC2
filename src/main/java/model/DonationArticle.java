@@ -79,11 +79,14 @@ public class DonationArticle {
 		this.userId = userId;
 	}
 	
-	public DonationArticle(String title, String createDate, int totalAmount, String receiptCheck) {
+	public DonationArticle(int article_id, String title, String category, String createDate, int totalAmount, String receiptCheck, String userId) {
+		this.articleId = article_id;
 		this.title = title;
+		this.category = category;
 		this.createDate = createDate;
 		this.receiptCheck = receiptCheck;
 		this.totalAmount = totalAmount;
+		this.userId = userId;
 	}
 
 	public int getArticleId() {

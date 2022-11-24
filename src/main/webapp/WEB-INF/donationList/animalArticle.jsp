@@ -366,11 +366,11 @@
 		<!-- [20221120] insert, delete 추가, 신고 수정(글쓴이는 자신을 신고x) from 나현  -->
 		<c:if test="${sessionScope.userId eq article.userId }">
 			<div class="update">
-			  	<a href="<c:url value='/donationList/animalArticleUpdate' >
+			  	<a href="<c:url value='/donationForm/animalArticleUpdate' >
 			  				<c:param name='userId' value='${article.userId}'/>
 			  				<c:param name='articleId' value='${article.articleId}'/>
 			  			</c:url>">수정하기</a>
-			  	<a href="<c:url value='/donationList/animalArticleDELTE' />">삭제하기</a>		  
+			  	<a href="<c:url value='/donationForm/animalArticleDELTE' />">삭제하기</a>		  
 			</div>
 		</c:if>
 
