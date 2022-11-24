@@ -70,7 +70,7 @@
         <h2>Login</h2>
 
         <hr>
-
+	
         <form name="form"  method="POST" action="<c:url value='/user/login' />">
             <table>
                 <tr>

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class DonationArticle {
 	private int articleId;
 	private String title;
@@ -17,6 +19,7 @@ public class DonationArticle {
 	private String receiptCheck;
 	private String userId;
 	private int totalAmount;
+	private List<DonationImage> images;
 	
 	public DonationArticle() {};
 
@@ -74,6 +77,13 @@ public class DonationArticle {
 		this.updateDate = updateDate;
 		this.totalAmount = totalAmount;
 		this.userId = userId;
+	}
+	
+	public DonationArticle(String title, String createDate, int totalAmount, String receiptCheck) {
+		this.title = title;
+		this.createDate = createDate;
+		this.receiptCheck = receiptCheck;
+		this.totalAmount = totalAmount;
 	}
 
 	public int getArticleId() {

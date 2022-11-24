@@ -29,8 +29,7 @@ public class CommentController implements Controller{
 			HttpSession session = request.getSession();
 			String userId = UserSessionUtils.getLoginUserId(session);
 			
-			String articleStr = request.getParameter("articleId");
-			int articleId = Integer.parseInt(articleStr);
+			int articleId = Integer.parseInt(request.getParameter("articleId"));
 			request.setAttribute("articleId", articleId);
 			
 			DonationComment comment = new DonationComment(0, 
@@ -46,39 +45,7 @@ public class CommentController implements Controller{
 			request.setAttribute("result", result);
 			
 			String category = request.getParameter("category");
-			List<DonationComment> comment_l = comm_man.findAllComment(articleId);
-			request.setAttribute("comment", comment_l);
-			
-			if (category == "animal") {
-				AnimalManager animal_man = AnimalManager.getInstance();
-				AnimalArticle article = animal_man.findAnimalArticleByArticleId(articleId);
-				
-				System.out.println("articleInfo: "+article);
-				request.setAttribute("article", article);
-				
-				return "/donationList/animalArticle.jsp";
-			}
-//			else if (category == "disaster") {
-//				DisasterManager disaster_man = DisasterManager.getInstance();
-//				DisasterArticle article = disaster_man.findAnimalArticleByArticleId(articleId);
-//				
-//				System.out.println("articleInfo: "+article);
-//				request.setAttribute("article", article);
-//				
-//				return "/donationList/disaterArticle.jsp";
-//			}
-//			else {
-//				SocialGroupManager socialGroup_man = SocialGroupManager.getInstance();
-//				SocialGroupArticle article = socialGroup_man.findAnimalArticleByArticleId(articleId);
-//				
-//				System.out.println("articleInfo: "+article);
-//				request.setAttribute("article", article);
-//				
-//				return "/donationList/socialGroupArticle.jsp";
-//			}
-			
-//			return "redirect:/donationList/"+category; // viewAnimalController로 리다이렉션
-			return "/donationList/animalArticle.jsp";
+			return "redirect:/donationList/"+category+"?articleId="+articleId; // viewAnimalController로 리다이렉션
 		}catch (Exception e) {
 			// TODO: handle exception
 			log.debug("Exception: ", e);

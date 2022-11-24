@@ -3,6 +3,7 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import model.DonationArticle;
 import model.User;
 import model.dao.UserDAO;
 
@@ -55,16 +56,7 @@ public class UserManager {
 		}		
 		return user;
 	}
-
-	public List<User> findUserList() throws SQLException {
-			return userDAO.findUserList();
-	}
 	
-	public List<User> findUserList(int currentPage, int countPerPage)
-		throws SQLException {
-		return userDAO.findUserList(currentPage, countPerPage);
-	}
-
 	public boolean login(String userId, String password)
 		throws SQLException, UserNotFoundException, PasswordMismatchException {
 		User user = findUser(userId);
@@ -75,10 +67,10 @@ public class UserManager {
 		return true;
 	}
 	
-//	public List<User> findCommunityMembers(int commId) throws SQLException {
-//		return userDAO.findUsersInCommunity(commId);
-//	}
-
+	public List<DonationArticle> findMyArticleList(String userId) throws Exception {
+		return userDAO.findMyArticleList(userId);
+	}
+	
 	public UserDAO getUserDAO() {
 		return this.userDAO;
 	}
