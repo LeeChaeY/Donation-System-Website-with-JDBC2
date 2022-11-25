@@ -38,6 +38,9 @@ public class RequestMapping {
         //donation Article Update
         mappings.put("/donationList/animalArticleUpdate", new UpdateAnimalArticleController());
         
+      //doantion Article Delete
+        mappings.put("/donationList/socialGroupArticleDelete", new DeleteSocialGroupArticleController());
+        
         logger.info("Initialized Request Mapping!");
     }
 

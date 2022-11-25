@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -174,7 +174,6 @@
             form.submit();
         }
     </script>
-    
 </head>
 
 <body>
@@ -195,8 +194,8 @@
             <div>
                 <div>성별<span>*</span></div>
                 <br>
-                <input type="radio" name="sex" id="female"><label for="female">여성</label>
-                <input type="radio" name="sex" id="male"><label for="male">남성</label>
+                <input type="radio" name="gender" id="female" value="F"><label for="female">F</label>
+                <input type="radio" name="gender" id="male" value="M"><label for="male">M</label>
             </div>
 
             <div>
@@ -206,9 +205,9 @@
             </div>
 
             <div>
-                <label for="region">지역<span>*</span></label>
+                <label for="area">지역<span>*</span></label>
                 <br>
-                <input type="text" id="region" name="region">
+                <input type="text" id="area" name="area">
             </div>
 
 
@@ -219,15 +218,15 @@
             </div>
 
             <div>
-                <label for="present_condition">현재 상황<span>*</span></label>
+                <label for="situation">현재 상황<span>*</span></label>
                 <br>
-                <textarea name="present_condition" id="present_condition" rows="7"></textarea>
+                <textarea name="situation" id="situation" rows="7"></textarea>
             </div>
 
             <div>
-                <label for="photo">사진<span>*</span></label>
+                <label for="img">사진<span>*</span></label>
                 <br>
-                <input type="file" id="photo" name="photo">
+                <input type="file" id="img" name="img">
             </div>
 
             <div>
@@ -237,21 +236,21 @@
             </div>
 
             <div>
-                <label for="bank">후원 계좌 은행<span>*</span></label>
+                <label for="bank_name">후원 계좌 은행<span>*</span></label>
                 <br>
-                <input type="text" id="bank" name="bank">
+                <input type="text" id="bank_name" name="bank_name">
             </div>
 
             <div>
-                <label for="account_holder">후원 계좌 예금주 이름<span>*</span></label>
+                <label for="acc_holder">후원 계좌 예금주 이름<span>*</span></label>
                 <br>
-                <input type="text" id="account_holder" name="account_holder">
+                <input type="text" id="acc_holder" name="acc_holder">
             </div>
 
             <div>
-                <label for="account_number">후원 계좌 번호<span>*</span></label>
+                <label for="acc_num">후원 계좌 번호<span>*</span></label>
                 <br>
-                <input type="text" id="account_number" name="account_number">
+                <input type="text" id="acc_num" name="acc_num">
             </div>
 
             <div>
@@ -273,7 +272,7 @@
             </div>
 
             <div class="btn">
-                <input type="button" value="Create" onClick="articleCreate()">
+                <input type="button" value="Create" onClick="return articleCreate()">
             </div>
         </form>
     </div>
