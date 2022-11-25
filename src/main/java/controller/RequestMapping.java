@@ -47,6 +47,9 @@ public class RequestMapping {
         mappings.put("/donationList/commentUpdate", new UpdateCommentController());
 
         
+      //doantion Article Delete
+        mappings.put("/donationList/socialGroupArticleDelete", new DeleteSocialGroupArticleController());
+        
         logger.info("Initialized Request Mapping!");
     }
 

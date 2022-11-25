@@ -2,12 +2,12 @@ package model;
 
 public class SocialGroupArticle extends DonationArticle
 {
+  //private int article_id; //부모클래스에 존재
     private int age;
     private String gender;
     private String type;
     private String area;
     private String situation; //현재 상황
-    //private int article_id; //부모클래스에 존재
     
     public SocialGroupArticle() {
     

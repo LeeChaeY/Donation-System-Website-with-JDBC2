@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -273,6 +273,11 @@
             cursor: pointer;
         }
     </style>
+    <script>
+        function articleRemove() {
+            return confirm("ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
+        }
+    </script>
 </head>
 
 <body>
@@ -280,55 +285,72 @@
 
     <div class="container">
         <h2 class="desc">Donation for Socially vulnerable</h2>
-        <h2 class="container-title">¿©¼º¿ëÇ° Áö¿ø ºÎÅ¹µå¸³´Ï´Ù.</h2>
+        
+        <h2 class="container-title">${socialGroupArticle.title}</h2>
 
-        <div class="writer">ÀÛ¼ºÀÚ id : somsome</div>
-        <div class="declare">
-            <button onclick="confirm('½Å°íÇÏ½Ã°Ú½À´Ï±î?')">½Å°íÇÏ±â</button>
-        </div>
+        <div class="writer">ìž‘ì„±ìž id : ${socialGroupArticle.userId}</div>
+        
+        <!-- [20221120] insert, delete ì¶”ê°€, ì‹ ê³  ìˆ˜ì •(ê¸€ì“´ì´ëŠ” ìžì‹ ì„ ì‹ ê³ x) from ë‚˜í˜„  -->
+        <c:if test="${sessionScope.userId eq socialGroupArticle.userId}">
+            <div class="update">
+                <a href="<c:url value='/donationList/socialGroupArticleUpdate' >
+                            <c:param name='userId' value='${socialGroupArticle.userId}'/>
+                            <c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+                        </c:url>">ìˆ˜ì •í•˜ê¸°</a>
+                <a href="<c:url value='/donationList/socialGroupArticleDelete' >
+                            <c:param name='userId' value='${socialGroupArticle.userId}'/>
+                            <c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+                        </c:url>" onclick="return articleRemove();">ì‚­ì œí•˜ê¸°</a> &nbsp;            
+            </div>
+        </c:if>
+
+        <c:if test="${sessionScope.userId ne socialGroupArticle.userId}">
+            <div class="declare">
+                <button onclick="confirm('ì‹ ê³ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?')">ì‹ ê³ í•˜ê¸°</button>
+            </div>
+        </c:if>
 
         <hr>
 
-        <h2 class="deadline">[ÈÄ¿ø ¸¶°¨ÀÏ] 2022-10-24</h2>
+        <h2 class="deadline">[í›„ì› ë§ˆê°ì¼] ${socialGroupArticle.deadline}</h2>
 
         <hr>
 
         <div class="imgPost">
-            <img src="../img/volunteer.jpg" alt="">
+            <!-- <img src="../img/volunteer.jpg" alt=""> -->
+            <img src="../img/${articleImage}" alt="">
         </div>
 
         <div>
-            <h2 class="info-title">ÈÄ¿ø ±âº» Á¤º¸</h2>
+            <h2 class="info-title">í›„ì› ê¸°ë³¸ ì •ë³´</h2>
 
             <div class="info">
                 <div class="info1">
                     <div>
-                        <div class="basic">¼ºº°</div>
-                        <div>¿©ÀÚ</div>
+                        <div class="basic">ì„±ë³„</div>
+                        <div>${socialGroupArticle.gender}</div>
                     </div>
 
                     <div>
-                        <div class="basic">³ªÀÌ</div>
-                        <div>17¼¼</div>
+                        <div class="basic">ë‚˜ì´</div>
+                        <div>${socialGroupArticle.age}</div>
                     </div>
 
                     <div>
-                        <div class="basic">Áö¿ª</div>
-                        <div>¼­¿ïÆ¯º°½Ã °­³²±¸</div>
+                        <div class="basic">ì§€ì—­</div>
+                        <div>${socialGroupArticle.area}</div>
                     </div>
                 </div>
 
                 <div class="info2">
                     <div>
-                        <div class="basic">ÇöÀç »óÈ²</div>
-                        <div>
-                            ³ª¶ó¿¡¼­ ³ª¿À´Â »ý¸®´ë Áö¿øÀ¸·Î´Â ºÎÁ·ÇÑ »óÅÂÀÔ´Ï´Ù.
-                        </div>
+                        <div class="basic">í˜„ìž¬ ìƒí™©</div>
+                        <div>${socialGroupArticle.situation}</div>
                     </div>
 
                     <div>
-                        <div class="basic">±âÅ¸ Æ¯Â¡</div>
-                        <div>¾øÀ½</div>
+                        <div class="basic">ê¸°íƒ€ íŠ¹ì§•</div>
+                        <div>${socialGroupArticle.otherText}</div>
                     </div>
                 </div>
             </div>
@@ -338,26 +360,22 @@
         <hr>
 
         <div>
-            <h2 class="info-title">ÈÄ¿ø±Ý »ç¿ë °èÈ¹</h2>
+            <h2 class="info-title">í›„ì›ê¸ˆ ì‚¬ìš© ê³„íš</h2>
 
             <div class="info info3">
                 <div>
-                    <div class="basic">»ç¿ë ¸¶°¨ÀÏ</div>
-                    <div>2022-11-24</div>
+                    <div class="basic">ì‚¬ìš© ë§ˆê°ì¼</div>
+                    <div>${socialGroupArticle.dueDate}</div>
                 </div>
 
                 <div>
-                    <div class="basic">»ç¿ë ¿¹»ê¾È</div>
-                    <div>
-                        ¸¶Æ® : 100,000 µî
-                    </div>
+                    <div class="basic">ì‚¬ìš© ì˜ˆì‚°ì•ˆ</div>
+                    <div>${socialGroupArticle.usePlan}</div>
                 </div>
 
                 <div>
-                    <div class="basic">±âÅ¸</div>
-                    <div>
-                        ¾øÀ½
-                    </div>
+                    <div class="basic">ê¸°íƒ€</div>
+                    <div>${socialGroupArticle.otherText}</div>
                 </div>
             </div>
         </div>
@@ -366,79 +384,79 @@
 
         <div class="donation">
             <div class="account">
-                <span>ÈÄ¿ø °èÁÂ : </span>
-                <span>Ä«Ä«¿À¹ðÅ©</span>
-                <span>ÀÌÈñ¹Î</span>
-                <span>3333-11-2492614</span>
+                <span>í›„ì› ê³„ì¢Œ : </span>
+                <span>${socialGroupArticle.bankName}</span>
+                <span>${socialGroupArticle.accHolder}</span>
+                <span>${socialGroupArticle.accNum}</span>
             </div>
 
-            <button>ÈÄ¿øÇÏ±â</button>
+            <button>í›„ì›í•˜ê¸°</button>
         </div>
 
         <hr>
 
         <div class="donater">
-            <h2 class="info-title">ÈÄ¿ø±Ý ÀÔ±Ý ³»¿ª</h2>
+            <h2 class="info-title">í›„ì›ê¸ˆ ìž…ê¸ˆ ë‚´ì—­</h2>
 
             <table>
                 <tr>
-                    <th>ÀÌ¸§</th>
-                    <th>ÈÄ¿ø±Ý¾×(´ÜÀ§ : ¿ø)</th>
+                    <th>ì´ë¦„</th>
+                    <th>í›„ì›ê¸ˆì•¡(ë‹¨ìœ„ : ì›)</th>
                 </tr>
 
                 <tr>
-                    <td>±è¹Î¼ö</td>
+                    <td>ê¹€ë¯¼ìˆ˜</td>
                     <td>15,000</td>
                 </tr>
 
                 <tr>
-                    <td>¹ÚÁö¿î</td>
+                    <td>ë°•ì§€ìš´</td>
                     <td>1,000</td>
                 </tr>
 
                 <tr>
-                    <td>ÀÌÁø¿ì</td>
+                    <td>ì´ì§„ìš°</td>
                     <td>50,000</td>
                 </tr>
 
                 <tr>
-                    <td>±è¹ÎÁö</td>
+                    <td>ê¹€ë¯¼ì§€</td>
                     <td>10,000</td>
                 </tr>
 
                 <tr>
-                    <td>ÀÌ¿¹Áø</td>
+                    <td>ì´ì˜ˆì§„</td>
                     <td>55,000</td>
                 </tr>
 
                 <tr>
-                    <td>ÃÖ¼öÇÏ</td>
+                    <td>ìµœìˆ˜í•˜</td>
                     <td>1,000</td>
                 </tr>
 
 
                 <tr>
-                    <td>ÀÓÁö¹Î</td>
+                    <td>ìž„ì§€ë¯¼</td>
                     <td>500</td>
                 </tr>
 
                 <tr>
-                    <td>ÀÌ°æ¿ø</td>
+                    <td>ì´ê²½ì›</td>
                     <td>35,000</td>
                 </tr>
 
                 <tr>
-                    <td>¹ÚÁöÀº</td>
+                    <td>ë°•ì§€ì€</td>
                     <td>10,000</td>
                 </tr>
 
                 <tr>
-                    <td>ÀÌÁÖ¿ø</td>
+                    <td>ì´ì£¼ì›</td>
                     <td>15,000</td>
                 </tr>
 
                 <tr>
-                    <th colspan="2">ÃÑ¾× : 500,000</th>
+                    <th colspan="2">ì´ì•¡ : 500,000</th>
                 </tr>
             </table>
         </div>
@@ -446,51 +464,51 @@
         <hr>
 
         <div class="receipt">
-            <h2 class="info-title">ÈÄ¿ø±Ý »ç¿ë ³»¿ª</h2>
-            <div>ÀÛ¼ºÀÚ°¡ ¾ÆÁ÷ ¿µ¼öÁõ ¿Ã¸®Áö ¾Ê¾Ò½À´Ï´Ù.</div>
+            <h2 class="info-title">í›„ì›ê¸ˆ ì‚¬ìš© ë‚´ì—­</h2>
+            <div>ìž‘ì„±ìžê°€ ì•„ì§ ì˜ìˆ˜ì¦ ì˜¬ë¦¬ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.</div>
         </div>
 
         <hr>
 
         <div class="comment">
-            <div class="comment-title">´ñ±Û</div>
+            <div class="comment-title">ëŒ“ê¸€</div>
 
             <form action="">
                 <textarea name="" id="" style="width: 100%;" rows="5"></textarea>
-                <button>´ñ±Û ÀÛ¼ºÀÚ</button>
+                <button>ëŒ“ê¸€ ìž‘ì„±ìž</button>
             </form>
 
             <div class="line">
-                <button>½Å°í</button>
+                <button>ì‹ ê³ </button>
 
                 <div class="person">
-                    <div class="person-id">id[ÀÛ¼ºÀÚ]</div>
+                    <div class="person-id">id[ìž‘ì„±ìž]</div>
                     <div class="person-time">2022-10-24 12:00</div>
                 </div>
 
-                <div class="person-content">´öºÐ¿¡ ÈÄ¿øÀÌ ¸¹ÀÌ ÀÌ·ïÁö°í ÀÖ½À´Ï´Ù.</div>
+                <div class="person-content">ë•ë¶„ì— í›„ì›ì´ ë§Žì´ ì´ë¤„ì§€ê³  ìžˆìŠµë‹ˆë‹¤.</div>
             </div>
 
             <div class="line">
-                <button>½Å°í</button>
+                <button>ì‹ ê³ </button>
 
                 <div class="person">
-                    <div class="person-id">id[ÈÄ¿øÀÚ]</div>
+                    <div class="person-id">id[í›„ì›ìž]</div>
                     <div class="person-time">2022-10-11 9:00</div>
                 </div>
 
-                <div class="person-content">¿µ¼öÁõ ÀÎÁõ ¼­µÑ·¯ ºÎÅ¹µå¸³´Ï´Ù.</div>
+                <div class="person-content">ì˜ìˆ˜ì¦ ì¸ì¦ ì„œë‘˜ëŸ¬ ë¶€íƒë“œë¦½ë‹ˆë‹¤.</div>
             </div>
 
             <div class="line">
-                <button>½Å°í</button>
+                <button>ì‹ ê³ </button>
 
                 <div class="person">
-                    <div class="person-id">id[ÈÄ¿øÀÚ]</div>
+                    <div class="person-id">id[í›„ì›ìž]</div>
                     <div class="person-time">2022-10-02 16:00</div>
                 </div>
 
-                <div class="person-content">Èû³»¼¼¿ä</div>
+                <div class="person-content">íž˜ë‚´ì„¸ìš”</div>
             </div>
         </div>
     </div>
