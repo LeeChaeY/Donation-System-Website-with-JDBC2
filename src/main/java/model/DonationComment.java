@@ -25,6 +25,15 @@ public class DonationComment {
 		this.articleId = articleId;
 		this.userId = userId;
 	}
+	
+	public DonationComment(int commentId, String content,  int articleId, String userId) {
+		super();
+		this.commentId = commentId;
+		this.content = content;
+		this.articleId = articleId;
+		this.userId = userId;
+	}
+
 
 	public int getCommentId() {
 		return commentId;

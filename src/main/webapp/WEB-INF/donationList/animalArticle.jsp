@@ -116,6 +116,11 @@
             text-align: right;
             font-style: italic;
         }
+        
+        .container .updateDate{
+       		text-align: right;
+            font-style: italic;
+        }
 
         .container .declare {
             text-align: right;
@@ -141,7 +146,7 @@
             border-radius: 3px;
             text-decoration: none;
         }
-
+        
         .container .declare>a {
             background-color: lightcoral;
         }
@@ -255,24 +260,32 @@
             background-color: lightgreen;
         }
 
-        .container .comment>.line {
+        .container .comment>.comm>.line {
             border-bottom: 1px dotted green;
         }
+        
+        .container .comment>.comm>.line>form>input {
+            margin: 10px;
+        }
 
-        .container .comment>.line>.person {
+        .container .comment>.comm>.line>.person {
             display: flex;
             padding: 5px;
         }
 
-        .container .comment>.line>.person>div {
+        .container .comment>.comm>.line>.person>div {
             padding: 5px;
         }
 
-        .container .comment>.line>.person>.person-time {
+        .container .comment>.comm>.line>.person>.person-time {
             color: gray;
         }
+        
+        .container .comment>.comm>.line>.person-content {
+            margin: 10px;
+        }
 
-        .container .comment>.line>button {
+        .container .comment>.comm>.line>button {
             border: none;
             padding: 5px;
             border-radius: 3px;
@@ -287,6 +300,62 @@
             cursor: pointer;
         }
     </style>
+    <script>
+    	function commentCreate() {
+    		if (${sessionScope.userId eq null}) {
+    			confirm('로그인 후 이용가능한 서비스입니다.');
+    			location.href = "<c:url value='/user/login' />";
+    			return;
+    		}
+    		if (event.target.parentElement.com_text.value == "") {
+    			alert("댓글을 입력하세요.");
+    			event.target.parentElement.com_text.focus();
+                return false;
+             }
+    		confirm('댓글을 작성하시겠습니까?');
+    		event.target.parentElement.submit();
+		}
+    	
+    	function commentUpdate() {
+    		if (event.target.parentElement.updateCommText.value == "") {
+    			alert("댓글을 입력하세요.");
+    			event.target.parentElement.updateCommText.focus();
+                return false;
+             }
+    		confirm('댓글을 수정하시겠습니까?');
+    		event.target.parentElement.submit();
+		}
+    	
+    	function CancelEdit() {
+    		personContent = event.target.parentElement.parentElement.getElementsByClassName("person-content");
+    		
+    		if (personContent[0].style.display == "none") 
+    			personContent[0].style.display = "inline-block";
+    		else 
+    			personContent[0].style.display = "none";
+    		
+    		if (personContent[1].style.display == "none") 
+    			personContent[1].style.display = "inline";
+    		else
+    			personContent[1].style.display = "none";	
+    	} 
+    	
+    	function CommUpdateEdit() {
+    		event.preventDefault();
+    		
+    		var commmentList = document.getElementsByClassName("comm");
+
+    		for (var comm of commmentList) {
+    			personContent = comm.getElementsByClassName("person-content");
+    			personContent[0].style.display = "inline-block";
+    			personContent[1].style.display = "none";
+    		}
+    		
+    		personContent = event.target.parentElement.parentElement.getElementsByClassName("person-content");
+    		personContent[0].style.display = "none";
+    		personContent[1].style.display = "inline";
+		}
+    </script>
 </head>
 
 <body>
@@ -298,15 +367,19 @@
         <h2 class="container-title">${article.title }</h2>
 
         <div class="writer">작성자 id : ${article.userId }</div>
+        
+        <c:if test="${not empty article.updateDate}">
+        	<div class="updateDate">수정된 날짜: ${article.updateDate }</div>	
+        </c:if>
 		
 		<!-- [20221120] insert, delete 추가, 신고 수정(글쓴이는 자신을 신고x) from 나현  -->
 		<c:if test="${sessionScope.userId eq article.userId }">
 			<div class="update">
-			  	<a href="<c:url value='/donationList/animalArticleUpdate' >
+			  	<a href="<c:url value='/donationForm/animalArticleUpdate' >
 			  				<c:param name='userId' value='${article.userId}'/>
 			  				<c:param name='articleId' value='${article.articleId}'/>
 			  			</c:url>">수정하기</a>
-			  	<a href="<c:url value='/donationList/animalArticleDELTE' />">삭제하기</a>		  
+			  	<a href="<c:url value='/donationForm/animalArticleDELTE' />">삭제하기</a>		  
 			</div>
 		</c:if>
 
@@ -498,7 +571,7 @@
                 </tr>
 
                 <tr>
-                    <th colspan="2">총액: ${article.otherText }</th>
+                    <th colspan="2">총액 : 500,000</th>
                 </tr>
             </table>
         </div>
@@ -516,44 +589,69 @@
 
         <div class="comment">
             <div class="comment-title">댓글</div>
-
-            <form action="">
-                <textarea name="" id="" style="width: 100%;" rows="5"></textarea>
-                <button>댓글 작성</button>
-            </form>
-
-            <div class="line">
-                <button>신고</button>
-
-                <div class="person">
-                    <div class="person-id">id[작성자]</div>
-                    <div class="person-time">2022-10-24 16:00</div>
-                </div>
-
-                <div class="person-content">덕분에 후원이 많이 이뤄지고 있습니다.</div>
-            </div>
-
-            <div class="line">
-                <button>신고</button>
-
-                <div class="person">
-                    <div class="person-id">id[후원자]</div>
-                    <div class="person-time">2022-10-20 11:00</div>
-                </div>
-
-                <div class="person-content">영수증 인증 서둘러 부탁드립니다.</div>
-            </div>
-
-            <div class="line">
-                <button>신고</button>
-
-                <div class="person">
-                    <div class="person-id">id[후원자]</div>
-                    <div class="person-time">2022-10-01 19:00</div>
-                </div>
-
-                <div class="person-content">상태는 호전 되었나요?</div>
-            </div>
+			  			
+            <form name="form" method="POST" action="<c:url value='/donationList/comment' >
+			  				<c:param name='articleId' value='${article.articleId}'/>
+			  				<c:param name='category' value='${article.category}'/>
+			  			</c:url>">
+                <textarea name="com_text" style="width: 100%;" rows="5"></textarea>
+                
+                	<input type="button" value="댓글 작성" onclick="commentCreate()">
+                </form>
+            
+			<c:forEach var="comm" items="${comment}">
+				<div class="comm">
+					<c:if test="${sessionScope.userId eq comm.userId }">
+						<div class="update">
+						  	<a href="#" onclick="CommUpdateEdit()">수정</a>
+						  		
+						  	<a href="<c:url value='/donationList/commentDelete' >
+						  				<c:param name='articleId' value='${article.articleId}'/>
+						  				<c:param name='category' value='${article.category}'/>
+						  				<c:param name='commentId' value='${comm.commentId}'/>
+						  			</c:url>" onclick="confirm('댓글을 삭제하시겠습니까?')">삭제</a>		  
+						</div>
+					</c:if>
+		
+					<c:if test="${sessionScope.userId ne comm.userId }">
+				        <div class="declare">
+				            <button>신고</button>
+				        </div>
+					</c:if>
+					
+					<div class="line">
+	                	<div class="person">
+	                		<c:if test="${sessionScope.userId eq article.userId }">
+	                    		<div class="person-id">${comm.userId}[작성자]</div>
+	                    	</c:if>
+	                    	<c:if test="${sessionScope.userId ne article.userId }">
+	                    		<div class="person-id">${comm.userId}[후원자]</div>
+	                    	</c:if>
+	                    	
+	                    	<c:if test="${article.updateDate eq null }">
+	                    		<div class="person-time">${comm.createDate}</div>
+	                    	</c:if>
+	                    	<c:if test="${article.updateDate ne null }">
+	                    		<div class="person-time">${comm.updateDate}</div>
+	                    	</c:if>
+	                	</div>
+						
+	                	<div class="person-content">${comm.content}</div>
+	                	
+	                	<form name="form" class="person-content" method="POST" action="<c:url value='/donationList/commentUpdate' >
+						  				<c:param name='articleId' value='${article.articleId}'/>
+						  				<c:param name='category' value='${article.category}'/>
+						  				<c:param name='commentId' value='${comm.commentId}'/>
+						  			</c:url>" style="display:none;">
+						  			
+			                <textarea name="updateCommText" style="width: 100%;" rows="5">${comm.content}</textarea>
+			                <input type="button" value="댓글 수정" onclick="commentUpdate()">
+			                <input type="button" value="취소" onclick="CancelEdit()">
+			            </form>
+            		</div>
+            	</div>
+			</c:forEach>
+ 
         </div>
     </div>
 </body>

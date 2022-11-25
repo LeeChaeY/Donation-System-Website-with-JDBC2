@@ -70,7 +70,7 @@
         <h2>Login</h2>
 
         <hr>
-
+	
         <form name="form"  method="POST" action="<c:url value='/user/login' />">
             <table>
                 <tr>
@@ -104,6 +104,16 @@
                         <input type="button" value="Join" onClick="userCreate(
                         '<c:url value='/user/register'/>')">
                     </td>
+                </tr>
+                
+                <tr>
+                   <td colspan="2">
+                       <c:if test="${loginFailed}">
+                       <script>
+                           alert("<c:out value='${exception.getMessage()}' />");
+                       </script>
+                    </c:if>
+                   </td>
                 </tr>
             </table>
         </form>

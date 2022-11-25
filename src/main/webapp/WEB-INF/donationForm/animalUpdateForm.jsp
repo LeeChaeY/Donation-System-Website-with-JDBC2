@@ -185,9 +185,10 @@
 
         <hr>
 
-        <form name="form" method="POST" action="<c:url value='/donationList/animalArticleUpdate' />">
+        <form name="form" method="POST" action="<c:url value='/donationForm/animalArticleUpdate' />">
         	<input type="hidden" name="articleId" value="${article.articleId }">
         	<input type="hidden" name="userId" value="${article.userId }">
+        	<input type="hidden" name="createDate" value="${article.createDate }">
         
             <div>
                 <label for="title">제목<span>*</span></label>

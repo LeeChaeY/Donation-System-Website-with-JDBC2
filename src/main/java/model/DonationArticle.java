@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class DonationArticle {
 	private int articleId;
 	private String title;
@@ -17,6 +19,7 @@ public class DonationArticle {
 	private String receiptCheck;
 	private String userId;
 	private int totalAmount;
+	private List<DonationImage> images;
 	
 	public DonationArticle() {};
 
@@ -61,6 +64,29 @@ public class DonationArticle {
 		this.receiptCheck = receiptCheck;
 		this.userId = userId;
 		this.totalAmount = totalAmount;
+	}
+	
+	public DonationArticle(int articleId, String title, String category, String deadline, 
+			String createDate, String updateDate, int totalAmount, String userId) {
+		super();
+		this.articleId = articleId;
+		this.title = title;
+		this.category = category;
+		this.deadline = deadline;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+		this.totalAmount = totalAmount;
+		this.userId = userId;
+	}
+	
+	public DonationArticle(int article_id, String title, String category, String createDate, int totalAmount, String receiptCheck, String userId) {
+		this.articleId = article_id;
+		this.title = title;
+		this.category = category;
+		this.createDate = createDate;
+		this.receiptCheck = receiptCheck;
+		this.totalAmount = totalAmount;
+		this.userId = userId;
 	}
 
 	public int getArticleId() {

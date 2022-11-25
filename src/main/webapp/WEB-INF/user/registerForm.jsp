@@ -154,7 +154,26 @@
             form.email.focus();
             return false;
          }
-      
+         if(form.postcode.value == ""){
+        	 alert("우편번호를 입력하십시오.");
+             form.postcode.focus();
+             return false;
+         }
+         if(form.address.value == ""){
+        	 alert("주소를 입력하십시오.");
+             form.address.focus();
+             return false;
+         }
+         if(form.detailAddress.value == ""){
+        	 alert("상세주소를 입력하십시오.");
+             form.detailAddress.focus();
+             return false;
+         }
+         if(form.extraAddress.value == ""){
+        	 alert("참고항목을 입력하십시오.");
+             form.extraAddress.focus();
+             return false;
+         }
          form.submit();
       }
    </script>
@@ -209,7 +228,7 @@
                 <label id="location">주소<span>*</span></label>
                 <br>
                 <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-                <input type="text" id="postcode" placeholder="우편번호"><br>
+                <input type="text" id="postcode" placeholder="우편번호" name="postcode"><br>
                 <input type="text" id="address" placeholder="주소" name="address"><br>
                 <input type="text" id="detailAddress" placeholder="상세주소" name="detailAddress"><br>
                 <input type="text" id="extraAddress" placeholder="참고항목" name="extraAddress">

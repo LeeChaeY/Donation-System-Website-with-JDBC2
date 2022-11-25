@@ -4,6 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
+import model.DonationArticle;
+import model.Donator;
 import model.User;
 
 /**
@@ -45,9 +50,10 @@ public class UserDAO {
 	 */
 	public int update(User user) throws SQLException {
 		String sql = "UPDATE USER_INFO "
-					+ "SET password=?, name=?, email=?, phone=?, commId=? "
-					+ "WHERE userid=?";
-		Object[] param = new Object[] {};				
+					+ "SET pwd=?, phone_num=?, email=?, address = ? "
+					+ "WHERE user_id=?";
+		Object[] param = new Object[] {user.getPassword(), user.getPhoneNum(),
+				user.getEmail(), user.getAddress(), user.getUserId()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
 			
 		try {				
@@ -119,61 +125,36 @@ public class UserDAO {
 		}
 		return null;
 	}
-
-	/**
-	 * 전체 사용자 정보를 검색하여 List에 저장 및 반환
-	 */
-	public List<User> findUserList() throws SQLException {
-        String sql = "SELECT userId, name, email, NVL(commId,0) AS commId, cName " 
-        		   + "FROM USER_INFO u LEFT OUTER JOIN Community c ON u.commId = c.cId "
-        		   + "ORDER BY userId";
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
-					
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
-			List<User> userList = new ArrayList<User>();	// User들의 리스트 생성
-			while (rs.next()) {
-				// User 객체를 생성하여 현재 행의 정보를 저장
-				
-				
-				// List에 User 객체 저장
-			}		
-			return userList;					
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();		// resource 반환
-		}
-		return null;
-	}
 	
-	/**
-	 * 전체 사용자 정보를 검색한 후 현재 페이지와 페이지당 출력할 사용자 수를 이용하여
-	 * 해당하는 사용자 정보만을 List에 저장하여 반환.
-	 */
-	public List<User> findUserList(int currentPage, int countPerPage) throws SQLException {
-		String sql = "SELECT userId, name, email, NVL(commId, 0) AS commId, cName " 
-					+ "FROM USER_INFO u LEFT OUTER JOIN Community c ON u.commId = c.cId "
-					+ "ORDER BY userId";
-		jdbcUtil.setSqlAndParameters(sql, null,					// JDBCUtil에 query문 설정
-				ResultSet.TYPE_SCROLL_INSENSITIVE,				// cursor scroll 가능
-				ResultSet.CONCUR_READ_ONLY);						
+	
+	// 사용자가 작성한 글의 리스트
+	public List<DonationArticle> findMyArticleList(String userId) throws SQLException{
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT article_id, title, category, TO_CHAR(create_date, 'YYYY-MM-DD') create_date, total_amount, receipt_check ");
+		sb.append("FROM donation_article ");
+		sb.append("WHERE user_id = ? ");
+		
+		String sql = sb.toString();
+		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});
+		List<DonationArticle> list = new ArrayList<DonationArticle>();
 		
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();				// query 실행			
-			int start = ((currentPage-1) * countPerPage) + 1;	// 출력을 시작할 행 번호 계산
-			if ((start >= 0) && rs.absolute(start)) {			// 커서를 시작 행으로 이동
-				List<User> userList = new ArrayList<User>();	// User들의 리스트 생성
-				do {
-					// User 객체를 생성하여 현재 행의 정보를 저장
-					
-					
-					// 리스트에 User 객체 저장
-				} while ((rs.next()) && (--countPerPage > 0));		
-				return userList;							
+			ResultSet rs = jdbcUtil.executeQuery();	
+			while(rs.next()) {
+				DonationArticle donation = new DonationArticle(
+						rs.getInt("article_id"),
+						rs.getString("title"),
+						rs.getString("category"),
+						rs.getString("create_date"),
+						rs.getInt("total_amount"),
+						rs.getString("receipt_check"),
+						userId
+						);
+				list.add(donation);
 			}
-		} catch (Exception ex) {
+			return list;
+		}catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.close();		// resource 반환
@@ -181,54 +162,6 @@ public class UserDAO {
 		return null;
 	}
 
-	/**
-	 * 특정 커뮤니티에 속한 사용자들을 검색하여 List에 저장 및 반환
-	 */
-	public List<User> findUsersInCommunity(int communityId) throws SQLException {
-        String sql = "SELECT userId, name, email, phone FROM USER_INFO "
-     				+ "WHERE commId = ?";                         
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {communityId});	// JDBCUtil에 query문과 매개 변수 설정
-		
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
-			List<User> memList = new ArrayList<User>();	// member들의 리스트 생성
-			while (rs.next()) {
-				// User 객체를 생성하여 현재 행의 정보를 저장
-				// List에 Community 객체 저장
-			}		
-			return memList;					
-				
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();		// resource 반환
-		}
-		return null;
-	}
-	
-	/**
-	 * 특정 커뮤니티에 속한 사용자들의 수를 count하여 반환
-	 */
-	public int getNumberOfUsersInCommunity(int communityId) {
-		String sql = "SELECT COUNT(userId) FROM USER_INFO "
-     				+ "WHERE commId = ?";              
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {communityId});	// JDBCUtil에 query문과 매개 변수 설정
-		
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
-			rs.next();										
-			return rs.getInt(1);			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();		// resource 반환
-		}
-		return 0;
-	}
-	
-	/**
-	 * 주어진 사용자 ID에 해당하는 사용자가 존재하는지 검사 
-	 */
 	public boolean existingUser(String userId) throws SQLException {
 		String sql = "SELECT count(*) FROM USER_INFO WHERE user_id=?";      
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정

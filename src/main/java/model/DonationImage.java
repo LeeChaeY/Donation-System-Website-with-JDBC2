@@ -2,18 +2,18 @@ package model;
 
 public class DonationImage
 {
-    String imgLink;
-    int imgOrder;
-    int articleId;
+    private String imgLink;
+    private int imgOrder;
+    private int articleId;
+    DonationArticle article; // article 객체 먼저 생성..?
     
-    public DonationImage() {
+    public DonationImage() { }
 
-    }
-
-    public DonationImage(String imgLink, int imgOrder, int articleId) {
+    public DonationImage(String imgLink, int imgOrder, int articleId, DonationArticle article) {
         this.imgLink = imgLink;
         this.imgOrder = imgOrder;
         this.articleId = articleId;
+        this.article = article;
     }
 
     public String getImgLink() {
