@@ -2,34 +2,21 @@ package model;
 
 public class DonationImage
 {
-    private String imgLink;
-    private int imgOrder;
     private int articleId;
-    DonationArticle article; // article 객체 먼저 생성..?
+    private int fileOrder;
+    private String fileName;
+    DonationArticle article;
     
-    public DonationImage() { }
+    public DonationImage() {
+        super();
+    }
 
-    public DonationImage(String imgLink, int imgOrder, int articleId, DonationArticle article) {
-        this.imgLink = imgLink;
-        this.imgOrder = imgOrder;
+    public DonationImage(int articleId, int fileOrder, String fileName, DonationArticle article) {
+        super();
         this.articleId = articleId;
+        this.fileOrder = fileOrder;
+        this.fileName = fileName;
         this.article = article;
-    }
-
-    public String getImgLink() {
-        return imgLink;
-    }
-
-    public void setImgLink(String imgLink) {
-        this.imgLink = imgLink;
-    }
-
-    public int getImgOrder() {
-        return imgOrder;
-    }
-
-    public void setImgOrder(int imgOrder) {
-        this.imgOrder = imgOrder;
     }
 
     public int getArticleId() {
@@ -40,9 +27,34 @@ public class DonationImage
         this.articleId = articleId;
     }
 
+    public int getFileOrder() {
+        return fileOrder;
+    }
+
+    public void setFileOrder(int fileOrder) {
+        this.fileOrder = fileOrder;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public DonationArticle getArticle() {
+        return article;
+    }
+
+    public void setArticle(DonationArticle article) {
+        this.article = article;
+    }
+
     @Override
     public String toString() {
-        return "DonationImage [imgLink=" + imgLink + ", imgOrder=" + imgOrder + ", articleId=" + articleId + "]";
+        return "DonationImage [articleId=" + articleId + ", fileOrder=" + fileOrder + ", fileName=" + fileName
+                + ", article=" + article + "]";
     }
-    
+
 }

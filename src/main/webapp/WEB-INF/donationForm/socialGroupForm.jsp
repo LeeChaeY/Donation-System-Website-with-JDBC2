@@ -184,7 +184,7 @@
 
         <hr>
 
-        <form name="form" method="POST" action="<c:url value='/donationForm/socialGroup' />">
+        <form name="form" method="POST" action="<c:url value='/donationForm/socialGroup' />" enctype="multipart/form-data">
             <div>
                 <label for="title">제목<span>*</span></label>
                 <br>
@@ -224,9 +224,9 @@
             </div>
 
             <div>
-                <label for="img">사진<span>*</span></label>
+                <label for="image">사진<span>*</span></label>
                 <br>
-                <input type="file" id="img" name="img">
+                <input type="file" id="image" name="image" multiple="multiple">
             </div>
 
             <div>
