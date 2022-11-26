@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -317,8 +318,11 @@
         <hr>
 
         <div class="imgPost">
-            <!-- <img src="../img/volunteer.jpg" alt=""> -->
-            <img src="../img/${articleImage}" alt="">
+            <c:forEach var="image" items="${socialGroupArticle.imageList}">
+                <img src="<c:url value='/upload/${image.fileName}'/>"><br>
+            </c:forEach>
+            <!-- 첫번째 이미지파일 -->
+            <%-- <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/> --%>
         </div>
 
         <div>

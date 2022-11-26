@@ -23,8 +23,12 @@ public class SocialGroupManager
         return socialGroupMan;
     }
     
-    public int create(SocialGroupArticle article, DonationImage image) throws SQLException, ExistingUserException {
-        return socialGroupDAO.create(article, image);
+    public int create(SocialGroupArticle article) throws SQLException, ExistingUserException {
+        return socialGroupDAO.create(article);
+    }
+    
+    public int create_image(DonationImage image) throws SQLException, ExistingUserException {
+        return socialGroupDAO.create_image(image);
     }
     
     public int remove(int articleid) throws SQLException, UserNotFoundException {
