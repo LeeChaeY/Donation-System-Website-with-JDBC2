@@ -59,6 +59,7 @@ public class RequestMapping {
         
         //doantion Article Delete
         mappings.put("/donationList/socialGroupArticleDelete", new DeleteSocialGroupArticleController());
+        mappings.put("/donationList/animalArticleDelete", new DeleteAnimalArticleController());
         
         // donation Receipt 1127 by 채연
         mappings.put("/donationList/receipt", new DonationReceiptController());

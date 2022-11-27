@@ -32,4 +32,8 @@ public class AnimalManager {
 	public int update(AnimalArticle animal) throws SQLException{
 		return animalDAO.update(animal);
 	}
+	
+	public int remove(int articleId) throws SQLException{
+		return animalDAO.remove(articleId);
+	}
 }
