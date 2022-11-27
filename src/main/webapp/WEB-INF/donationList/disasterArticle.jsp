@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,11 +12,9 @@
         * {
             box-sizing: border-box;
         }
-
         body {
             margin: 0;
         }
-
         nav {
             background-color: antiquewhite;
             display: flex;
@@ -24,50 +22,42 @@
             justify-content: center;
             text-align: center;
         }
-
         nav>div {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 70%;
         }
-
         .title {
             font-weight: bold;
             font-size: xx-large;
             color: brown;
             margin: 30px 0px;
         }
-
         #main-menu {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         #main-menu,
         #sub-menu {
             margin: 0;
             padding: 0;
             list-style-type: none;
         }
-
         #main-menu>li {
             padding: 15px;
         }
-
         #main-menu>li>a {
             color: black;
             text-align: center;
             text-decoration: none;
             font-weight: 600;
         }
-
         #main-menu>li>a:hover {
             cursor: pointer;
             color: gray;
         }
-
         #sub-menu {
             height: 0;
             visibility: hidden;
@@ -75,7 +65,6 @@
             position: relative;
             z-index: 10;
         }
-
         #sub-menu>li {
             width: 115px;
             padding: 10px 0px;
@@ -84,37 +73,48 @@
             background: brown;
             border-bottom: 1px solid rgba(255, 255, 255, 0.6);
         }
-
         #sub-menu>li>a {
             color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
         }
-
         #main-menu>li:hover #sub-menu {
             visibility: visible;
         }
-
         #sub-menu>li>a:hover {
             cursor: pointer;
             color: lightgray;
         }
-
         .container {
             width: 70%;
             margin: 0 auto;
         }
-
         .container .desc {
             color: indianred;
         }
-
         .container-title {
             text-align: center;
         }
-
         .container .writer {
             text-align: right;
             font-style: italic;
+        }
+        
+        .container .updateDate{
+       		text-align: right;
+            font-style: italic;
+        }
+        
+        .container .update {
+            text-align: right;
+            margin: 10px;
+        }
+
+        .container .update>a {
+            background-color: cadetblue;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            text-decoration: none;
         }
 
         .container .declare {
@@ -129,7 +129,7 @@
             border-radius: 3px;
         }
 
-        .container .declare>button:hover {
+        .container .declare>a {
             background-color: lightcoral;
         }
 
@@ -137,13 +137,11 @@
             color: cadetblue;
             text-align: center;
         }
-
         .container .imgPost {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         .container .info-title {
             font-weight: bold;
             font-size: x-large;
@@ -151,40 +149,33 @@
             padding: 20px;
             margin: 20px 0;
         }
-
         .container .info1>div {
             display: flex;
             padding: 5px;
             margin: 5px;
         }
-
         .container .info .basic {
             font-weight: bold;
             width: 15%;
         }
-
         .container .info2>div,
         .container .info3>div {
             padding: 5px;
             margin: 5px;
         }
-
         .container .donation {
             text-align: center;
             padding: 30px;
             margin: 10px 0;
         }
-
         .container .donation .account {
             font-size: x-large;
             font-weight: bold;
             margin: 20px;
         }
-
         .container .donation>.account>span {
             color: cornflowerblue;
         }
-
         .container .donation button {
             border: none;
             border-radius: 5px;
@@ -193,27 +184,49 @@
             background-color: darkblue;
             transition: all 0.3s ease;
         }
-
         .container .donation button:hover {
             background-color: cornflowerblue;
         }
-
         .container .donater table {
             text-align: center;
             margin: 50px auto;
             width: 70%;
             border-collapse: collapse;
         }
-
         .container .donater table th,
         .container .donater table td {
             border: 1px solid black;
             height: 30px;
             width: 50%;
         }
-
         .container .receipt {
             text-align: center;
+            padding: 0px 0px 40px 0px;
+            margin: 20px 0;
+        }
+        
+        .container .receipt button {
+            /* border: none; */
+            padding: 10px 15px;
+  			text-align: center;
+  			font-weight: bold;
+            /* color: white; */
+            /* background-color: darkblue; */
+        }
+        
+        .container .receipt button:hover {
+            background-color: lightgary;
+        }
+        
+        .container .receipt .receipt-info .basic {
+            font-weight: bold;
+            width: 15%;
+        }
+
+        .container .receipt .receipt-info >div {
+        	text-align: left;
+            padding: 5px;
+            margin: 5px;
         }
 
         .container .comment>div {
@@ -242,24 +255,32 @@
             background-color: lightgreen;
         }
 
-        .container .comment>.line {
+        .container .comment>.comm>.line {
             border-bottom: 1px dotted green;
         }
+        
+        .container .comment>.comm>.line>form>input {
+            margin: 10px;
+        }
 
-        .container .comment>.line>.person {
+        .container .comment>.comm>.line>.person {
             display: flex;
             padding: 5px;
         }
 
-        .container .comment>.line>.person>div {
+        .container .comment>.comm>.line>.person>div {
             padding: 5px;
         }
 
-        .container .comment>.line>.person>.person-time {
+        .container .comment>.comm>.line>.person>.person-time {
             color: gray;
         }
+        
+        .container .comment>.comm>.line>.person-content {
+            margin: 10px;
+        }
 
-        .container .comment>.line>button {
+        .container .comment>.comm>.line>button {
             border: none;
             padding: 5px;
             border-radius: 3px;
@@ -273,69 +294,244 @@
         button:hover {
             cursor: pointer;
         }
+        
+        .container .btn {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 10px;
+		}
+		
+		.container .btn>div {
+			background-color: gray;
+			border-radius: 3px;
+			color: white;
+			transition: all 0.3s ease;
+			padding: 5px;
+		}
+		
+		.container .btn>div:hover {
+			background-color: lightgray;
+		}
+		
+		.container .btn > div > a {
+			text-decoration: none;
+			color: white;
+		}
+		
+		.container .btn > div > a:hover {
+			color: black;
+			cursor: pointer;
+		}
     </style>
+    <script>
+    	function loginCheck() {
+    		if (${sessionScope.userId eq null}) {
+    			alert('ë¡œê·¸ì¸ í›„ ì´ìš©ê°€ëŠ¥í•œ ì„œë¹„ìŠ¤ì…ë‹ˆë‹¤.');
+    			window.location.href = "<c:url value='/user/login' />";
+    			return;
+    		}
+    		else return 1;
+    	}
+    	
+    	function commentCreate() {
+			var p = loginCheck();
+    		
+    		if (p == 1) {
+	    		if (event.target.parentElement.com_text.value == "") {
+	    			alert("ëŒ“ê¸€ì„ ì…ë ¥í•˜ì„¸ìš”.");
+	    			event.target.parentElement.com_text.focus();
+	                return false;
+	             }
+	    		confirm('ëŒ“ê¸€ì„ ì‘ì„±í•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
+	    		event.target.parentElement.submit();
+    		}
+		}
+    	
+    	function commentUpdate() {
+    		if (event.target.parentElement.updateCommText.value == "") {
+    			alert("ëŒ“ê¸€ì„ ì…ë ¥í•˜ì„¸ìš”.");
+    			event.target.parentElement.updateCommText.focus();
+                return false;
+             }
+    		confirm('ëŒ“ê¸€ì„ ìˆ˜ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
+    		event.target.parentElement.submit();
+		}
+    	
+    	function cancelEdit() {
+    		personContent = event.target.parentElement.parentElement.getElementsByClassName("person-content");
+    		
+    		if (personContent[0].style.display == "none") 
+    			personContent[0].style.display = "inline-block";
+    		else 
+    			personContent[0].style.display = "none";
+    		
+    		if (personContent[1].style.display == "none") 
+    			personContent[1].style.display = "inline";
+    		else
+    			personContent[1].style.display = "none";	
+    	} 
+    	
+    	function commUpdateEdit() {
+    		event.preventDefault();
+    		
+    		var commmentList = document.getElementsByClassName("comm");
+
+    		for (var comm of commmentList) {
+    			personContent = comm.getElementsByClassName("person-content");
+    			personContent[0].style.display = "inline-block";
+    			personContent[1].style.display = "none";
+    		}
+    		
+    		personContent = event.target.parentElement.parentElement.getElementsByClassName("person-content");
+    		personContent[0].style.display = "none";
+    		personContent[1].style.display = "inline";
+		}
+    	
+    	function createDeclare() {
+    		event.preventDefault();
+    		var p = loginCheck();
+    		
+    		if (p == 1) {
+    			confirm('ì‹ ê³ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
+    			location.href="<c:url value='/user/report' >
+    				<c:param name='reportedId' value='${article.userId}'/>
+    				<c:param name='articleId' value='${article.articleId}'/>
+    				<c:param name='category' value='${article.category}'/>
+    			</c:url>";
+    		}
+    		
+    	}
+    	
+    	function createReceipt() {
+    		var child = window.open("<c:url value='/donationList/receipt' > <c:param name='articleId' value='${article.articleId}'/> <c:param name='category' value='${article.category}'/> </c:url>", "receiptCreate", "width=640, height=400");
+    		//window.location.reload();
+    		//child.close();
+    	}
+    	
+    	function updateReceipt(url) {
+    		event.preventDefault();
+    		loginCheck();
+    		
+    		var child = window.open(url, "receiptCreate", "width=640, height=400");
+    		//window.location.reload();
+    		//child.close();
+    	}
+    </script>
 </head>
 
 <body>
     <jsp:include page="./../navigation.jsp"/>
     
     <div class="container">
-        <h2 class="desc">Donation for Disaster</h2>
-        <h2 class="container-title">ÀÌ¹ø Æø¿ì·Î ÀÎÇØ ÁıÀÌ ¸Á°¡Á³½À´Ï´Ù.
+        <h2 class="desc">Donation for disaster</h2>
 
-        </h2>
-        <div class="writer">ÀÛ¼ºÀÚ id : somsome</div>
-        <div class="declare">
-            <button onclick="confirm('½Å°íÇÏ½Ã°Ú½À´Ï±î?')">½Å°íÇÏ±â</button>
-        </div>
+        <h2 class="container-title">${article.title }</h2>
 
+        <div class="writer">ì‘ì„±ì id : ${article.userId }</div>
+        
+        <c:if test="${empty article.updateDate }">
+        	<div class="updateDate">ì‘ì„±ëœ ë‚ ì§œ: ${article.createDate }</div>
+        </c:if>
+        
+        <c:if test="${not empty article.updateDate}">
+        	<div class="updateDate">ìˆ˜ì •ëœ ë‚ ì§œ: ${article.updateDate }</div>	
+        </c:if>
+		
+		<!-- [20221120] insert, delete ì¶”ê°€, ì‹ ê³  ìˆ˜ì •(ê¸€ì“´ì´ëŠ” ìì‹ ì„ ì‹ ê³ x) from ë‚˜í˜„  -->
+		<c:if test="${sessionScope.userId eq article.userId }">
+			<div class="update">
+			  	<a href="<c:url value='/donationForm/animalArticleUpdate' >
+			  				<c:param name='userId' value='${article.userId}'/>
+			  				<c:param name='articleId' value='${article.articleId}'/>
+			  			</c:url>">ìˆ˜ì •í•˜ê¸°</a>
+			  	<a href="<c:url value='/donationForm/animalArticleDELTE' />">ì‚­ì œí•˜ê¸°</a>		  
+			</div>
+		</c:if>
+
+		<c:if test="${sessionScope.userId ne article.userId }">
+	        <div class="declare">
+	            <button onclick="createDeclare()">ì‹ ê³ í•˜ê¸°</button>
+	        </div>
+		</c:if>
+		
         <hr>
 
-        <h2 class="deadline">[ÈÄ¿ø ¸¶°¨ÀÏ] 2022-10-24</h2>
+        <h2 class="deadline">[í›„ì› ë§ˆê°ì¼] ${article.deadline }</h2>
 
         <hr>
 
         <div class="imgPost">
             <img src="../img/rain.jpg" alt="">
         </div>
+        
+        <%-- <div class="imgPost">
+            <c:forEach var="image" items="${socialGroupArticle.imageList}">
+                <img src="<c:url value='/upload/${image.fileName}'/>"><br>
+            </c:forEach>
+            <!-- ì²«ë²ˆì§¸ ì´ë¯¸ì§€íŒŒì¼ -->
+            <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/>
+        </div> --%>
 
         <div>
-            <h2 class="info-title">ÈÄ¿ø ±âº» Á¤º¸</h2>
+            <h2 class="info-title">í›„ì› ê¸°ë³¸ ì •ë³´</h2>
 
             <div class="info">
                 <div class="info1">
                     <div>
-                        <div class="basic">Àç³­ ÀçÇØ Á¾·ù</div>
-                        <div>È«¼ö(Æø¿ì)</div>
+                        <div class="basic">ì´ë¦„</div>
+                        <div>${article.name }</div>
                     </div>
 
                     <div>
-                        <div class="basic">Àç³½ ÀçÇØ ¸íÄª</div>
-                        <div>¼öµµ±Ç ÁıÁß Æø¿ì</div>
+                        <div class="basic">ì§€ì—­</div>
+                        <div>${article.area }</div>
                     </div>
 
                     <div>
-                        <div class="basic">Áö¿ª</div>
-                        <div>¼­¿ïÆ¯º°½Ã °­³²±¸</div>
+                        <div class="basic">ì¢…</div>
+                        <div>${article.type }</div>
                     </div>
 
                     <div>
-                        <div class="basic">ÇÇÇØ±İ¾×</div>
-                        <div>100¸¸¿ø</div>
+                        <div class="basic">ë‚˜ì´</div>
+                        <div>${article.age }</div>
+                    </div>
+
+                    <div>
+                        <div class="basic">ëª¸ë¬´ê²Œ</div>
+                        <div>${article.weight }</div>
+                    </div>
+
+                    <div>
+                        <div class="basic">ì„±ë³„</div>
+                        <div>${article.gender }</div>
+                    </div>
+
+                    <div>
+                        <div class="basic">ì¤‘ì„±í™” ìœ ë¬´</div>
+                        <div>${article.gender }</div>
+                    </div>
+
+                    <div>
+                        <div class="basic">í˜„ì¬ ìƒí™©</div>
+                        <div>${article.currentStatus }</div>
                     </div>
                 </div>
 
                 <div class="info2">
                     <div>
-                        <div class="basic">ÇöÀç »óÈ²</div>
+                        <div class="basic">ê±´ê°• ìƒíƒœ</div>
                         <div>
-                            ÀÌ¹ø Æø¿ì·Î ÁıÀÌ ¸Á°¡Á³½À´Ï´Ù. ´çÀå »ıÈ°ÇÒ °÷ÀÌ ¿©ÀÇÄ¡ ¾Ê½À´Ï´Ù.
+                            ${article.healthStatus }
                         </div>
                     </div>
 
                     <div>
-                        <div class="basic">±âÅ¸ Æ¯Â¡</div>
-                        <div>¾øÀ½</div>
+                        <div class="basic">ì„±ê²©</div>
+                        <div>
+                            ${article.personality }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -345,29 +541,30 @@
         <hr>
 
         <div>
-            <h2 class="info-title">ÈÄ¿ø±İ »ç¿ë °èÈ¹</h2>
+            <h2 class="info-title">í›„ì›ê¸ˆ ì‚¬ìš© ê³„íš</h2>
 
             <div class="info info3">
                 <div>
-                    <div class="basic">»ç¿ë ¸¶°¨ÀÏ</div>
-                    <div>2022-11-24</div>
+                    <div class="basic">í›„ì› ë§ˆê°ì¼</div>
+                    <div>${article.deadline }</div>
                 </div>
 
                 <div>
-                    <div class="basic">»ç¿ë ¿¹»ê¾È</div>
+                    <div class="basic">í›„ì›ê¸ˆ ì‚¬ìš© ë§ˆê°ì¼</div>
+                    <div>${article.dueDate }</div>
+                </div>
+
+                <div>
+                    <div class="basic">ì‚¬ìš© ì˜ˆì‚°ì•ˆ</div>
                     <div>
-                        Àü±â ¼³ºñ : 300,000
+                        ${article.usePlan }
                     </div>
                 </div>
 
                 <div>
-                    <div class="basic">±âÅ¸</div>
+                    <div class="basic">ê¸°íƒ€</div>
                     <div>
-                        ´çÀå ÈÄ¿ø ¹ŞÀ» °÷ÀÌ ¿©±â ¹Û¿¡ ¶°¿À¸£Áö ¾Ê¾Æ¼­ ±ŞÇÏ°Ô ¿Ã¸³´Ï´Ù.
-                        <br>
-                        ÈÄ¿øÇØÁÖ½Å ±İ¾×Àº º¸´Ù Åõ¸íÇÏ°Ô ¿µ¼öÁõ °ø°³·Î ÀÎÁõÇÏ°Ú½À´Ï´Ù.
-                        <br>
-                        µµ¿ÍÁÖ½Ã¸é °¨»çÇÏ°Ú½À´Ï´Ù.
+                        ${article.otherText }
                     </div>
                 </div>
             </div>
@@ -377,133 +574,165 @@
 
         <div class="donation">
             <div class="account">
-                <span>ÈÄ¿ø °èÁÂ : </span>
-                <span>Ä«Ä«¿À¹ğÅ©</span>
-                <span>ÀÌÈñ¹Î</span>
-                <span>3333-11-2492614</span>
+                <span>í›„ì› ê³„ì¢Œ : </span>
+                <span>${article.bankName }</span>
+                <span>${article.accHolder }</span>
+                <span>${article.accNum }</span>
             </div>
-
-            <button>ÈÄ¿øÇÏ±â</button>
+            
+             <div class="btn">
+					<div>
+						<a href="<c:url value='/donation' >
+				  				<c:param name='articleId' value='${article.articleId}'/>
+				  				<c:param name='category' value='${article.category}'/>
+				  		</c:url>">Donate now</a>
+					</div>
+			 </div>
         </div>
+
         <hr>
 
         <div class="donater">
-            <h2 class="info-title">ÈÄ¿ø±İ ÀÔ±İ ³»¿ª</h2>
+            <h2 class="info-title">í›„ì›ê¸ˆ ì…ê¸ˆ ë‚´ì—­</h2>
 
             <table>
-                <tr>
-                    <th>ÀÌ¸§</th>
-                    <th>ÈÄ¿ø±İ¾×(´ÜÀ§ : ¿ø)</th>
+            	<tr>
+                    <th>ì´ë¦„</th>
+                    <th>í›„ì›ê¸ˆì•¡(ë‹¨ìœ„ : ì›)</th>
                 </tr>
-
+            
+            	<c:forEach var="donator" items="${donatorList}">
+            		<tr>
+	                    <td>${donator.userId }</td>
+	                    <td>${donator.amount }</td>
+                	</tr>
+            	</c:forEach>
+                
                 <tr>
-                    <td>±è¹Î¼ö</td>
-                    <td>15,000</td>
+                    <th colspan="2">ì´ì•¡ : ${article.totalAmount }</th>
                 </tr>
-
-                <tr>
-                    <td>¹ÚÁö¿î</td>
-                    <td>1,000</td>
-                </tr>
-
-                <tr>
-                    <td>ÀÌÁø¿ì</td>
-                    <td>50,000</td>
-                </tr>
-
-                <tr>
-                    <td>±è¹ÎÁö</td>
-                    <td>10,000</td>
-                </tr>
-
-                <tr>
-                    <td>ÀÌ¿¹Áø</td>
-                    <td>55,000</td>
-                </tr>
-
-                <tr>
-                    <td>ÃÖ¼öÇÏ</td>
-                    <td>1,000</td>
-                </tr>
-
-
-                <tr>
-                    <td>ÀÓÁö¹Î</td>
-                    <td>500</td>
-                </tr>
-
-                <tr>
-                    <td>ÀÌ°æ¿ø</td>
-                    <td>35,000</td>
-                </tr>
-
-                <tr>
-                    <td>¹ÚÁöÀº</td>
-                    <td>10,000</td>
-                </tr>
-
-                <tr>
-                    <td>ÀÌÁÖ¿ø</td>
-                    <td>15,000</td>
-                </tr>
-
-                <tr>
-                    <th colspan="2">ÃÑ¾× : 500,000</th>
-                </tr>
+                
             </table>
         </div>
 
         <hr>
 
         <div class="receipt">
-            <h2 class="info-title">ÈÄ¿ø±İ »ç¿ë ³»¿ª</h2>
-            <div>
-                <img src="../img/receipt.jpg" alt="">
-            </div>
+            <h2 class="info-title">í›„ì›ê¸ˆ ì‚¬ìš© ë‚´ì—­</h2>
+            <c:if test="${empty donationReceipt.receiptId }">
+            	<c:if test="${sessionScope.userId eq article.userId }">
+            		<div>
+                		<button onclick="createReceipt()">ì¸ì¦ê¸€ ì˜¬ë¦¬ê¸°</button>
+            		</div>
+            	</c:if>
+            
+            	<c:if test="${sessionScope.userId ne article.userId }">
+            		<div>
+                		<img src="../img/receipt.jpg" alt="">
+            		</div>
+            	</c:if>
+            </c:if>
+            
+            <c:if test="${not empty donationReceipt.receiptId }">
+            	<c:if test="${sessionScope.userId eq article.userId }">
+					<div class="update">
+			  			<a href="#" onclick="updateReceipt('<c:url value='/donationForm/receiptUpdate' > 
+			  										<c:param name='receiptId' value='${donationReceipt.receiptId}'/> 
+			  										<c:param name='articleId' value='${article.articleId}'/> 
+			  										<c:param name='category' value='${article.category}'/> 
+			  										</c:url>')">ìˆ˜ì •í•˜ê¸°</a>
+			  			<a href="<c:url value='/donationList/receiptDelete' >
+			  					<c:param name='articleId' value='${article.articleId}'/>
+			  					<c:param name='category' value='${article.category}'/>
+			  				</c:url>" onclick="confirm('ì¸ì¦ê¸€ì„ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?')">ì‚­ì œí•˜ê¸°</a>		  
+					</div>
+				</c:if>
+				
+            	<div class="receipt-info">
+            		<div class="basic">ì¸ì¦ ë‚´ì—­ ì‚¬ì§„</div>
+                    <div class="imgPost">
+            			<c:forEach var="receiptImage" items="${donationReceipt.imageList}">
+                			<img src="<c:url value='/upload/${receiptImage.imgLink}'/>"><br>
+            			</c:forEach>
+            			<!-- ì²«ë²ˆì§¸ ì´ë¯¸ì§€íŒŒì¼ -->
+            			<%-- <img src="<c:url value='/upload/${donationReceipt.imageList[0].fileName}'/>"/><br/> --%>
+        			</div>
+                    
+                    <div class="basic">ì¸ì¦ ë‚´ì—­ ì„¤ëª…</div>
+                    <div>${donationReceipt.content}</div>
+                </div>
+            	
+            </c:if>   
+            
         </div>
-
+            
         <hr>
 
         <div class="comment">
-            <div class="comment-title">´ñ±Û</div>
-
-            <form action="">
-                <textarea name="" id="" style="width: 100%;" rows="5"></textarea>
-                <button>´ñ±Û ÀÛ¼º</button>
-            </form>
-
-            <div class="line">
-                <button>½Å°í</button>
-
-                <div class="person">
-                    <div class="person-id">id[ÀÛ¼ºÀÚ]</div>
-                    <div class="person-time">2022-10-29 16:00</div>
-                </div>
-
-                <div class="person-content">´öºĞ¿¡ ÈÄ¿øÀÌ ¸¹ÀÌ ÀÌ·ïÁö°í ÀÖ½À´Ï´Ù.</div>
-            </div>
-
-            <div class="line">
-                <button>½Å°í</button>
-
-                <div class="person">
-                    <div class="person-id">id[ÈÄ¿øÀÚ]</div>
-                    <div class="person-time">2022-10-24 23:00</div>
-                </div>
-
-                <div class="person-content">¿µ¼öÁõ ÀÎÁõ ¼­µÑ·¯ ºÎÅ¹µå¸³´Ï´Ù.</div>
-            </div>
-
-            <div class="line">
-                <button>½Å°í</button>
-
-                <div class="person">
-                    <div class="person-id">id[ÈÄ¿øÀÚ]</div>
-                    <div class="person-time">2022-10-20 10:00</div>
-                </div>
-
-                <div class="person-content">´õ ÀÌ»óÀÇ ÀçÇØ´Â ¾ø¾úÀ¸¸é ÁÁ°Ú³×¿ä.</div>
-            </div>
+            <div class="comment-title">ëŒ“ê¸€</div>
+			  			
+            <form name="form" method="POST" action="<c:url value='/donationList/comment' >
+			  				<c:param name='articleId' value='${article.articleId}'/>
+			  				<c:param name='category' value='${article.category}'/>
+			  			</c:url>">
+                <textarea name="com_text" style="width: 100%;" rows="5"></textarea>
+                
+                	<input type="button" value="ëŒ“ê¸€ ì‘ì„±" onclick="commentCreate()">
+                </form>
+            
+			<c:forEach var="comm" items="${comment}">
+				<div class="comm">
+					<c:if test="${sessionScope.userId eq comm.userId }">
+						<div class="update">
+						  	<a href="#" onclick="commUpdateEdit()">ìˆ˜ì •</a>
+						  		
+						  	<a href="<c:url value='/donationList/commentDelete' >
+						  				<c:param name='articleId' value='${article.articleId}'/>
+						  				<c:param name='category' value='${article.category}'/>
+						  				<c:param name='commentId' value='${comm.commentId}'/>
+						  			</c:url>" onclick="confirm('ëŒ“ê¸€ì„ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?')">ì‚­ì œ</a>		  
+						</div>
+					</c:if>
+		
+					<c:if test="${sessionScope.userId ne comm.userId }">
+				        <div class="declare">
+				            <button onclick="createDeclare()">ì‹ ê³ </button>
+				        </div>
+					</c:if>
+					
+					<div class="line">
+	                	<div class="person">
+	                		<c:if test="${sessionScope.userId eq article.userId }">
+	                    		<div class="person-id">${comm.userId}[ì‘ì„±ì]</div>
+	                    	</c:if>
+	                    	<c:if test="${sessionScope.userId ne article.userId }">
+	                    		<div class="person-id">${comm.userId}[í›„ì›ì]</div>
+	                    	</c:if>
+	                    	
+	                    	<c:if test="${empty comm.updateDate }">
+	                    		<div class="person-time">${comm.createDate}</div>
+	                    	</c:if>
+	                    	<c:if test="${not empty comm.updateDate }">
+	                    		<div class="person-time">${comm.updateDate}</div>
+	                    	</c:if>
+	                	</div>
+						
+	                	<div class="person-content">${comm.content}</div>
+	                	
+	                	<form name="form" class="person-content" method="POST" action="<c:url value='/donationList/commentUpdate' >
+						  				<c:param name='articleId' value='${article.articleId}'/>
+						  				<c:param name='category' value='${article.category}'/>
+						  				<c:param name='commentId' value='${comm.commentId}'/>
+						  			</c:url>" style="display:none;">
+						  			
+			                <textarea name="updateCommText" style="width: 100%;" rows="5">${comm.content}</textarea>
+			                <input type="button" value="ëŒ“ê¸€ ìˆ˜ì •" onclick="commentUpdate()">
+			                <input type="button" value="ì·¨ì†Œ" onclick="cancelEdit()">
+			            </form>
+            		</div>
+            	</div>
+			</c:forEach>
+ 
         </div>
     </div>
 </body>

@@ -29,6 +29,9 @@ public class RequestMapping {
         mappings.put("/user/delete", new DeleteUserController());
         mappings.put("/user/myArticle", new UserArticleController());
         mappings.put("/user/myDonaion", new UserDonationController());
+        //1126 by 채연
+        mappings.put("/user/report", new UserReportController());
+
         
         //donation Article Create
         mappings.put("/donationForm/animal", new AnimalArticleController());
@@ -37,9 +40,14 @@ public class RequestMapping {
         
         // donation Article View
         mappings.put("/donationList/animal", new ViewAnimalArticleController()); // 1123 by 채연
+        mappings.put("/donationList/socialGroup", new ViewSocialGroupArticleController());
         
         //donation Article Update
         mappings.put("/donationForm/animalArticleUpdate", new UpdateAnimalArticleController());
+        
+        //[22/11/26] donaiton by 나현 
+        mappings.put("/donation", new DonationController());
+
         
         // comment controller // 1123 by 채연
         mappings.put("/donationList/comment", new CommentController());
@@ -49,6 +57,12 @@ public class RequestMapping {
         
       //doantion Article Delete
         mappings.put("/donationList/socialGroupArticleDelete", new DeleteSocialGroupArticleController());
+        
+        // donation Receipt 1127 by 채연
+        mappings.put("/donationList/receipt", new DonationReceiptController());
+        mappings.put("/donationForm/receipt", new ForwardController("/donationForm/receiptForm.jsp"));
+        mappings.put("/donationList/receiptDelete", new DeleteDonationReceiptController());
+        mappings.put("/donationForm/receiptUpdate", new UpdateDonationReceiptController());
         
         logger.info("Initialized Request Mapping!");
     }

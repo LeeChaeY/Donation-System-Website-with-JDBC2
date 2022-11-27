@@ -25,7 +25,7 @@ public class DonationDAO {
 			jdbcUtil.setSqlAndParameters(insert, param1);	// JDBCUtil 에 insert문과 매개 변수 설정
 			jdbcUtil.executeUpdate();
 			
-			String update = "UPDATE DONATION_ARTICLE SET total_amount = amount + ? WHERE article_id = ?";		
+			String update = "UPDATE DONATION_ARTICLE SET total_amount = total_amount + ? WHERE article_id = ?";		
 			Object[] param2 = new Object[] {donation.getAmount(), donation.getArticleId()};
 			
 			jdbcUtil.setSqlAndParameters(update, param2);	// JDBCUtil 에 insert문과 매개 변수 설정

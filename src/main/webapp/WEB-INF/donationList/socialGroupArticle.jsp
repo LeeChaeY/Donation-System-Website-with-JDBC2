@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,11 +13,9 @@
         * {
             box-sizing: border-box;
         }
-
         body {
             margin: 0;
         }
-
         nav {
             background-color: antiquewhite;
             display: flex;
@@ -24,50 +23,42 @@
             justify-content: center;
             text-align: center;
         }
-
         nav>div {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 70%;
         }
-
         .title {
             font-weight: bold;
             font-size: xx-large;
             color: brown;
             margin: 30px 0px;
         }
-
         #main-menu {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         #main-menu,
         #sub-menu {
             margin: 0;
             padding: 0;
             list-style-type: none;
         }
-
         #main-menu>li {
             padding: 15px;
         }
-
         #main-menu>li>a {
             color: black;
             text-align: center;
             text-decoration: none;
             font-weight: 600;
         }
-
         #main-menu>li>a:hover {
             cursor: pointer;
             color: gray;
         }
-
         #sub-menu {
             height: 0;
             visibility: hidden;
@@ -75,7 +66,6 @@
             position: relative;
             z-index: 10;
         }
-
         #sub-menu>li {
             width: 115px;
             padding: 10px 0px;
@@ -83,37 +73,48 @@
             background: brown;
             border-bottom: 1px solid rgba(255, 255, 255, 0.6);
         }
-
         #sub-menu>li>a {
             color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
         }
-
         #main-menu>li:hover #sub-menu {
             visibility: visible;
         }
-
         #sub-menu>li>a:hover {
             cursor: pointer;
             color: lightgray;
         }
-
         .container {
             width: 70%;
             margin: 0 auto;
         }
-
         .container .desc {
             color: indianred;
         }
-
         .container-title {
             text-align: center;
         }
-
         .container .writer {
             text-align: right;
             font-style: italic;
+        }
+        
+        .container .updateDate{
+       		text-align: right;
+            font-style: italic;
+        }
+        
+        .container .update {
+            text-align: right;
+            margin: 10px;
+        }
+
+        .container .update>a {
+            background-color: cadetblue;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            text-decoration: none;
         }
 
         .container .declare {
@@ -128,7 +129,7 @@
             border-radius: 3px;
         }
 
-        .container .declare>button:hover {
+        .container .declare>a {
             background-color: lightcoral;
         }
 
@@ -136,13 +137,11 @@
             color: cadetblue;
             text-align: center;
         }
-
         .container .imgPost {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         .container .info-title {
             font-weight: bold;
             font-size: x-large;
@@ -150,40 +149,33 @@
             padding: 20px;
             margin: 20px 0;
         }
-
         .container .info1>div {
             display: flex;
             padding: 5px;
             margin: 5px;
         }
-
         .container .info .basic {
             font-weight: bold;
             width: 15%;
         }
-
         .container .info2>div,
         .container .info3>div {
             padding: 5px;
             margin: 5px;
         }
-
         .container .donation {
             text-align: center;
             padding: 30px;
             margin: 10px 0;
         }
-
         .container .donation .account {
             font-size: x-large;
             font-weight: bold;
             margin: 20px;
         }
-
         .container .donation>.account>span {
             color: cornflowerblue;
         }
-
         .container .donation button {
             border: none;
             border-radius: 5px;
@@ -192,27 +184,49 @@
             background-color: darkblue;
             transition: all 0.3s ease;
         }
-
         .container .donation button:hover {
             background-color: cornflowerblue;
         }
-
         .container .donater table {
             text-align: center;
             margin: 50px auto;
             width: 70%;
             border-collapse: collapse;
         }
-
         .container .donater table th,
         .container .donater table td {
             border: 1px solid black;
             height: 30px;
             width: 50%;
         }
-
         .container .receipt {
             text-align: center;
+            padding: 0px 0px 40px 0px;
+            margin: 20px 0;
+        }
+        
+        .container .receipt button {
+            /* border: none; */
+            padding: 10px 15px;
+  			text-align: center;
+  			font-weight: bold;
+            /* color: white; */
+            /* background-color: darkblue; */
+        }
+        
+        .container .receipt button:hover {
+            background-color: lightgary;
+        }
+        
+        .container .receipt .receipt-info .basic {
+            font-weight: bold;
+            width: 15%;
+        }
+
+        .container .receipt .receipt-info >div {
+        	text-align: left;
+            padding: 5px;
+            margin: 5px;
         }
 
         .container .comment>div {
@@ -241,24 +255,32 @@
             background-color: lightgreen;
         }
 
-        .container .comment>.line {
+        .container .comment>.comm>.line {
             border-bottom: 1px dotted green;
         }
+        
+        .container .comment>.comm>.line>form>input {
+            margin: 10px;
+        }
 
-        .container .comment>.line>.person {
+        .container .comment>.comm>.line>.person {
             display: flex;
             padding: 5px;
         }
 
-        .container .comment>.line>.person>div {
+        .container .comment>.comm>.line>.person>div {
             padding: 5px;
         }
 
-        .container .comment>.line>.person>.person-time {
+        .container .comment>.comm>.line>.person>.person-time {
             color: gray;
         }
+        
+        .container .comment>.comm>.line>.person-content {
+            margin: 10px;
+        }
 
-        .container .comment>.line>button {
+        .container .comment>.comm>.line>button {
             border: none;
             padding: 5px;
             border-radius: 3px;
@@ -272,11 +294,129 @@
         button:hover {
             cursor: pointer;
         }
+        
+        .container .btn {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 10px;
+		}
+		
+		.container .btn>div {
+			background-color: gray;
+			border-radius: 3px;
+			color: white;
+			transition: all 0.3s ease;
+			padding: 5px;
+		}
+		
+		.container .btn>div:hover {
+			background-color: lightgray;
+		}
+		
+		.container .btn > div > a {
+			text-decoration: none;
+			color: white;
+		}
+		
+		.container .btn > div > a:hover {
+			color: black;
+			cursor: pointer;
+		}
     </style>
     <script>
-        function articleRemove() {
-            return confirm("삭제하시겠습니까?");
-        }
+    function loginCheck() {
+		if (${sessionScope.userId eq null}) {
+			alert('로그인 후 이용가능한 서비스입니다.');
+			window.location.href = "<c:url value='/user/login' />";
+			return;
+		}
+		else return 1;
+	}
+	
+	function commentCreate() {
+		var p = loginCheck();
+		
+		if (p == 1) {
+    		if (event.target.parentElement.com_text.value == "") {
+    			alert("댓글을 입력하세요.");
+    			event.target.parentElement.com_text.focus();
+                return false;
+             }
+    		confirm('댓글을 작성하시겠습니까?');
+    		event.target.parentElement.submit();
+		}
+	}
+	
+	function commentUpdate() {
+		if (event.target.parentElement.updateCommText.value == "") {
+			alert("댓글을 입력하세요.");
+			event.target.parentElement.updateCommText.focus();
+            return false;
+         }
+		confirm('댓글을 수정하시겠습니까?');
+		event.target.parentElement.submit();
+	}
+	
+	function cancelEdit() {
+		personContent = event.target.parentElement.parentElement.getElementsByClassName("person-content");
+		
+		if (personContent[0].style.display == "none") 
+			personContent[0].style.display = "inline-block";
+		else 
+			personContent[0].style.display = "none";
+		
+		if (personContent[1].style.display == "none") 
+			personContent[1].style.display = "inline";
+		else
+			personContent[1].style.display = "none";	
+	} 
+	
+	function commUpdateEdit() {
+		event.preventDefault();
+		
+		var commmentList = document.getElementsByClassName("comm");
+
+		for (var comm of commmentList) {
+			personContent = comm.getElementsByClassName("person-content");
+			personContent[0].style.display = "inline-block";
+			personContent[1].style.display = "none";
+		}
+		
+		personContent = event.target.parentElement.parentElement.getElementsByClassName("person-content");
+		personContent[0].style.display = "none";
+		personContent[1].style.display = "inline";
+	}
+	
+	function createDeclare() {
+		event.preventDefault();
+		var p = loginCheck();
+		
+		if (p == 1) {
+			confirm('신고하시겠습니까?');
+			location.href="<c:url value='/user/report' >
+				<c:param name='reportedId' value='${socialGroupArticle.userId}'/>
+				<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+				<c:param name='category' value='${socialGroupArticle.category}'/>
+			</c:url>";
+		}
+		
+	}
+	
+	function createReceipt() {
+		var child = window.open("<c:url value='/donationList/receipt' > <c:param name='articleId' value='${socialGroupArticle.articleId}'/> <c:param name='category' value='${socialGroupArticle.category}'/> </c:url>", "receiptCreate", "width=640, height=400");
+		//window.location.reload();
+		//child.close();
+	}
+	
+	function updateReceipt(url) {
+		event.preventDefault();
+		loginCheck();
+		
+		var child = window.open(url, "receiptCreate", "width=640, height=400");
+		//window.location.reload();
+		//child.close();
+	}
     </script>
 </head>
 
@@ -306,7 +446,7 @@
 
         <c:if test="${sessionScope.userId ne socialGroupArticle.userId}">
             <div class="declare">
-                <button onclick="confirm('신고하시겠습니까?')">신고하기</button>
+                <button onclick="createDeclare()">신고하기</button>
             </div>
         </c:if>
 
@@ -317,8 +457,11 @@
         <hr>
 
         <div class="imgPost">
-            <!-- <img src="../img/volunteer.jpg" alt=""> -->
-            <img src="../img/${articleImage}" alt="">
+            <c:forEach var="image" items="${socialGroupArticle.imageList}">
+                <img src="<c:url value='/upload/${image.fileName}'/>"><br>
+            </c:forEach>
+            <!-- 첫번째 이미지파일 -->
+            <%-- <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/> --%>
         </div>
 
         <div>
@@ -399,65 +542,22 @@
             <h2 class="info-title">후원금 입금 내역</h2>
 
             <table>
-                <tr>
+            	<tr>
                     <th>이름</th>
                     <th>후원금액(단위 : 원)</th>
                 </tr>
-
+            
+            	<c:forEach var="donator" items="${donatorList}">
+            		<tr>
+	                    <td>${donator.userId }</td>
+	                    <td>${donator.amount }</td>
+                	</tr>
+            	</c:forEach>
+                
                 <tr>
-                    <td>김민수</td>
-                    <td>15,000</td>
+                    <th colspan="2">총액 : ${socialGroupArticle.totalAmount }</th>
                 </tr>
-
-                <tr>
-                    <td>박지운</td>
-                    <td>1,000</td>
-                </tr>
-
-                <tr>
-                    <td>이진우</td>
-                    <td>50,000</td>
-                </tr>
-
-                <tr>
-                    <td>김민지</td>
-                    <td>10,000</td>
-                </tr>
-
-                <tr>
-                    <td>이예진</td>
-                    <td>55,000</td>
-                </tr>
-
-                <tr>
-                    <td>최수하</td>
-                    <td>1,000</td>
-                </tr>
-
-
-                <tr>
-                    <td>임지민</td>
-                    <td>500</td>
-                </tr>
-
-                <tr>
-                    <td>이경원</td>
-                    <td>35,000</td>
-                </tr>
-
-                <tr>
-                    <td>박지은</td>
-                    <td>10,000</td>
-                </tr>
-
-                <tr>
-                    <td>이주원</td>
-                    <td>15,000</td>
-                </tr>
-
-                <tr>
-                    <th colspan="2">총액 : 500,000</th>
-                </tr>
+                
             </table>
         </div>
 
@@ -465,51 +565,120 @@
 
         <div class="receipt">
             <h2 class="info-title">후원금 사용 내역</h2>
-            <div>작성자가 아직 영수증 올리지 않았습니다.</div>
+            <c:if test="${empty donationReceipt.receiptId }">
+            	<c:if test="${sessionScope.userId eq socialGroupArticle.userId }">
+            		<div>
+                		<button onclick="createReceipt()">인증글 올리기</button>
+            		</div>
+            	</c:if>
+            
+            	<c:if test="${sessionScope.userId ne socialGroupArticle.userId }">
+            		<div>
+                		<img src="../img/receipt.jpg" alt="">
+            		</div>
+            	</c:if>
+            </c:if>
+            
+            <c:if test="${not empty donationReceipt.receiptId }">
+            	<c:if test="${sessionScope.userId eq socialGroupArticle.userId }">
+					<div class="update">
+			  			<a href="#" onclick="updateReceipt('<c:url value='/donationForm/receiptUpdate' > 
+			  										<c:param name='receiptId' value='${donationReceipt.receiptId}'/> 
+			  										<c:param name='articleId' value='${socialGroupArticle.articleId}'/> 
+			  										<c:param name='category' value='${socialGroupArticle.category}'/> 
+			  										</c:url>')">수정하기</a>
+			  			<a href="<c:url value='/donationList/receiptDelete' >
+			  					<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+			  					<c:param name='category' value='${socialGroupArticle.category}'/>
+			  				</c:url>" onclick="confirm('인증글을 삭제하시겠습니까?')">삭제하기</a>		  
+					</div>
+				</c:if>
+				
+            	<div class="receipt-info">
+            		<div class="basic">인증 내역 사진</div>
+                    <div class="imgPost">
+            			<c:forEach var="receiptImage" items="${donationReceipt.imageList}">
+                			<img src="<c:url value='/upload/${receiptImage.imgLink}'/>"><br>
+            			</c:forEach>
+            			<!-- 첫번째 이미지파일 -->
+            			<%-- <img src="<c:url value='/upload/${donationReceipt.imageList[0].fileName}'/>"/><br/> --%>
+        			</div>
+                    
+                    <div class="basic">인증 내역 설명</div>
+                    <div>${donationReceipt.content}</div>
+                </div>
+            	
+            </c:if>   
+            
         </div>
-
+            
         <hr>
 
         <div class="comment">
             <div class="comment-title">댓글</div>
-
-            <form action="">
-                <textarea name="" id="" style="width: 100%;" rows="5"></textarea>
-                <button>댓글 작성자</button>
-            </form>
-
-            <div class="line">
-                <button>신고</button>
-
-                <div class="person">
-                    <div class="person-id">id[작성자]</div>
-                    <div class="person-time">2022-10-24 12:00</div>
-                </div>
-
-                <div class="person-content">덕분에 후원이 많이 이뤄지고 있습니다.</div>
-            </div>
-
-            <div class="line">
-                <button>신고</button>
-
-                <div class="person">
-                    <div class="person-id">id[후원자]</div>
-                    <div class="person-time">2022-10-11 9:00</div>
-                </div>
-
-                <div class="person-content">영수증 인증 서둘러 부탁드립니다.</div>
-            </div>
-
-            <div class="line">
-                <button>신고</button>
-
-                <div class="person">
-                    <div class="person-id">id[후원자]</div>
-                    <div class="person-time">2022-10-02 16:00</div>
-                </div>
-
-                <div class="person-content">힘내세요</div>
-            </div>
+			  			
+            <form name="form" method="POST" action="<c:url value='/donationList/comment' >
+			  				<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+			  				<c:param name='category' value='${socialGroupArticle.category}'/>
+			  			</c:url>">
+                <textarea name="com_text" style="width: 100%;" rows="5"></textarea>
+                
+                	<input type="button" value="댓글 작성" onclick="commentCreate()">
+                </form>
+            
+			<c:forEach var="comm" items="${comment}">
+				<div class="comm">
+					<c:if test="${sessionScope.userId eq comm.userId }">
+						<div class="update">
+						  	<a href="#" onclick="commUpdateEdit()">수정</a>
+						  		
+						  	<a href="<c:url value='/donationList/commentDelete' >
+						  				<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+						  				<c:param name='category' value='${socialGroupArticle.category}'/>
+						  				<c:param name='commentId' value='${socialGroupArticle.commentId}'/>
+						  			</c:url>" onclick="confirm('댓글을 삭제하시겠습니까?')">삭제</a>		  
+						</div>
+					</c:if>
+		
+					<c:if test="${sessionScope.userId ne comm.userId }">
+				        <div class="declare">
+				            <button onclick="createDeclare()">신고</button>
+				        </div>
+					</c:if>
+					
+					<div class="line">
+	                	<div class="person">
+	                		<c:if test="${sessionScope.userId eq socialGroupArticle.userId }">
+	                    		<div class="person-id">${comm.userId}[작성자]</div>
+	                    	</c:if>
+	                    	<c:if test="${sessionScope.userId ne socialGroupArticle.userId }">
+	                    		<div class="person-id">${comm.userId}[후원자]</div>
+	                    	</c:if>
+	                    	
+	                    	<c:if test="${empty comm.updateDate }">
+	                    		<div class="person-time">${comm.createDate}</div>
+	                    	</c:if>
+	                    	<c:if test="${not empty comm.updateDate }">
+	                    		<div class="person-time">${comm.updateDate}</div>
+	                    	</c:if>
+	                	</div>
+						
+	                	<div class="person-content">${comm.content}</div>
+	                	
+	                	<form name="form" class="person-content" method="POST" action="<c:url value='/donationList/commentUpdate' >
+						  				<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+						  				<c:param name='category' value='${socialGroupArticle.category}'/>
+						  				<c:param name='commentId' value='${comm.commentId}'/>
+						  			</c:url>" style="display:none;">
+						  			
+			                <textarea name="updateCommText" style="width: 100%;" rows="5">${comm.content}</textarea>
+			                <input type="button" value="댓글 수정" onclick="commentUpdate()">
+			                <input type="button" value="취소" onclick="cancelEdit()">
+			            </form>
+            		</div>
+            	</div>
+			</c:forEach>
+ 
         </div>
     </div>
 </body>

@@ -7,13 +7,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyArticle</title>
+    <title>My Article</title>
     <style>
         .container {
             width: 70%;
             margin: 0 auto;
         }
-
         table {
             width: 90%;
             margin: 0 auto;
@@ -21,29 +20,23 @@
             text-align: center;
             border-collapse: collapse;
         }
-
         th {
             border: 1px solid goldenrod;
             background-color: #fab1a0;
         }
-
         td {
             border: 1px solid #e17055;
         }
-
         td:nth-child(1) {
             width: 20%;
         }
-
         td>img {
             width: 70%;
             height: 140px;
         }
-
         td:nth-child(2) {
             width: 30%;
         }
-
         td:nth-child(3),
         td:nth-child(4),
         td:nth-child(5),
@@ -59,7 +52,6 @@
             transition: all 0.3s ease;
             padding: 10px;
         }
-
 		.update > a {
 			text-decoration: none;
 			color: white;
@@ -110,7 +102,6 @@
 			  				</c:url>">UPDATE</a> 
 			  			</span>
 			  		</td>
-	                <!--  <td><button>UPDATE</button></td> -->
 	            </tr>
 			</c:forEach>
         </table>

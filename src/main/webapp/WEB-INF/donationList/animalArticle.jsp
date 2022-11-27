@@ -121,6 +121,19 @@
        		text-align: right;
             font-style: italic;
         }
+        
+        .container .update {
+            text-align: right;
+            margin: 10px;
+        }
+
+        .container .update>a {
+            background-color: cadetblue;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            text-decoration: none;
+        }
 
         .container .declare {
             text-align: right;
@@ -133,20 +146,7 @@
             border: none;
             border-radius: 3px;
         }
-        
-         .container .update {
-            text-align: right;
-            margin: 10px;
-        }
 
-        .container .update>a {
-            background-color: cadetblue;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            text-decoration: none;
-        }
-        
         .container .declare>a {
             background-color: lightcoral;
         }
@@ -232,6 +232,32 @@
 
         .container .receipt {
             text-align: center;
+            padding: 0px 0px 40px 0px;
+            margin: 20px 0;
+        }
+        
+        .container .receipt button {
+            /* border: none; */
+            padding: 10px 15px;
+  			text-align: center;
+  			font-weight: bold;
+            /* color: white; */
+            /* background-color: darkblue; */
+        }
+        
+        .container .receipt button:hover {
+            background-color: lightgary;
+        }
+        
+        .container .receipt .receipt-info .basic {
+            font-weight: bold;
+            width: 15%;
+        }
+
+        .container .receipt .receipt-info >div {
+        	text-align: left;
+            padding: 5px;
+            margin: 5px;
         }
 
         .container .comment>div {
@@ -299,21 +325,58 @@
         button:hover {
             cursor: pointer;
         }
+        
+        .container .btn {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 10px;
+		}
+		
+		.container .btn>div {
+			background-color: gray;
+			border-radius: 3px;
+			color: white;
+			transition: all 0.3s ease;
+			padding: 5px;
+		}
+		
+		.container .btn>div:hover {
+			background-color: lightgray;
+		}
+		
+		.container .btn > div > a {
+			text-decoration: none;
+			color: white;
+		}
+		
+		.container .btn > div > a:hover {
+			color: black;
+			cursor: pointer;
+		}
     </style>
     <script>
-    	function commentCreate() {
+    	function loginCheck() {
     		if (${sessionScope.userId eq null}) {
-    			confirm('로그인 후 이용가능한 서비스입니다.');
-    			location.href = "<c:url value='/user/login' />";
+    			alert('로그인 후 이용가능한 서비스입니다.');
+    			window.location.href = "<c:url value='/user/login' />";
     			return;
     		}
-    		if (event.target.parentElement.com_text.value == "") {
-    			alert("댓글을 입력하세요.");
-    			event.target.parentElement.com_text.focus();
-                return false;
-             }
-    		confirm('댓글을 작성하시겠습니까?');
-    		event.target.parentElement.submit();
+    		else return 1;
+    	}
+    	
+    	function commentCreate() {
+			var p = loginCheck();
+    		
+    		if (p == 1) {
+	    		if (event.target.parentElement.com_text.value == "") {
+	    			alert("댓글을 입력하세요.");
+	    			event.target.parentElement.com_text.focus();
+	                return false;
+	             }
+	    		confirm('댓글을 작성하시겠습니까?');
+	    		event.target.parentElement.submit();
+    		}
 		}
     	
     	function commentUpdate() {
@@ -326,7 +389,7 @@
     		event.target.parentElement.submit();
 		}
     	
-    	function CancelEdit() {
+    	function cancelEdit() {
     		personContent = event.target.parentElement.parentElement.getElementsByClassName("person-content");
     		
     		if (personContent[0].style.display == "none") 
@@ -340,7 +403,7 @@
     			personContent[1].style.display = "none";	
     	} 
     	
-    	function CommUpdateEdit() {
+    	function commUpdateEdit() {
     		event.preventDefault();
     		
     		var commmentList = document.getElementsByClassName("comm");
@@ -355,6 +418,36 @@
     		personContent[0].style.display = "none";
     		personContent[1].style.display = "inline";
 		}
+    	
+    	function createDeclare() {
+    		event.preventDefault();
+    		var p = loginCheck();
+    		
+    		if (p == 1) {
+    			confirm('신고하시겠습니까?');
+    			location.href="<c:url value='/user/report' >
+    				<c:param name='reportedId' value='${article.userId}'/>
+    				<c:param name='articleId' value='${article.articleId}'/>
+    				<c:param name='category' value='${article.category}'/>
+    			</c:url>";
+    		}
+    		
+    	}
+    	
+    	function createReceipt() {
+    		var child = window.open("<c:url value='/donationList/receipt' > <c:param name='articleId' value='${article.articleId}'/> <c:param name='category' value='${article.category}'/> </c:url>", "receiptCreate", "width=640, height=400");
+    		//window.location.reload();
+    		//child.close();
+    	}
+    	
+    	function updateReceipt(url) {
+    		event.preventDefault();
+    		loginCheck();
+    		
+    		var child = window.open(url, "receiptCreate", "width=640, height=400");
+    		//window.location.reload();
+    		//child.close();
+    	}
     </script>
 </head>
 
@@ -367,6 +460,10 @@
         <h2 class="container-title">${article.title }</h2>
 
         <div class="writer">작성자 id : ${article.userId }</div>
+        
+        <c:if test="${empty article.updateDate }">
+        	<div class="updateDate">작성된 날짜: ${article.createDate }</div>
+        </c:if>
         
         <c:if test="${not empty article.updateDate}">
         	<div class="updateDate">수정된 날짜: ${article.updateDate }</div>	
@@ -385,7 +482,7 @@
 
 		<c:if test="${sessionScope.userId ne article.userId }">
 	        <div class="declare">
-	            <button onclick="confirm('신고하시겠습니까?')">신고하기</button>
+	            <button onclick="createDeclare()">신고하기</button>
 	        </div>
 		</c:if>
 		
@@ -398,6 +495,14 @@
         <div class="imgPost">
             <img src="../img/cat.jpg" alt="">
         </div>
+        
+        <%-- <div class="imgPost">
+            <c:forEach var="image" items="${socialGroupArticle.imageList}">
+                <img src="<c:url value='/upload/${image.fileName}'/>"><br>
+            </c:forEach>
+            <!-- 첫번째 이미지파일 -->
+            <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/>
+        </div> --%>
 
         <div>
             <h2 class="info-title">후원 기본 정보</h2>
@@ -505,8 +610,15 @@
                 <span>${article.accHolder }</span>
                 <span>${article.accNum }</span>
             </div>
-
-            <button>후원하기</button>
+            
+             <div class="btn">
+					<div>
+						<a href="<c:url value='/donation' >
+				  				<c:param name='articleId' value='${article.articleId}'/>
+				  				<c:param name='category' value='${article.category}'/>
+				  		</c:url>">Donate now</a>
+					</div>
+			 </div>
         </div>
 
         <hr>
@@ -515,64 +627,22 @@
             <h2 class="info-title">후원금 입금 내역</h2>
 
             <table>
-                <tr>
+            	<tr>
                     <th>이름</th>
                     <th>후원금액(단위 : 원)</th>
                 </tr>
-
+            
+            	<c:forEach var="donator" items="${donatorList}">
+            		<tr>
+	                    <td>${donator.userId }</td>
+	                    <td>${donator.amount }</td>
+                	</tr>
+            	</c:forEach>
+                
                 <tr>
-                    <td>김민수</td>
-                    <td>15,000</td>
+                    <th colspan="2">총액 : ${article.totalAmount }</th>
                 </tr>
-
-                <tr>
-                    <td>박지운</td>
-                    <td>1,000</td>
-                </tr>
-
-                <tr>
-                    <td>이진우</td>
-                    <td>50,000</td>
-                </tr>
-
-                <tr>
-                    <td>김민지</td>
-                    <td>10,000</td>
-                </tr>
-
-                <tr>
-                    <td>이예진</td>
-                    <td>55,000</td>
-                </tr>
-
-                <tr>
-                    <td>최수하</td>
-                    <td>1,000</td>
-                </tr>
-
-                <tr>
-                    <td>임지민</td>
-                    <td>500</td>
-                </tr>
-
-                <tr>
-                    <td>이경원</td>
-                    <td>35,000</td>
-                </tr>
-
-                <tr>
-                    <td>박지은</td>
-                    <td>10,000</td>
-                </tr>
-
-                <tr>
-                    <td>이주원</td>
-                    <td>15,000</td>
-                </tr>
-
-                <tr>
-                    <th colspan="2">총액 : 500,000</th>
-                </tr>
+                
             </table>
         </div>
 
@@ -580,11 +650,53 @@
 
         <div class="receipt">
             <h2 class="info-title">후원금 사용 내역</h2>
-            <div>
-                <img src="../img/receipt.jpg" alt="">
-            </div>
+            <c:if test="${empty donationReceipt.receiptId }">
+            	<c:if test="${sessionScope.userId eq article.userId }">
+            		<div>
+                		<button onclick="createReceipt()">인증글 올리기</button>
+            		</div>
+            	</c:if>
+            
+            	<c:if test="${sessionScope.userId ne article.userId }">
+            		<div>
+                		<img src="../img/receipt.jpg" alt="">
+            		</div>
+            	</c:if>
+            </c:if>
+            
+            <c:if test="${not empty donationReceipt.receiptId }">
+            	<c:if test="${sessionScope.userId eq article.userId }">
+					<div class="update">
+			  			<a href="#" onclick="updateReceipt('<c:url value='/donationForm/receiptUpdate' > 
+			  										<c:param name='receiptId' value='${donationReceipt.receiptId}'/> 
+			  										<c:param name='articleId' value='${article.articleId}'/> 
+			  										<c:param name='category' value='${article.category}'/> 
+			  										</c:url>')">수정하기</a>
+			  			<a href="<c:url value='/donationList/receiptDelete' >
+			  					<c:param name='articleId' value='${article.articleId}'/>
+			  					<c:param name='category' value='${article.category}'/>
+			  				</c:url>" onclick="confirm('인증글을 삭제하시겠습니까?')">삭제하기</a>		  
+					</div>
+				</c:if>
+				
+            	<div class="receipt-info">
+            		<div class="basic">인증 내역 사진</div>
+                    <div class="imgPost">
+            			<c:forEach var="receiptImage" items="${donationReceipt.imageList}">
+                			<img src="<c:url value='/upload/${receiptImage.imgLink}'/>"><br>
+            			</c:forEach>
+            			<!-- 첫번째 이미지파일 -->
+            			<%-- <img src="<c:url value='/upload/${donationReceipt.imageList[0].fileName}'/>"/><br/> --%>
+        			</div>
+                    
+                    <div class="basic">인증 내역 설명</div>
+                    <div>${donationReceipt.content}</div>
+                </div>
+            	
+            </c:if>   
+            
         </div>
-
+            
         <hr>
 
         <div class="comment">
@@ -603,7 +715,7 @@
 				<div class="comm">
 					<c:if test="${sessionScope.userId eq comm.userId }">
 						<div class="update">
-						  	<a href="#" onclick="CommUpdateEdit()">수정</a>
+						  	<a href="#" onclick="commUpdateEdit()">수정</a>
 						  		
 						  	<a href="<c:url value='/donationList/commentDelete' >
 						  				<c:param name='articleId' value='${article.articleId}'/>
@@ -615,7 +727,7 @@
 		
 					<c:if test="${sessionScope.userId ne comm.userId }">
 				        <div class="declare">
-				            <button>신고</button>
+				            <button onclick="createDeclare()">신고</button>
 				        </div>
 					</c:if>
 					
@@ -628,10 +740,10 @@
 	                    		<div class="person-id">${comm.userId}[후원자]</div>
 	                    	</c:if>
 	                    	
-	                    	<c:if test="${article.updateDate eq null }">
+	                    	<c:if test="${empty comm.updateDate }">
 	                    		<div class="person-time">${comm.createDate}</div>
 	                    	</c:if>
-	                    	<c:if test="${article.updateDate ne null }">
+	                    	<c:if test="${not empty comm.updateDate }">
 	                    		<div class="person-time">${comm.updateDate}</div>
 	                    	</c:if>
 	                	</div>
@@ -646,7 +758,7 @@
 						  			
 			                <textarea name="updateCommText" style="width: 100%;" rows="5">${comm.content}</textarea>
 			                <input type="button" value="댓글 수정" onclick="commentUpdate()">
-			                <input type="button" value="취소" onclick="CancelEdit()">
+			                <input type="button" value="취소" onclick="cancelEdit()">
 			            </form>
             		</div>
             	</div>

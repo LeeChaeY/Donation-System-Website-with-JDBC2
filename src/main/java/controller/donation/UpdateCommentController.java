@@ -31,12 +31,13 @@ public class UpdateCommentController implements Controller {
 			String content = request.getParameter("updateCommText");
 			int result = comm_man.update(commentId, content);
 			request.setAttribute("result", result);
+			log.debug("Comment Update result: {}", result);
 		
 			String category = request.getParameter("category");
 			return "redirect:/donationList/"+category+"?articleId="+articleId; // viewAnimalController로 리다이렉션
 		}catch (ArithmeticException e) {
 			// TODO: handle exception
-			throw new UserNotFoundException("존재하지 않는 후원글입니다.");
+			throw new UserNotFoundException("존재하지 않는 댓글입니다.");
 		}
 	}
 }
