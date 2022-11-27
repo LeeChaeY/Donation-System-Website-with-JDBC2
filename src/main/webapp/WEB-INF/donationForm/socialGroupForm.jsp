@@ -8,15 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SocialGroupForm</title>
+     <script type="text/javascript" src="./../js/socialGroupForm.js"></script>
     <style>
         * {
             box-sizing: border-box;
         }
-
         body {
             margin: 0;
         }
-
         nav {
             background-color: antiquewhite;
             display: flex;
@@ -24,50 +23,42 @@
             justify-content: center;
             text-align: center;
         }
-
         nav>div {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 70%;
         }
-
         .title {
             font-weight: bold;
             font-size: xx-large;
             color: brown;
             margin: 30px 0px;
         }
-
         #main-menu {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         #main-menu,
         #sub-menu {
             margin: 0;
             padding: 0;
             list-style-type: none;
         }
-
         #main-menu>li {
             padding: 15px;
         }
-
         #main-menu>li>a {
             color: black;
             text-align: center;
             text-decoration: none;
             font-weight: 600;
         }
-
         #main-menu>li>a:hover {
             cursor: pointer;
             color: gray;
         }
-
         #sub-menu {
             height: 0;
             visibility: hidden;
@@ -75,7 +66,6 @@
             position: relative;
             z-index: 10;
         }
-
         #sub-menu>li {
             width: 115px;
             padding: 10px 0px;
@@ -83,69 +73,55 @@
             background: brown;
             border-bottom: 1px solid rgba(255, 255, 255, 0.6);
         }
-
         #sub-menu>li>a {
             color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
         }
-
         #main-menu>li:hover #sub-menu {
             visibility: visible;
         }
-
         #sub-menu>li>a:hover {
             cursor: pointer;
             color: lightgray;
         }
-
         .container {
             width: 70%;
             margin: 0 auto;
         }
-
         h2 {
             color: indianred;
         }
-
         form {
             width: 100%;
             margin: 0 auto;
         }
-
         form>div {
             margin: 15px;
         }
-
         span {
             color: orange;
         }
-
         input {
             border: 1px solid lightgray;
             padding: 5px;
             margin: 5px;
         }
-
         input[type="text"] {
             width: 50%;
         }
-
         input[type="file"] {
             font-size: medium;
             width: 50%;
         }
-
         input[type="date"] {
             width: 50%;
             font-size: large;
         }
-
         textarea {
             border: 1px solid lightgray;
             width: 50%;
             margin: 5px;
         }
-
         .btn {
             margin: 0 auto;
             display: flex;
@@ -153,7 +129,6 @@
             align-items: center;
             text-align: center;
         }
-
         .btn>input {
             background-color: gray;
             border: none;
@@ -162,18 +137,12 @@
             border-radius: 3px;
             transition: all 0.3s ease;
         }
-
         .btn>input:hover {
             background-color: lightgray;
             color: black;
             cursor: pointer;
         }
     </style>
-    <script>
-        function articleCreate() {
-            form.submit();
-        }
-    </script>
 </head>
 
 <body>
@@ -184,7 +153,7 @@
 
         <hr>
 
-        <form name="form" method="POST" action="<c:url value='/donationForm/socialGroup' />">
+        <form name="form" method="POST" action="<c:url value='/donationForm/socialGroup' />" enctype="multipart/form-data">
             <div>
                 <label for="title">제목<span>*</span></label>
                 <br>
@@ -194,7 +163,7 @@
             <div>
                 <div>성별<span>*</span></div>
                 <br>
-                <input type="radio" name="gender" id="female" value="F"><label for="female">F</label>
+                <input type="radio" name="gender" id="female" value="F" checked="checked"><label for="female">F</label>
                 <input type="radio" name="gender" id="male" value="M"><label for="male">M</label>
             </div>
 
@@ -224,9 +193,9 @@
             </div>
 
             <div>
-                <label for="img">사진<span>*</span></label>
+                <label for="image">사진<span>*</span></label>
                 <br>
-                <input type="file" id="img" name="img">
+                <input type="file" id="image" name="image" multiple="multiple">
             </div>
 
             <div>

@@ -5,15 +5,17 @@ public class ReceiptImage
     String imgLink;
     int imgOrder;
     int receiptId;
+    DonationReceipt receipt;
     
     public ReceiptImage() {
 
     }
 
-    public ReceiptImage(String imgLink, int imgOrder, int receiptId) {
+    public ReceiptImage(String imgLink, int imgOrder, int receiptId, DonationReceipt receipt) {
         this.imgLink = imgLink;
         this.imgOrder = imgOrder;
         this.receiptId = receiptId;
+        this.receipt = receipt;
     }
 
     public String getImgLink() {
@@ -40,9 +42,20 @@ public class ReceiptImage
         this.receiptId = receiptId;
     }
 
-    @Override
-    public String toString() {
-        return "DonationImage [imgLink=" + imgLink + ", imgOrder=" + imgOrder + ", receiptId=" + receiptId + "]";
-    }
+	public DonationReceipt getReceipt() {
+		return receipt;
+	}
+
+	public void setReceipt(DonationReceipt receipt) {
+		this.receipt = receipt;
+	}
+
+	@Override
+	public String toString() {
+		return "ReceiptImage [imgLink=" + imgLink + ", imgOrder=" + imgOrder + ", receiptId=" + receiptId + ", receipt="
+				+ receipt + "]";
+	}
+    
+    
     
 }

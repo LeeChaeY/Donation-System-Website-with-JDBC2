@@ -13,7 +13,8 @@ import model.SocialGroupArticle;
  */
 public class SocialGroupDAO {
     private JDBCUtil jdbcUtil = null; // JDBCUtil 참조 변수 선언
-
+    int generatedKey = 0;
+    
     public SocialGroupDAO() { // 생성자
         jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성 및 활용
     }
@@ -21,7 +22,7 @@ public class SocialGroupDAO {
     /**
      * article 테이블에 새로운 article 생성
      */
-    public int create(SocialGroupArticle article, DonationImage image) throws SQLException {
+    public int create(SocialGroupArticle article) throws SQLException {
         try {
             //DONATION_ARTICLE
             String sql1 = "INSERT INTO DONATION_ARTICLE VALUES (seq_donation_article_id.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?, ?, ?, ?)";     
@@ -48,7 +49,7 @@ public class SocialGroupDAO {
             
             //SOCIALGROUP_ARTICLE
             ResultSet rs = jdbcUtil.getGeneratedKeys(); // 생성된 PK 값을 포함한 result set 객체 반환
-            int generatedKey = 0;
+            //int generatedKey = 0;
             if (rs.next()) {
                 generatedKey = rs.getInt(1); // PK 값을 읽음
                 String sql2 = "INSERT INTO SOCIALGROUP_ARTICLE VALUES (?, ?, ?, ?, ?, ?)";
@@ -65,14 +66,14 @@ public class SocialGroupDAO {
                 //System.out.println("SocialGroup_Article table " + result + "개 등록 성공");
             
             //DONATION_IMAGE
-            String sql3 = "INSERT INTO DONATION_IMAGE VALUES (?, ?, ?)";
-            Object[] param3 = new Object[] {
-                                generatedKey,
-                                image.getImgOrder(),
-                                image.getImgLink()
-                                };
-            jdbcUtil.setSqlAndParameters(sql3, param3); // JDBCUtil 에 insert문과 매개 변수 설정
-            result = jdbcUtil.executeUpdate(); // insert 문 실행
+//            String sql3 = "INSERT INTO DONATION_IMAGE VALUES (?, ?, ?)";
+//            Object[] param3 = new Object[] {
+//                                generatedKey,
+//                                image.getFileOrder(),
+//                                image.getFilename()
+//                                };
+//            jdbcUtil.setSqlAndParameters(sql3, param3); // JDBCUtil 에 insert문과 매개 변수 설정
+//            result = jdbcUtil.executeUpdate(); // insert 문 실행
             //System.out.println("DONATION_IMAGE table " + result + "개 등록 성공");
         }
             return generatedKey; // article ID 반환
@@ -85,6 +86,30 @@ public class SocialGroupDAO {
         }       
         return 0;
     }
+    
+    public int create_image(DonationImage image) throws SQLException {
+        try {
+            //DONATION_IMAGE
+            String sql3 = "INSERT INTO DONATION_IMAGE VALUES (?, ?, ?)";
+            Object[] param3 = new Object[] {
+                                generatedKey,
+                                image.getFileOrder(),
+                                image.getFileName()
+                                };
+            jdbcUtil.setSqlAndParameters(sql3, param3); // JDBCUtil 에 insert문과 매개 변수 설정
+            int result = jdbcUtil.executeUpdate(); // insert 문 실행
+            //System.out.println("DONATION_IMAGE table " + result + "개 등록 성공");
+            return result;
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {     
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }       
+        return 0;
+    }
+    
     
     /**
      * 주어진 article ID에 해당하는 article 정보를 데이터베이스에서 찾아
@@ -173,11 +198,10 @@ public class SocialGroupDAO {
             //System.out.println("SOCIALGROUP_ARTICLE table " + result + "개 수정 성공");
             
             return 1;
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             jdbcUtil.rollback();
             ex.printStackTrace();
-        }
-        finally {
+        } finally {
             jdbcUtil.commit();
             jdbcUtil.close();   // resource 반환
         }

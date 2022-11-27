@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnimalForm</title>
+    <script type="text/javascript" src="./../js/animalUpdateForm.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -170,11 +171,6 @@
             cursor: pointer;
         }
     </style>
-    <script>
-    	function AnimalArticleUpdate() {
-			form.submit();
-		}
-    </script>
 </head>
 
 <body>

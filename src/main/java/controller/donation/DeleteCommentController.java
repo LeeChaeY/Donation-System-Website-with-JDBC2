@@ -33,6 +33,7 @@ public class DeleteCommentController implements Controller{
 			
 			int result = comm_man.remove(commentId);
 			request.setAttribute("result", result);
+			log.debug("Comment Delete result: {}", result);
 			
 			String category = request.getParameter("category");
 			int articleId = Integer.parseInt(request.getParameter("articleId"));
@@ -40,7 +41,7 @@ public class DeleteCommentController implements Controller{
 		
 		}catch (ArithmeticException e) {
 			// TODO: handle exception
-			throw new UserNotFoundException("존재하지 않는 후원글입니다.");
+			throw new UserNotFoundException("존재하지 않는 댓글입니다.");
 		}
 	}
 

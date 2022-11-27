@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.DonationArticle;
+import model.MyDonation;
 import model.User;
 import model.dao.UserDAO;
 
@@ -69,6 +70,10 @@ public class UserManager {
 	
 	public List<DonationArticle> findMyArticleList(String userId) throws Exception {
 		return userDAO.findMyArticleList(userId);
+	}
+	
+	public List<MyDonation> findMyDonationList(String userId) throws Exception {
+		return userDAO.findMyDonationList(userId);
 	}
 	
 	public UserDAO getUserDAO() {
