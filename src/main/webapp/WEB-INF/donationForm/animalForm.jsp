@@ -203,7 +203,7 @@
             <div>
                 <div>현재 상태<span>*</span></div>
                 <br>
-                <input type="radio" name="current_status" value="반려동물" id="status1"><label for="status1">반려동물</label>
+                <input type="radio" name="current_status" value="반려동물" id="status1" checked="checked"><label for="status1">반려동물</label>
                 <input type="radio" name="current_status" value="임시보호" id="status2"><label for="status2">임시보호</label>
                 <input type="radio" name="current_status" value="구조동물" id="status3"><label for="status3">구조 동물</label>
                 <input type="radio" name="current_status" value="기타" id="status4"><label for="status4">기타</label>
@@ -212,7 +212,7 @@
             <div>
                 <div>종<span>*</span></div>
                 <br>
-                <input type="radio" name="type" value="bird" id="bird"><label for="bird">조류</label>
+                <input type="radio" name="type" value="bird" id="bird" checked="checked"><label for="bird">조류</label>
                 <input type="radio" name="type" value="dog" id="dog"><label for="dog">강아지</label>
                 <input type="radio" name="type" value="cat" id="cat"><label for="cat">고양이</label>
                 <input type="radio" name="type" value="sortEtc" id="sortEtc"><label for="sortEtc">기타</label>
@@ -221,7 +221,7 @@
             <div>
                 <div>성별<span>*</span></div>
                 <br>
-                <input type="radio" name="gender" value="암컷"  id="female"><label for="female">암컷</label>
+                <input type="radio" name="gender" value="암컷"  id="female" checked="checked"><label for="female">암컷</label>
                 <input type="radio" name="gender" value="수컷" id="male"><label for="male">수컷</label>
                 <input type="radio" name="gender" value="모름" id="fm"><label for="fm">모름</label>
             </div>
@@ -229,7 +229,7 @@
             <div>
                 <div>중성화 유/무<span>*</span></div>
                 <br>
-                <input type="radio" name="neutering" value="O" id="presence"><label for="presence">유</label>
+                <input type="radio" name="neutering" value="O" id="presence" checked="checked"><label for="presence">유</label>
                 <input type="radio" name="neutering" value="X" id="absence"><label for="absence">무</label>
                 <input type="radio" name="neutering" value="모름" id="fm"><label for="fm">모름</label>
             </div>
@@ -247,9 +247,9 @@
             </div>
 
             <div>
-                <label for="img">사진<span>*</span></label>
+                <label for="image">사진<span>*</span></label>
                 <br>
-                <input type="file" id="img" name="img">
+                <input type="file" id="image" name="image" multiple="multiple">
             </div>
 
             <div>

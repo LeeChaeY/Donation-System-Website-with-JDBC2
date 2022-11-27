@@ -99,15 +99,18 @@
             font-style: italic;
         }
         
+
         .container .updateDate{
        		text-align: right;
             font-style: italic;
         }
         
+
         .container .update {
             text-align: right;
             margin: 10px;
         }
+
 
         .container .update>a {
             background-color: cadetblue;
@@ -117,11 +120,19 @@
             text-decoration: none;
         }
 
+
+        .container .update>a {
+            background-color: cadetblue;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+        
         .container .declare {
             text-align: right;
             margin: 10px;
         }
-
         .container .declare>button {
             background-color: red;
             color: white;
@@ -129,10 +140,12 @@
             border-radius: 3px;
         }
 
+
         .container .declare>a {
+
+
             background-color: lightcoral;
         }
-
         .container .deadline {
             color: cadetblue;
             text-align: center;
@@ -228,21 +241,17 @@
             padding: 5px;
             margin: 5px;
         }
-
         .container .comment>div {
             padding: 10px;
         }
-
         .container .comment>.comment-title {
             font-weight: bold;
             font-size: large;
         }
-
         .container .comment>form {
             text-align: right;
             padding: 10px;
         }
-
         .container .comment>form>button {
             background-color: yellowgreen;
             border: none;
@@ -250,10 +259,10 @@
             color: white;
             padding: 5px;
         }
-
         .container .comment>form>button:hover {
             background-color: lightgreen;
         }
+
 
         .container .comment>.comm>.line {
             border-bottom: 1px dotted green;
@@ -281,16 +290,15 @@
         }
 
         .container .comment>.comm>.line>button {
+
             border: none;
             padding: 5px;
             border-radius: 3px;
             float: right;
         }
-
         button {
             transition: all 0.3s ease;
         }
-
         button:hover {
             cursor: pointer;
         }

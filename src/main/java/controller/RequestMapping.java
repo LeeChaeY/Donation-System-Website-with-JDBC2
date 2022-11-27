@@ -20,7 +20,7 @@ public class RequestMapping {
         mappings.put("/homepage", new ForwardController("/homepage.jsp"));
         mappings.put("/donationList/donationFeed", new DonationArticleController()); // 1123 by 채연
         
-        //mypage section
+        //mypage
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
         mappings.put("/user/register", new RegisterUserController());
@@ -37,8 +37,11 @@ public class RequestMapping {
         mappings.put("/donationForm/animal", new AnimalArticleController());
         mappings.put("/donationForm/disaster", new DisasterArticleController());
         mappings.put("/donationForm/socialGroup", new SocialGroupArticleController());
-        
+
         // donation Article View
+        mappings.put("/donationList/animal", new ViewAnimalArticleController()); // 1123 by 채연, [22/11/26]update by 나현
+
+        //donation Article View
         mappings.put("/donationList/animal", new ViewAnimalArticleController()); // 1123 by 채연
         mappings.put("/donationList/socialGroup", new ViewSocialGroupArticleController());
         
@@ -53,9 +56,8 @@ public class RequestMapping {
         mappings.put("/donationList/comment", new CommentController());
         mappings.put("/donationList/commentDelete", new DeleteCommentController());
         mappings.put("/donationList/commentUpdate", new UpdateCommentController());
-
         
-      //doantion Article Delete
+        //doantion Article Delete
         mappings.put("/donationList/socialGroupArticleDelete", new DeleteSocialGroupArticleController());
         
         // donation Receipt 1127 by 채연

@@ -98,6 +98,7 @@
             text-align: right;
             font-style: italic;
         }
+
         
         .container .updateDate{
        		text-align: right;
@@ -117,11 +118,11 @@
             text-decoration: none;
         }
 
+
         .container .declare {
             text-align: right;
             margin: 10px;
         }
-
         .container .declare>button {
             background-color: red;
             color: white;
@@ -130,9 +131,9 @@
         }
 
         .container .declare>a {
+
             background-color: lightcoral;
         }
-
         .container .deadline {
             color: cadetblue;
             text-align: center;
@@ -228,21 +229,17 @@
             padding: 5px;
             margin: 5px;
         }
-
         .container .comment>div {
             padding: 10px;
         }
-
         .container .comment>.comment-title {
             font-weight: bold;
             font-size: large;
         }
-
         .container .comment>form {
             text-align: right;
             padding: 10px;
         }
-
         .container .comment>form>button {
             background-color: yellowgreen;
             border: none;
@@ -250,10 +247,10 @@
             color: white;
             padding: 5px;
         }
-
         .container .comment>form>button:hover {
             background-color: lightgreen;
         }
+
 
         .container .comment>.comm>.line {
             border-bottom: 1px dotted green;
@@ -281,16 +278,16 @@
         }
 
         .container .comment>.comm>.line>button {
+
+      
             border: none;
             padding: 5px;
             border-radius: 3px;
             float: right;
         }
-
         button {
             transition: all 0.3s ease;
         }
-
         button:hover {
             cursor: pointer;
         }
@@ -424,6 +421,7 @@
     <jsp:include page="./../navigation.jsp"/>
     
     <div class="container">
+
         <h2 class="desc">Donation for disaster</h2>
 
         <h2 class="container-title">${article.title }</h2>
@@ -479,6 +477,7 @@
             <div class="info">
                 <div class="info1">
                     <div>
+
                         <div class="basic">이름</div>
                         <div>${article.name }</div>
                     </div>
@@ -516,22 +515,27 @@
                     <div>
                         <div class="basic">현재 상황</div>
                         <div>${article.currentStatus }</div>
+
                     </div>
                 </div>
 
                 <div class="info2">
                     <div>
+
                         <div class="basic">건강 상태</div>
                         <div>
                             ${article.healthStatus }
+
                         </div>
                     </div>
 
                     <div>
+
                         <div class="basic">성격</div>
                         <div>
                             ${article.personality }
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -545,6 +549,7 @@
 
             <div class="info info3">
                 <div>
+
                     <div class="basic">후원 마감일</div>
                     <div>${article.deadline }</div>
                 </div>
@@ -552,12 +557,16 @@
                 <div>
                     <div class="basic">후원금 사용 마감일</div>
                     <div>${article.dueDate }</div>
+
                 </div>
 
                 <div>
                     <div class="basic">사용 예산안</div>
                     <div>
+
                         ${article.usePlan }
+
+
                     </div>
                 </div>
 
@@ -565,6 +574,7 @@
                     <div class="basic">기타</div>
                     <div>
                         ${article.otherText }
+
                     </div>
                 </div>
             </div>
@@ -575,6 +585,7 @@
         <div class="donation">
             <div class="account">
                 <span>후원 계좌 : </span>
+
                 <span>${article.bankName }</span>
                 <span>${article.accHolder }</span>
                 <span>${article.accNum }</span>
@@ -588,6 +599,7 @@
 				  		</c:url>">Donate now</a>
 					</div>
 			 </div>
+
         </div>
 
         <hr>
@@ -596,9 +608,11 @@
             <h2 class="info-title">후원금 입금 내역</h2>
 
             <table>
+
             	<tr>
                     <th>이름</th>
                     <th>후원금액(단위 : 원)</th>
+
                 </tr>
             
             	<c:forEach var="donator" items="${donatorList}">
@@ -609,7 +623,9 @@
             	</c:forEach>
                 
                 <tr>
+
                     <th colspan="2">총액 : ${article.totalAmount }</th>
+
                 </tr>
                 
             </table>
@@ -619,6 +635,7 @@
 
         <div class="receipt">
             <h2 class="info-title">후원금 사용 내역</h2>
+
             <c:if test="${empty donationReceipt.receiptId }">
             	<c:if test="${sessionScope.userId eq article.userId }">
             		<div>
@@ -664,12 +681,14 @@
             	
             </c:if>   
             
+
         </div>
             
         <hr>
 
         <div class="comment">
             <div class="comment-title">댓글</div>
+
 			  			
             <form name="form" method="POST" action="<c:url value='/donationList/comment' >
 			  				<c:param name='articleId' value='${article.articleId}'/>
@@ -733,6 +752,7 @@
             	</div>
 			</c:forEach>
  
+
         </div>
     </div>
 </body>
