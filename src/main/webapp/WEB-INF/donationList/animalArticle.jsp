@@ -436,7 +436,10 @@
 			  				<c:param name='userId' value='${article.userId}'/>
 			  				<c:param name='articleId' value='${article.articleId}'/>
 			  			</c:url>">수정하기</a>
-			  	<a href="<c:url value='/donationForm/animalArticleDELTE' />">삭제하기</a>		  
+			  	<a href="<c:url value='/donationList/animalArticleDelete' >
+			  				<c:param name='userId' value='${article.userId}'/>
+			  				<c:param name='articleId' value='${article.articleId}'/>
+			  			</c:url>">삭제하기</a>		  
 			</div>
 		</c:if>
 

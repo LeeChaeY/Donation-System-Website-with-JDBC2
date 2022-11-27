@@ -127,4 +127,23 @@ public class AnimalDAO {
 		}
 		return 0;
 	}
+	
+	public int remove(int articleId) throws SQLException {	
+		try {
+			StringBuilder sb = new StringBuilder();
+			sb.append("DELETE FROM DONATION_ARTICLE WHERE article_id=? ");
+			String sql = sb.toString();
+			jdbcUtil.setSqlAndParameters(sql, new Object[] { articleId });
+            int result = jdbcUtil.executeUpdate(); // delete 문 실행
+            System.out.println("DONATION_ARTICLE table " + result + "개 삭제 성공");
+            return result;
+		}catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.commit();
+            jdbcUtil.close(); // resource 반환
+        }
+		return 0;
+	}
 }
