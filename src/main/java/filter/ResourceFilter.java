@@ -19,12 +19,21 @@ public class ResourceFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(ResourceFilter.class);
     private static final List<String> resourcePrefixs = new ArrayList<>();
     static {
+<<<<<<< HEAD
     	 resourcePrefixs.add("/css");
          resourcePrefixs.add("/js");
          resourcePrefixs.add("/fonts");
          resourcePrefixs.add("/img");
          resourcePrefixs.add("/images");
          resourcePrefixs.add("/upload");
+=======
+        resourcePrefixs.add("/css");
+        resourcePrefixs.add("/js");
+        resourcePrefixs.add("/fonts");
+        resourcePrefixs.add("/img");
+        resourcePrefixs.add("/images");
+        resourcePrefixs.add("/upload");
+>>>>>>> refs/remotes/origin/develop
     }
 
     private RequestDispatcher defaultRequestDispatcher;

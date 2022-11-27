@@ -220,12 +220,19 @@ public class DonationArticle {
 	public List<DonationImage> getImageList() {
         return imageList;
     }
+<<<<<<< HEAD
+
+    public void setImageList(List<DonationImage> imageList) {
+        this.imageList = imageList;
+    }
+=======
+>>>>>>> refs/remotes/origin/develop
 
     public void setImageList(List<DonationImage> imageList) {
         this.imageList = imageList;
     }
 
-	@Override
+    @Override
 	public String toString() {
 		return "DonationArticle [articleId=" + articleId + ", title=" + title + ", category=" + category + ", deadline="
 				+ deadline + ", bankName=" + bankName + ", accHolder=" + accHolder + ", accNum=" + accNum + ", idCheck="
