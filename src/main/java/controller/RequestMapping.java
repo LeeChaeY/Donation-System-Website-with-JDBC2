@@ -20,7 +20,7 @@ public class RequestMapping {
         mappings.put("/homepage", new ForwardController("/homepage.jsp"));
         mappings.put("/donationList/donationFeed", new DonationArticleController()); // 1123 by 채연
         
-        //mypage section by 나현
+        //mypage
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
         mappings.put("/user/register", new RegisterUserController());
