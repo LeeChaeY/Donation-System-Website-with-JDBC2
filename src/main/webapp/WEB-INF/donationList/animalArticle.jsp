@@ -573,20 +573,14 @@
                 <span>${article.accHolder }</span>
                 <span>${article.accNum }</span>
             </div>
-
-            
-             <div class="btn">
-
-
+            <div class="btn">
 					<div>
 						<a href="<c:url value='/donation' >
 				  				<c:param name='articleId' value='${article.articleId}'/>
 				  				<c:param name='category' value='${article.category}'/>
 				  		</c:url>">Donate now</a>
 					</div>
-
-			 </div>
-
+			</div>
         </div>
 
         <hr>

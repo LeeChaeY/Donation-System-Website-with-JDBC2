@@ -541,7 +541,14 @@
                 <span>${socialGroupArticle.accNum}</span>
             </div>
 
-            <button>후원하기</button>
+            <div class="btn">
+					<div>
+						<a href="<c:url value='/donation' >
+				  				<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+				  				<c:param name='category' value='${socialGroupArticle.category}'/>
+				  		</c:url>">Donate now</a>
+					</div>
+			 </div>
         </div>
 
         <hr>

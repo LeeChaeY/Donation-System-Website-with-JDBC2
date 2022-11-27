@@ -42,6 +42,7 @@ public class SocialGroupArticleController implements Controller {
         SocialGroupArticle article = new SocialGroupArticle();
         //이미지 리스트
         List<DonationImage> imageList = new ArrayList<DonationImage>();
+        //이미지 정보
         String filename = null;
         int fileOrder = 1;
     
@@ -87,7 +88,7 @@ public class SocialGroupArticleController implements Controller {
                             // parameter 이름이 deadline이면 deadline 변수에 값을 저장한다.
                         else if(item.getFieldName().equals("bank_name"))
                             article.setBankName(value);
-                            // parameter 이름이 bankName이면 bankName 변수에 값을 저장한다.
+                            // parameter 이름이 bank_name이면 bankName 변수에 값을 저장한다.
                         else if(item.getFieldName().equals("acc_holder"))
                             article.setAccHolder(value);
                         else if(item.getFieldName().equals("acc_num"))
@@ -111,18 +112,6 @@ public class SocialGroupArticleController implements Controller {
                             article.setArea(value);
                         else if(item.getFieldName().equals("situation"))
                             article.setSituation(value);
-                        
-                        //defualt값으로 지정할 필드
-                        article.setArticleId(0); //추후 변경
-                        article.setCategory("socialGroup"); //고정
-                        article.setIdCheck("Y"); //추후 변경
-                        article.setCreateDate(null); //추후 변경
-                        article.setUpdateDate(null); //추후 변경
-                        article.setReceiptCheck("N"); //추후 변경
-                        article.setTotalAmount(0); //추후 변경
-                        article.setUserId(userId); //session값, 고정
-                        
-                        log.debug("Create article : {}", article);
                     }
                     else {  // item이 파일인 경우   
                         if (item.getFieldName().equals("image")) {
@@ -172,12 +161,24 @@ public class SocialGroupArticleController implements Controller {
             //request.setAttribute("filename", filename); //마지막 파일
             //System.out.println("filname: "+filename);
             
+            //defualt값으로 지정할 필드
+            article.setArticleId(0); //추후 변경
+            article.setCategory("socialGroup"); //고정
+            article.setIdCheck("Y"); //추후 변경
+            article.setCreateDate(null); //추후 변경
+            article.setUpdateDate(null); //추후 변경
+            article.setReceiptCheck("N"); //추후 변경
+            article.setTotalAmount(0); //추후 변경
+            article.setUserId(userId); //session값, 고정
+            
             //SoicalGroupArticle.imageList에 위에서 생성한 imageList 저장
             article.setImageList(imageList);
 //            System.out.println("imgList 출력");
 //            for (DonationImage list : article.getImageList()) {
 //                System.out.println(list);
 //            }
+            
+            log.debug("Create article : {}", article);
         }      
         
 //        article.setImageList(imageList);
