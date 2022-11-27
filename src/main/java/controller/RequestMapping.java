@@ -45,7 +45,7 @@ public class RequestMapping {
         //donation Article Update
         mappings.put("/donationForm/animalArticleUpdate", new UpdateAnimalArticleController());
   
-        //[22/11/26]donaiton by 나현 
+        //[22/11/26] donaiton by 나현 
         mappings.put("/donation", new DonationController());
 
         //comment controller // 1123 by 채연

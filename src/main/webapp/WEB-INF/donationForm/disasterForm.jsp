@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,144 +9,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DisasterForm</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        nav {
-            background-color: antiquewhite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        nav>div {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 70%;
-        }
-
-        .title {
-            font-weight: bold;
-            font-size: xx-large;
-            color: brown;
-            margin: 30px 0px;
-        }
-
-        #main-menu {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #main-menu,
-        #sub-menu {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-        }
-
-        #main-menu>li {
-            padding: 15px;
-        }
-
-        #main-menu>li>a {
-            color: black;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        #main-menu>li>a:hover {
-            cursor: pointer;
-            color: gray;
-        }
-
-        #sub-menu {
-            height: 0;
-            visibility: hidden;
-            transition: all 0.15s ease;
-            position: relative;
-            z-index: 10;
-        }
-
-        #sub-menu>li {
-            width: 115px;
-            padding: 10px 0px;
-            margin: 0 auto;
-            text-align: center;
-            background: brown;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-        }
-
-        #sub-menu>li>a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-        }
-
-        #main-menu>li:hover #sub-menu {
-            visibility: visible;
-        }
-
-        #sub-menu>li>a:hover {
-            cursor: pointer;
-            color: lightgray;
-        }
-
         .container {
             width: 70%;
             margin: 0 auto;
         }
-
         h2 {
             color: palevioletred;
         }
-
         form {
             width: 100%;
             margin: 0 auto;
         }
-
         form>div {
             margin: 15px;
         }
-
         span {
             color: orange;
         }
-
         input {
             border: 1px solid lightgray;
             padding: 5px;
             margin: 5px;
         }
-
         input[type="text"] {
             width: 50%;
         }
-
         input[type="file"] {
             font-size: medium;
             width: 50%;
         }
-
         input[type="date"] {
             width: 50%;
             font-size: large;
         }
-
         textarea {
             border: 1px solid lightgray;
             width: 50%;
             margin: 5px;
         }
-
         .btn {
             margin: 0 auto;
             display: flex;
@@ -154,7 +54,6 @@
             align-items: center;
             text-align: center;
         }
-
         .btn>input {
             background-color: gray;
             border: none;
@@ -163,7 +62,6 @@
             border-radius: 3px;
             transition: all 0.3s ease;
         }
-
         .btn>input:hover {
             background-color: lightgray;
             color: black;
@@ -171,6 +69,12 @@
         }
     </style>
 </head>
+
+<script>
+	function DisasterArticleCreate() {
+		form.submit();
+	}
+</script>
 
 <body>
     <jsp:include page="./../navigation.jsp"/>
@@ -182,95 +86,95 @@
 
         <form name="form" method="POST" action="<c:url value='/donationForm/disaster' />">
             <div>
-                <label for="title">Á¦¸ñ<span>*</span></label>
+                <label for="title">ì œëª©<span>*</span></label>
                 <br>
-                <input type="text" id="title">
+                <input type="text" id="title" name="title">
             </div>
 
             <div>
-                <label for="region">Áö¿ª<span>*</span></label>
+                <label for="area">ì§€ì—­<span>*</span></label>
                 <br>
-                <input type="text" id="region" name="region">
+                <input type="text" id="area" name="area">
+            </div>
+            
+            <div>
+                <div>ìž¬ë‚œ ìž¬í•´ ì¢…ë¥˜<span>*</span></div>
+                <br>
+                <input type="radio" name="type" value="íƒœí’" id="type1"><label for="type1">íƒœí’</label>
+                <input type="radio" name="type" value="ì§€ì§„" id="type2"><label for="type2">ì§€ì§„</label>
+                <input type="radio" name="type" value="ê°€ë­„" id="type3"><label for="type3">ê°€ë­„</label>
+                <input type="radio" name="type" value="í™ìˆ˜" id="type4"><label for="type4">í™ìˆ˜(í­ìš°)</label>
+                <input type="radio" name="type" value="í­ìš°" id="type5"><label for="type5">ê¸°íƒ€</label>
             </div>
 
             <div>
-                <div>Àç³­ ÀçÇØ Á¾·ù<span>*</span></div>
+                <label for="name">ìž¬ë‚œ ìž¬í•´ ëª…ì¹­<span>*</span></label>
                 <br>
-                <input type="radio" name="type" id="typhoon"><label for="typhoon">ÅÂÇ³</label>
-                <input type="radio" name="type" id="earthquake"><label for="earthquake">ÁöÁø</label>
-                <input type="radio" name="type" id="drought"><label for="drought">°¡¹³</label>
-                <input type="radio" name="type" id="flood"><label for="flood">È«¼ö(Æø¿ì)</label>
-                <input type="radio" name="type" id="sortEtc"><label for="sortEtc">±âÅ¸</label>
+                <input type="text" id="name" name="name">
             </div>
 
             <div>
-                <label for="disaterName">Àç³­ ÀçÇØ ¸íÄª<span>*</span></label>
+                <label for="damage_amount">í”¼í•´ ê¸ˆì•¡<span>*</span></label>
                 <br>
-                <input type="text" id="disaterName" name="disaterName">
+                <input type="number" id="damage_amount" name="damage_amount">(ë‹¨ìœ„: ì›)
             </div>
 
             <div>
-                <label for="damage_amount">ÇÇÇØ ±Ý¾×<span>*</span></label>
+                <label for="situation">í˜„ìž¬ ìƒí™©<span>*</span></label>
                 <br>
-                <input type="number" id="damage_amount" name="damage_amount">(´ÜÀ§: ¿ø)
+                <textarea name="situation" id="situation" rows="7"></textarea>
             </div>
 
             <div>
-                <label>ÇöÀç »óÈ²<span>*</span></label>
+                <label for="img">ì‚¬ì§„<span>*</span></label>
                 <br>
-                <textarea name="present_condition" id="present_condition" rows="7"></textarea>
+                <input type="file" id="img" name="img">
             </div>
 
             <div>
-                <label for="photo">»çÁø<span>*</span></label>
+                <label for="deadline">í›„ì› ë§ˆê°ì¼<span>*</span></label>
                 <br>
-                <input type="file" id="photo" name="photo">
+                <input type="date" id="deadline" name="deadline">
             </div>
 
             <div>
-                <label for="deadline">ÈÄ¿ø ¸¶°¨ÀÏ<span>*</span></label>
+                <label for="bank_name">í›„ì› ê³„ì¢Œ ì€í–‰<span>*</span></label>
                 <br>
-                <input type="date" id="deadline">
+                <input type="text" id="bank_name" name="bank_name">
             </div>
 
             <div>
-                <label for="bank">ÈÄ¿ø °èÁÂ ÀºÇà<span>*</span></label>
+                <label for="acc_holder">í›„ì› ê³„ì¢Œ ì˜ˆê¸ˆì£¼ ì´ë¦„<span>*</span></label>
                 <br>
-                <input type="text" id="bank">
+                <input type="text" id="acc_holder" name="acc_holder">
             </div>
 
             <div>
-                <label for=account_holder>ÈÄ¿ø °èÁÂ ¿¹±ÝÁÖ ÀÌ¸§<span>*</span></label>
+                <label for="acc_num">í›„ì› ê³„ì¢Œ ë²ˆí˜¸<span>*</span></label>
                 <br>
-                <input type="text" id="account_holder" name="account_holder">
+                <input type="text" id="acc_num" name="acc_num">
             </div>
 
             <div>
-                <label for="account_number">ÈÄ¿ø °èÁÂ ¹øÈ£<span>*</span></label>
-                <br>
-                <input type="text" id="account_number" name="account_number">
-            </div>
-
-            <div>
-                <label for="due_date">ÈÄ¿ø±Ý »ç¿ë ¸¶°¨ÀÏ<span>*</span></label>
+                <label for="due_date">í›„ì›ê¸ˆ ì‚¬ìš© ë§ˆê°ì¼<span>*</span></label>
                 <br>
                 <input type="date" id="due_date" name="due_date">
             </div>
 
             <div>
-                <label>»ç¿ë °èÈ¹<span>*</span></label>
+                <label for="use_plan">í›„ì›ê¸ˆ ì‚¬ìš© ê³„íš<span>*</span></label>
                 <br>
-                <textarea name="use_plan" id="use_plan" rows="7" placeholder="¿¹) Àü±â ¼³ºñ : 300,000 µî"></textarea>
+                <textarea name="use_plan" id="use_plan" rows="7" placeholder="ì˜ˆ) ì „ê¸° ì„¤ë¹„ : 500,000"></textarea>
             </div>
 
             <div>
-                <label for="other_text">±âÅ¸</label>
+                <label for="other_text">ê¸°íƒ€</label>
                 <br>
                 <textarea name="other_text" id="other_text" rows="7"></textarea>
             </div>
 
             <div class="btn">
-                <input type="button" value="Create">
+                <input type="button" value="Create" onClick="DisasterArticleCreate()">
             </div>
         </form>
     </div>

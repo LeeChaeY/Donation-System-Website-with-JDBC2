@@ -26,13 +26,6 @@ public class ResourceFilter implements Filter {
          resourcePrefixs.add("/img");
          resourcePrefixs.add("/images");
          resourcePrefixs.add("/upload");
-
-        resourcePrefixs.add("/css");
-        resourcePrefixs.add("/js");
-        resourcePrefixs.add("/fonts");
-        resourcePrefixs.add("/img");
-        resourcePrefixs.add("/images");
-        resourcePrefixs.add("/upload");
     }
 
     private RequestDispatcher defaultRequestDispatcher;

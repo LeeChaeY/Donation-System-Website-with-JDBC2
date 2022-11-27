@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SocialGroupForm</title>
+     <script type="text/javascript" src="./../js/socialGroupForm.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -142,11 +143,6 @@
             cursor: pointer;
         }
     </style>
-    <script>
-        function articleCreate() {
-            form.submit();
-        }
-    </script>
 </head>
 
 <body>
@@ -167,7 +163,7 @@
             <div>
                 <div>성별<span>*</span></div>
                 <br>
-                <input type="radio" name="gender" id="female" value="F"><label for="female">F</label>
+                <input type="radio" name="gender" id="female" value="F" checked="checked"><label for="female">F</label>
                 <input type="radio" name="gender" id="male" value="M"><label for="male">M</label>
             </div>
 

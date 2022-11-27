@@ -42,7 +42,6 @@ public class DonationController implements Controller{
 //			}else {
 //				
 //			}
-			
 			request.setAttribute("article", article);
 			request.setAttribute("user", user);
 			return "/donationList/donation.jsp";  

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,11 +12,9 @@
         * {
             box-sizing: border-box;
         }
-
         body {
             margin: 0;
         }
-
         nav {
             background-color: antiquewhite;
             display: flex;
@@ -24,50 +22,42 @@
             justify-content: center;
             text-align: center;
         }
-
         nav>div {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 70%;
         }
-
         .title {
             font-weight: bold;
             font-size: xx-large;
             color: brown;
             margin: 30px 0px;
         }
-
         #main-menu {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         #main-menu,
         #sub-menu {
             margin: 0;
             padding: 0;
             list-style-type: none;
         }
-
         #main-menu>li {
             padding: 15px;
         }
-
         #main-menu>li>a {
             color: black;
             text-align: center;
             text-decoration: none;
             font-weight: 600;
         }
-
         #main-menu>li>a:hover {
             cursor: pointer;
             color: gray;
         }
-
         #sub-menu {
             height: 0;
             visibility: hidden;
@@ -75,7 +65,6 @@
             position: relative;
             z-index: 10;
         }
-
         #sub-menu>li {
             width: 115px;
             padding: 10px 0px;
@@ -84,66 +73,53 @@
             background: brown;
             border-bottom: 1px solid rgba(255, 255, 255, 0.6);
         }
-
         #sub-menu>li>a {
             color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
         }
-
         #main-menu>li:hover #sub-menu {
             visibility: visible;
         }
-
         #sub-menu>li>a:hover {
             cursor: pointer;
             color: lightgray;
         }
-
         .container {
             width: 70%;
             margin: 0 auto;
         }
-
         .container .desc {
             color: indianred;
         }
-
         .container-title {
             text-align: center;
         }
-
         .container .writer {
             text-align: right;
             font-style: italic;
         }
-
         .container .declare {
             text-align: right;
             margin: 10px;
         }
-
         .container .declare>button {
             background-color: red;
             color: white;
             border: none;
             border-radius: 3px;
         }
-
         .container .declare>button:hover {
             background-color: lightcoral;
         }
-
         .container .deadline {
             color: cadetblue;
             text-align: center;
         }
-
         .container .imgPost {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         .container .info-title {
             font-weight: bold;
             font-size: x-large;
@@ -151,40 +127,33 @@
             padding: 20px;
             margin: 20px 0;
         }
-
         .container .info1>div {
             display: flex;
             padding: 5px;
             margin: 5px;
         }
-
         .container .info .basic {
             font-weight: bold;
             width: 15%;
         }
-
         .container .info2>div,
         .container .info3>div {
             padding: 5px;
             margin: 5px;
         }
-
         .container .donation {
             text-align: center;
             padding: 30px;
             margin: 10px 0;
         }
-
         .container .donation .account {
             font-size: x-large;
             font-weight: bold;
             margin: 20px;
         }
-
         .container .donation>.account>span {
             color: cornflowerblue;
         }
-
         .container .donation button {
             border: none;
             border-radius: 5px;
@@ -193,43 +162,35 @@
             background-color: darkblue;
             transition: all 0.3s ease;
         }
-
         .container .donation button:hover {
             background-color: cornflowerblue;
         }
-
         .container .donater table {
             text-align: center;
             margin: 50px auto;
             width: 70%;
             border-collapse: collapse;
         }
-
         .container .donater table th,
         .container .donater table td {
             border: 1px solid black;
             height: 30px;
             width: 50%;
         }
-
         .container .receipt {
             text-align: center;
         }
-
         .container .comment>div {
             padding: 10px;
         }
-
         .container .comment>.comment-title {
             font-weight: bold;
             font-size: large;
         }
-
         .container .comment>form {
             text-align: right;
             padding: 10px;
         }
-
         .container .comment>form>button {
             background-color: yellowgreen;
             border: none;
@@ -237,39 +198,31 @@
             color: white;
             padding: 5px;
         }
-
         .container .comment>form>button:hover {
             background-color: lightgreen;
         }
-
         .container .comment>.line {
             border-bottom: 1px dotted green;
         }
-
         .container .comment>.line>.person {
             display: flex;
             padding: 5px;
         }
-
         .container .comment>.line>.person>div {
             padding: 5px;
         }
-
         .container .comment>.line>.person>.person-time {
             color: gray;
         }
-
         .container .comment>.line>button {
             border: none;
             padding: 5px;
             border-radius: 3px;
             float: right;
         }
-
         button {
             transition: all 0.3s ease;
         }
-
         button:hover {
             cursor: pointer;
         }
@@ -281,17 +234,17 @@
     
     <div class="container">
         <h2 class="desc">Donation for Disaster</h2>
-        <h2 class="container-title">ÀÌ¹ø Æø¿ì·Î ÀÎÇØ ÁýÀÌ ¸Á°¡Á³½À´Ï´Ù.
+        <h2 class="container-title">ì´ë²ˆ í­ìš°ë¡œ ì¸í•´ ì§‘ì´ ë§ê°€ì¡ŒìŠµë‹ˆë‹¤.
 
         </h2>
-        <div class="writer">ÀÛ¼ºÀÚ id : somsome</div>
+        <div class="writer">ìž‘ì„±ìž id : somsome</div>
         <div class="declare">
-            <button onclick="confirm('½Å°íÇÏ½Ã°Ú½À´Ï±î?')">½Å°íÇÏ±â</button>
+            <button onclick="confirm('ì‹ ê³ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?')">ì‹ ê³ í•˜ê¸°</button>
         </div>
 
         <hr>
 
-        <h2 class="deadline">[ÈÄ¿ø ¸¶°¨ÀÏ] 2022-10-24</h2>
+        <h2 class="deadline">[í›„ì› ë§ˆê°ì¼] 2022-10-24</h2>
 
         <hr>
 
@@ -300,42 +253,42 @@
         </div>
 
         <div>
-            <h2 class="info-title">ÈÄ¿ø ±âº» Á¤º¸</h2>
+            <h2 class="info-title">í›„ì› ê¸°ë³¸ ì •ë³´</h2>
 
             <div class="info">
                 <div class="info1">
                     <div>
-                        <div class="basic">Àç³­ ÀçÇØ Á¾·ù</div>
-                        <div>È«¼ö(Æø¿ì)</div>
+                        <div class="basic">ìž¬ë‚œ ìž¬í•´ ì¢…ë¥˜</div>
+                        <div>í™ìˆ˜(í­ìš°)</div>
                     </div>
 
                     <div>
-                        <div class="basic">Àç³½ ÀçÇØ ¸íÄª</div>
-                        <div>¼öµµ±Ç ÁýÁß Æø¿ì</div>
+                        <div class="basic">ìž¬ë‚¸ ìž¬í•´ ëª…ì¹­</div>
+                        <div>ìˆ˜ë„ê¶Œ ì§‘ì¤‘ í­ìš°</div>
                     </div>
 
                     <div>
-                        <div class="basic">Áö¿ª</div>
-                        <div>¼­¿ïÆ¯º°½Ã °­³²±¸</div>
+                        <div class="basic">ì§€ì—­</div>
+                        <div>ì„œìš¸íŠ¹ë³„ì‹œ ê°•ë‚¨êµ¬</div>
                     </div>
 
                     <div>
-                        <div class="basic">ÇÇÇØ±Ý¾×</div>
-                        <div>100¸¸¿ø</div>
+                        <div class="basic">í”¼í•´ê¸ˆì•¡</div>
+                        <div>100ë§Œì›</div>
                     </div>
                 </div>
 
                 <div class="info2">
                     <div>
-                        <div class="basic">ÇöÀç »óÈ²</div>
+                        <div class="basic">í˜„ìž¬ ìƒí™©</div>
                         <div>
-                            ÀÌ¹ø Æø¿ì·Î ÁýÀÌ ¸Á°¡Á³½À´Ï´Ù. ´çÀå »ýÈ°ÇÒ °÷ÀÌ ¿©ÀÇÄ¡ ¾Ê½À´Ï´Ù.
+                            ì´ë²ˆ í­ìš°ë¡œ ì§‘ì´ ë§ê°€ì¡ŒìŠµë‹ˆë‹¤. ë‹¹ìž¥ ìƒí™œí•  ê³³ì´ ì—¬ì˜ì¹˜ ì•ŠìŠµë‹ˆë‹¤.
                         </div>
                     </div>
 
                     <div>
-                        <div class="basic">±âÅ¸ Æ¯Â¡</div>
-                        <div>¾øÀ½</div>
+                        <div class="basic">ê¸°íƒ€ íŠ¹ì§•</div>
+                        <div>ì—†ìŒ</div>
                     </div>
                 </div>
             </div>
@@ -345,29 +298,29 @@
         <hr>
 
         <div>
-            <h2 class="info-title">ÈÄ¿ø±Ý »ç¿ë °èÈ¹</h2>
+            <h2 class="info-title">í›„ì›ê¸ˆ ì‚¬ìš© ê³„íš</h2>
 
             <div class="info info3">
                 <div>
-                    <div class="basic">»ç¿ë ¸¶°¨ÀÏ</div>
+                    <div class="basic">ì‚¬ìš© ë§ˆê°ì¼</div>
                     <div>2022-11-24</div>
                 </div>
 
                 <div>
-                    <div class="basic">»ç¿ë ¿¹»ê¾È</div>
+                    <div class="basic">ì‚¬ìš© ì˜ˆì‚°ì•ˆ</div>
                     <div>
-                        Àü±â ¼³ºñ : 300,000
+                        ì „ê¸° ì„¤ë¹„ : 300,000
                     </div>
                 </div>
 
                 <div>
-                    <div class="basic">±âÅ¸</div>
+                    <div class="basic">ê¸°íƒ€</div>
                     <div>
-                        ´çÀå ÈÄ¿ø ¹ÞÀ» °÷ÀÌ ¿©±â ¹Û¿¡ ¶°¿À¸£Áö ¾Ê¾Æ¼­ ±ÞÇÏ°Ô ¿Ã¸³´Ï´Ù.
+                        ë‹¹ìž¥ í›„ì› ë°›ì„ ê³³ì´ ì—¬ê¸° ë°–ì— ë– ì˜¤ë¥´ì§€ ì•Šì•„ì„œ ê¸‰í•˜ê²Œ ì˜¬ë¦½ë‹ˆë‹¤.
                         <br>
-                        ÈÄ¿øÇØÁÖ½Å ±Ý¾×Àº º¸´Ù Åõ¸íÇÏ°Ô ¿µ¼öÁõ °ø°³·Î ÀÎÁõÇÏ°Ú½À´Ï´Ù.
+                        í›„ì›í•´ì£¼ì‹  ê¸ˆì•¡ì€ ë³´ë‹¤ íˆ¬ëª…í•˜ê²Œ ì˜ìˆ˜ì¦ ê³µê°œë¡œ ì¸ì¦í•˜ê² ìŠµë‹ˆë‹¤.
                         <br>
-                        µµ¿ÍÁÖ½Ã¸é °¨»çÇÏ°Ú½À´Ï´Ù.
+                        ë„ì™€ì£¼ì‹œë©´ ê°ì‚¬í•˜ê² ìŠµë‹ˆë‹¤.
                     </div>
                 </div>
             </div>
@@ -377,78 +330,78 @@
 
         <div class="donation">
             <div class="account">
-                <span>ÈÄ¿ø °èÁÂ : </span>
-                <span>Ä«Ä«¿À¹ðÅ©</span>
-                <span>ÀÌÈñ¹Î</span>
+                <span>í›„ì› ê³„ì¢Œ : </span>
+                <span>ì¹´ì¹´ì˜¤ë±…í¬</span>
+                <span>ì´í¬ë¯¼</span>
                 <span>3333-11-2492614</span>
             </div>
 
-            <button>ÈÄ¿øÇÏ±â</button>
+            <button>í›„ì›í•˜ê¸°</button>
         </div>
         <hr>
 
         <div class="donater">
-            <h2 class="info-title">ÈÄ¿ø±Ý ÀÔ±Ý ³»¿ª</h2>
+            <h2 class="info-title">í›„ì›ê¸ˆ ìž…ê¸ˆ ë‚´ì—­</h2>
 
             <table>
                 <tr>
-                    <th>ÀÌ¸§</th>
-                    <th>ÈÄ¿ø±Ý¾×(´ÜÀ§ : ¿ø)</th>
+                    <th>ì´ë¦„</th>
+                    <th>í›„ì›ê¸ˆì•¡(ë‹¨ìœ„ : ì›)</th>
                 </tr>
 
                 <tr>
-                    <td>±è¹Î¼ö</td>
+                    <td>ê¹€ë¯¼ìˆ˜</td>
                     <td>15,000</td>
                 </tr>
 
                 <tr>
-                    <td>¹ÚÁö¿î</td>
+                    <td>ë°•ì§€ìš´</td>
                     <td>1,000</td>
                 </tr>
 
                 <tr>
-                    <td>ÀÌÁø¿ì</td>
+                    <td>ì´ì§„ìš°</td>
                     <td>50,000</td>
                 </tr>
 
                 <tr>
-                    <td>±è¹ÎÁö</td>
+                    <td>ê¹€ë¯¼ì§€</td>
                     <td>10,000</td>
                 </tr>
 
                 <tr>
-                    <td>ÀÌ¿¹Áø</td>
+                    <td>ì´ì˜ˆì§„</td>
                     <td>55,000</td>
                 </tr>
 
                 <tr>
-                    <td>ÃÖ¼öÇÏ</td>
+                    <td>ìµœìˆ˜í•˜</td>
                     <td>1,000</td>
                 </tr>
 
 
                 <tr>
-                    <td>ÀÓÁö¹Î</td>
+                    <td>ìž„ì§€ë¯¼</td>
                     <td>500</td>
                 </tr>
 
                 <tr>
-                    <td>ÀÌ°æ¿ø</td>
+                    <td>ì´ê²½ì›</td>
                     <td>35,000</td>
                 </tr>
 
                 <tr>
-                    <td>¹ÚÁöÀº</td>
+                    <td>ë°•ì§€ì€</td>
                     <td>10,000</td>
                 </tr>
 
                 <tr>
-                    <td>ÀÌÁÖ¿ø</td>
+                    <td>ì´ì£¼ì›</td>
                     <td>15,000</td>
                 </tr>
 
                 <tr>
-                    <th colspan="2">ÃÑ¾× : 500,000</th>
+                    <th colspan="2">ì´ì•¡ : 500,000</th>
                 </tr>
             </table>
         </div>
@@ -456,7 +409,7 @@
         <hr>
 
         <div class="receipt">
-            <h2 class="info-title">ÈÄ¿ø±Ý »ç¿ë ³»¿ª</h2>
+            <h2 class="info-title">í›„ì›ê¸ˆ ì‚¬ìš© ë‚´ì—­</h2>
             <div>
                 <img src="../img/receipt.jpg" alt="">
             </div>
@@ -465,44 +418,44 @@
         <hr>
 
         <div class="comment">
-            <div class="comment-title">´ñ±Û</div>
+            <div class="comment-title">ëŒ“ê¸€</div>
 
             <form action="">
                 <textarea name="" id="" style="width: 100%;" rows="5"></textarea>
-                <button>´ñ±Û ÀÛ¼º</button>
+                <button>ëŒ“ê¸€ ìž‘ì„±</button>
             </form>
 
             <div class="line">
-                <button>½Å°í</button>
+                <button>ì‹ ê³ </button>
 
                 <div class="person">
-                    <div class="person-id">id[ÀÛ¼ºÀÚ]</div>
+                    <div class="person-id">id[ìž‘ì„±ìž]</div>
                     <div class="person-time">2022-10-29 16:00</div>
                 </div>
 
-                <div class="person-content">´öºÐ¿¡ ÈÄ¿øÀÌ ¸¹ÀÌ ÀÌ·ïÁö°í ÀÖ½À´Ï´Ù.</div>
+                <div class="person-content">ë•ë¶„ì— í›„ì›ì´ ë§Žì´ ì´ë¤„ì§€ê³  ìžˆìŠµë‹ˆë‹¤.</div>
             </div>
 
             <div class="line">
-                <button>½Å°í</button>
+                <button>ì‹ ê³ </button>
 
                 <div class="person">
-                    <div class="person-id">id[ÈÄ¿øÀÚ]</div>
+                    <div class="person-id">id[í›„ì›ìž]</div>
                     <div class="person-time">2022-10-24 23:00</div>
                 </div>
 
-                <div class="person-content">¿µ¼öÁõ ÀÎÁõ ¼­µÑ·¯ ºÎÅ¹µå¸³´Ï´Ù.</div>
+                <div class="person-content">ì˜ìˆ˜ì¦ ì¸ì¦ ì„œë‘˜ëŸ¬ ë¶€íƒë“œë¦½ë‹ˆë‹¤.</div>
             </div>
 
             <div class="line">
-                <button>½Å°í</button>
+                <button>ì‹ ê³ </button>
 
                 <div class="person">
-                    <div class="person-id">id[ÈÄ¿øÀÚ]</div>
+                    <div class="person-id">id[í›„ì›ìž]</div>
                     <div class="person-time">2022-10-20 10:00</div>
                 </div>
 
-                <div class="person-content">´õ ÀÌ»óÀÇ ÀçÇØ´Â ¾ø¾úÀ¸¸é ÁÁ°Ú³×¿ä.</div>
+                <div class="person-content">ë” ì´ìƒì˜ ìž¬í•´ëŠ” ì—†ì—ˆìœ¼ë©´ ì¢‹ê² ë„¤ìš”.</div>
             </div>
         </div>
     </div>
