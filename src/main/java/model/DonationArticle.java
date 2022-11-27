@@ -220,14 +220,7 @@ public class DonationArticle {
 	public List<DonationImage> getImageList() {
         return imageList;
     }
-<<<<<<< HEAD
-
-    public void setImageList(List<DonationImage> imageList) {
-        this.imageList = imageList;
-    }
-=======
->>>>>>> refs/remotes/origin/develop
-
+	
     public void setImageList(List<DonationImage> imageList) {
         this.imageList = imageList;
     }

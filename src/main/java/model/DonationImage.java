@@ -57,8 +57,4 @@ public class DonationImage
                 + ", article=" + article + "]";
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> refs/remotes/origin/develop

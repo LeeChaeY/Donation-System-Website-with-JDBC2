@@ -34,37 +34,26 @@ public class RequestMapping {
         mappings.put("/donationForm/animal", new AnimalArticleController());
         mappings.put("/donationForm/disaster", new DisasterArticleController());
         mappings.put("/donationForm/socialGroup", new SocialGroupArticleController());
-        
-<<<<<<< HEAD
+
         // donation Article View
         mappings.put("/donationList/animal", new ViewAnimalArticleController()); // 1123 by 채연, [22/11/26]update by 나현
-=======
+
         //donation Article View
         mappings.put("/donationList/animal", new ViewAnimalArticleController()); // 1123 by 채연
->>>>>>> refs/remotes/origin/develop
         mappings.put("/donationList/socialGroup", new ViewSocialGroupArticleController());
         
         //donation Article Update
         mappings.put("/donationForm/animalArticleUpdate", new UpdateAnimalArticleController());
-        
-<<<<<<< HEAD
+  
         //[22/11/26]donaiton by 나현 
         mappings.put("/donation", new DonationController());
-        
-        // comment controller // 1123 by 채연
-=======
+
         //comment controller // 1123 by 채연
->>>>>>> refs/remotes/origin/develop
         mappings.put("/donationList/comment", new CommentController());
         mappings.put("/donationList/commentDelete", new DeleteCommentController());
         mappings.put("/donationList/commentUpdate", new UpdateCommentController());
-<<<<<<< HEAD
         
-      //doantion Article Delete
-=======
-
         //doantion Article Delete
->>>>>>> refs/remotes/origin/develop
         mappings.put("/donationList/socialGroupArticleDelete", new DeleteSocialGroupArticleController());
         
         logger.info("Initialized Request Mapping!");
