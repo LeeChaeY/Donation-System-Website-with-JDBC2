@@ -1,5 +1,5 @@
-<%@page contentType="text/html; charset=utf-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +7,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SocialGroupForm</title>
+    <!-- 제이쿼리 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- 아임포트 -->
+	<script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+    <title>Donation</title>
     <style>
         * {
             box-sizing: border-box;
@@ -69,6 +73,7 @@
             width: 115px;
             padding: 10px 0px;
             margin: 0 auto;
+            text-align: center;
             background: brown;
             border-bottom: 1px solid rgba(255, 255, 255, 0.6);
         }
@@ -88,7 +93,7 @@
             margin: 0 auto;
         }
         h2 {
-            color: indianred;
+            color: palevioletred;
         }
         form {
             width: 100%;
@@ -117,10 +122,14 @@
             font-size: large;
         }
         textarea {
+            margin: 5px;
             border: 1px solid lightgray;
             width: 50%;
-            margin: 5px;
         }
+		.note{
+			font-weight: bold;
+			color: red;
+		}
         .btn {
             margin: 0 auto;
             display: flex;
@@ -143,9 +152,37 @@
         }
     </style>
     <script>
-        function articleCreate() {
-            form.submit();
-        }
+    function payment() {
+    	var amount = document.getElementById('amount').value;
+    	amount *= 1;
+    	
+    	if(amount<1000){
+    		alert("1000\ 이상부터 기부 가능합니다.");
+    		return false;
+    	}
+    	
+    	const IMP = window.IMP;
+    	IMP.init("imp03655522");
+        // IMP.request_pay(param, callback) 결제창 호출
+        IMP.request_pay({ // param
+          pg: "kakaopay",
+          pay_method: "kakaopay",
+          merchant_uid: 'donation_' + new Date().getTime(), // 주문번호
+          name: '${article.title}',
+          amount: amount,
+          buyer_email: '${user.email}',
+          buyer_name: '${user.name}',
+          buyer_tel: '${user.phoneNum}',
+          buyer_addr: '${user.address}',
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                form.submit();
+                alert("기부가 완료 되었습니다.");
+            } else {
+            	alert("기부가 실패 되었습니다.");
+            }
+        });
+      }
     </script>
 </head>
 
@@ -153,99 +190,38 @@
     <jsp:include page="./../navigation.jsp"/>
 
     <div class="container">
-        <h2>CREATE DONATION(Socially vulnerable)</h2>
-
+        <h2>기부글: ${article.title }</h2>
         <hr>
-
-        <form name="form" method="POST" action="<c:url value='/donationForm/socialGroup' />" enctype="multipart/form-data">
+        <form name="form" method="POST" action="<c:url value='/donation' />">
+        	<input type="hidden" name="userId" value="${user.userId }">
+        	<input type="hidden" name="articleId" value="${article.articleId }">
+        	<input type="hidden" name="category" value="${article.category }">
             <div>
-                <label for="title">제목<span>*</span></label>
+                <label for="amount">후원금액<span>*</span> (1000원 이상부터 후원이 가능합니다.)</label>
                 <br>
-                <input type="text" id="title" name="title">
+                <input type="number" id="amount" name="amount" min="1000"> \
             </div>
-
+            
             <div>
-                <div>성별<span>*</span></div>
+                <label for="payBankName">은행</label>
                 <br>
-                <input type="radio" name="gender" id="female" value="F"><label for="female">F</label>
-                <input type="radio" name="gender" id="male" value="M"><label for="male">M</label>
+                <input type="text" id="payBankName" name="payBankName" value="${article.bankName }" readonly="readonly">
             </div>
-
+            
             <div>
-                <label for="age">나이<span>*</span></label>
+                <label for="accHolder">예금주</label>
                 <br>
-                <input type="number" id="age" name="age">(단위: 세, 만 나이)
+                <input type="text" id="accHolder" name="accHolder" value="${article.accHolder }" readonly="readonly">
             </div>
-
+            
             <div>
-                <label for="area">지역<span>*</span></label>
+                <label for="accNum">계좌번호</label>
                 <br>
-                <input type="text" id="area" name="area">
+                <input type="text" id="accNum" name="accNum" value="${article.accNum }" readonly="readonly">
             </div>
-
-
-            <div>
-                <label for="type">취약 계층 유형<span>*</span></label>
-                <br>
-                <input type="text" id="type" name="type">
-            </div>
-
-            <div>
-                <label for="situation">현재 상황<span>*</span></label>
-                <br>
-                <textarea name="situation" id="situation" rows="7"></textarea>
-            </div>
-
-            <div>
-                <label for="image">사진<span>*</span></label>
-                <br>
-                <input type="file" id="image" name="image" multiple="multiple">
-            </div>
-
-            <div>
-                <label for="deadline">후원 마감일<span>*</span></label>
-                <br>
-                <input type="date" id="deadline" name="deadline">
-            </div>
-
-            <div>
-                <label for="bank_name">후원 계좌 은행<span>*</span></label>
-                <br>
-                <input type="text" id="bank_name" name="bank_name">
-            </div>
-
-            <div>
-                <label for="acc_holder">후원 계좌 예금주 이름<span>*</span></label>
-                <br>
-                <input type="text" id="acc_holder" name="acc_holder">
-            </div>
-
-            <div>
-                <label for="acc_num">후원 계좌 번호<span>*</span></label>
-                <br>
-                <input type="text" id="acc_num" name="acc_num">
-            </div>
-
-            <div>
-                <label for="due_date">후원금 사용 마감일<span>*</span></label>
-                <br>
-                <input type="date" id="due_date" name="due_date">
-            </div>
-
-            <div>
-                <label>사용 계획<span>*</span></label>
-                <br>
-                <textarea name="use_plan" id="use_plan" rows="7" placeholder="예) 마트 : 100,000 등"></textarea>
-            </div>
-
-            <div>
-                <label for="other_text">기타</label>
-                <br>
-                <textarea name="other_text" id="other_text" rows="7"></textarea>
-            </div>
-
+            
             <div class="btn">
-                <input type="button" value="Create" onClick="return articleCreate()">
+                <input type="button" value="Donate now" onClick="payment()">
             </div>
         </form>
     </div>

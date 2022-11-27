@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,17 +7,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyDonation</title>
+    <title>My Donation</title>
     <style>
         .container {
             width: 70%;
             margin: 0 auto;
         }
-
         .container h2 {
             text-align: left;
         }
-
         table {
             width: 90%;
             margin: 0 auto;
@@ -25,35 +23,28 @@
             text-align: center;
             border-collapse: collapse;
         }
-
         th {
-            background-color: gold;
+            background-color: #fab1a0;
             border: 1px solid goldenrod;
         }
-
         td {
-            border: 1px solid goldenrod;
+            border: 1px solid #e17055;
         }
-
         td:nth-child(1) {
             width: 25%;
         }
-
         td>img {
             width: 50%;
             height: 100px;
         }
-
         td:nth-child(2) {
             width: 40%;
         }
-
         td:nth-child(3),
         td:nth-child(4) {
             width: 10%;
         }
-
-        button {
+        .btn {
             background-color: gray;
             color: white;
             border-radius: 3px;
@@ -61,8 +52,12 @@
             transition: all 0.3s ease;
             padding: 10px;
         }
-
-        button:hover {
+		.btn > a {
+			text-decoration: none;
+			color: white;
+		}
+		
+        .btn:hover {
             background-color: lightgray;
             color: black;
             cursor: pointer;
@@ -74,59 +69,32 @@
     <jsp:include page="./../navigation.jsp"/>
 
     <div class="container">
-        <h2>≥ª∞° ±‚∫Œ«— ∏Ò∑œ</h2>
-
+        <h2>ÎÇ¥Í∞Ä Í∏∞Î∂ÄÌïú Î™©Î°ù</h2>
         <hr>
         <table>
             <tr>
-                <th>ªÁ¡¯</th>
-                <th>¡¶∏Ò</th>
-                <th>¿€º∫¿⁄</th>
-                <th>±‚∫Œ ±›æ◊(¥‹¿ß : ø¯)</th>
-                <th>πŸ∑Œ∞°±‚</th>
+                <th>ÏÇ¨ÏßÑ</th>
+                <th>Ï†úÎ™©</th>
+                <th>ÏûëÏÑ±Ïûê</th>
+                <th>Í∏∞Î∂Ä Í∏àÏï°(Îã®ÏúÑ : Ïõê)</th>
+                <th>Î∞îÎ°úÍ∞ÄÍ∏∞</th>
             </tr>
 
-            <tr>
-                <td>
-                    <img src="../img/animal.png" alt="">
-                </td>
-
-                <td>µø¥ˆø©¥Î ¿Œ±Ÿ ¿Ø±‚∞ﬂ</td>
-
-                <td>dongduk</td>
-                <td>5000</td>
-                <td>
-                    <button>Go to Site</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <img src="../img/cat.jpg" alt="">
-                </td>
-
-                <td>±≥≈ÎªÁ∞Ì ¥Á«— ∞ÌæÁ¿Ã∏¶ ¿ß«— ∫¥ø¯∫Ò∞° « ø‰«’¥œ¥Ÿ</td>
-
-                <td>dongduk</td>
-                <td>1500</td>
-                <td>
-                    <button>Go to Site</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <img src="../img/rain.jpg" alt="">
-                </td>
-
-                <td>¿Ãπ¯ ∆¯øÏ∑Œ ¿Œ«ÿ ¡˝¿Ã ∏¡∞°¡≥Ω¿¥œ¥Ÿ.</td>
-
-                <td>somsome</td>
-                <td>10000</td>
-                <td>
-                    <button>Go to Site</button>
-                </td>
-            </tr>
+           <c:forEach var="donation" items="${donations}">
+				<tr>
+	                <td><img src="../img/animal.png" alt=""></td>
+	                <td>${donation.title }</td>
+	                <td>${donation.writer }</td>
+	                <td>${donation.amount }</td>
+	                <td> 
+	                	<span class="btn">
+			  				<a href="<c:url value='/donationList/${donation.category }' >
+			  					<c:param name='articleId' value='${donation.articleId}'/>
+			  				</c:url>">Go to Site</a> 
+			  			</span>
+			  		</td>
+	            </tr>
+			</c:forEach>
         </table>
     </div>
 </body>

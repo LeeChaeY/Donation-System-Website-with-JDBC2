@@ -12,11 +12,9 @@
         * {
             box-sizing: border-box;
         }
-
         body {
             margin: 0;
         }
-
         nav {
             background-color: antiquewhite;
             display: flex;
@@ -24,50 +22,42 @@
             justify-content: center;
             text-align: center;
         }
-
         nav>div {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 70%;
         }
-
         .title {
             font-weight: bold;
             font-size: xx-large;
             color: brown;
             margin: 30px 0px;
         }
-
         #main-menu {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         #main-menu,
         #sub-menu {
             margin: 0;
             padding: 0;
             list-style-type: none;
         }
-
         #main-menu>li {
             padding: 15px;
         }
-
         #main-menu>li>a {
             color: black;
             text-align: center;
             text-decoration: none;
             font-weight: 600;
         }
-
         #main-menu>li>a:hover {
             cursor: pointer;
             color: gray;
         }
-
         #sub-menu {
             height: 0;
             visibility: hidden;
@@ -75,7 +65,6 @@
             position: relative;
             z-index: 10;
         }
-
         #sub-menu>li {
             width: 115px;
             padding: 10px 0px;
@@ -84,34 +73,27 @@
             background: brown;
             border-bottom: 1px solid rgba(255, 255, 255, 0.6);
         }
-
         #sub-menu>li>a {
             color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
         }
-
         #main-menu>li:hover #sub-menu {
             visibility: visible;
         }
-
         #sub-menu>li>a:hover {
             cursor: pointer;
             color: lightgray;
         }
-
         .container {
             width: 70%;
             margin: 0 auto;
         }
-
         .container .desc {
             color: indianred;
         }
-
         .container-title {
             text-align: center;
         }
-
         .container .writer {
             text-align: right;
             font-style: italic;
@@ -121,24 +103,11 @@
        		text-align: right;
             font-style: italic;
         }
-
-        .container .declare {
+        .container .update {
             text-align: right;
             margin: 10px;
-        }
-
-        .container .declare>button {
-            background-color: red;
-            color: white;
-            border: none;
-            border-radius: 3px;
         }
         
-         .container .update {
-            text-align: right;
-            margin: 10px;
-        }
-
         .container .update>a {
             background-color: cadetblue;
             color: white;
@@ -147,21 +116,29 @@
             text-decoration: none;
         }
         
+        .container .declare {
+            text-align: right;
+            margin: 10px;
+        }
+        .container .declare>button {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+        
         .container .declare>a {
             background-color: lightcoral;
         }
-
         .container .deadline {
             color: cadetblue;
             text-align: center;
         }
-
         .container .imgPost {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         .container .info-title {
             font-weight: bold;
             font-size: x-large;
@@ -169,40 +146,33 @@
             padding: 20px;
             margin: 20px 0;
         }
-
         .container .info1>div {
             display: flex;
             padding: 5px;
             margin: 5px;
         }
-
         .container .info .basic {
             font-weight: bold;
             width: 15%;
         }
-
         .container .info2>div,
         .container .info3>div {
             padding: 5px;
             margin: 5px;
         }
-
         .container .donation {
             text-align: center;
             padding: 30px;
             margin: 10px 0;
         }
-
         .container .donation .account {
             font-size: x-large;
             font-weight: bold;
             margin: 20px;
         }
-
         .container .donation>.account>span {
             color: cornflowerblue;
         }
-
         .container .donation button {
             border: none;
             border-radius: 5px;
@@ -211,43 +181,35 @@
             background-color: darkblue;
             transition: all 0.3s ease;
         }
-
         .container .donation button:hover {
             background-color: cornflowerblue;
         }
-
         .container .donater table {
             text-align: center;
             margin: 50px auto;
             width: 70%;
             border-collapse: collapse;
         }
-
         .container .donater table th,
         .container .donater table td {
             border: 1px solid black;
             height: 30px;
             width: 50%;
         }
-
         .container .receipt {
             text-align: center;
         }
-
         .container .comment>div {
             padding: 10px;
         }
-
         .container .comment>.comment-title {
             font-weight: bold;
             font-size: large;
         }
-
         .container .comment>form {
             text-align: right;
             padding: 10px;
         }
-
         .container .comment>form>button {
             background-color: yellowgreen;
             border: none;
@@ -255,11 +217,9 @@
             color: white;
             padding: 5px;
         }
-
         .container .comment>form>button:hover {
             background-color: lightgreen;
         }
-
         .container .comment>.comm>.line {
             border-bottom: 1px dotted green;
         }
@@ -267,16 +227,13 @@
         .container .comment>.comm>.line>form>input {
             margin: 10px;
         }
-
         .container .comment>.comm>.line>.person {
             display: flex;
             padding: 5px;
         }
-
         .container .comment>.comm>.line>.person>div {
             padding: 5px;
         }
-
         .container .comment>.comm>.line>.person>.person-time {
             color: gray;
         }
@@ -284,21 +241,34 @@
         .container .comment>.comm>.line>.person-content {
             margin: 10px;
         }
-
-        .container .comment>.comm>.line>button {
-            border: none;
-            padding: 5px;
-            border-radius: 3px;
-            float: right;
-        }
-
-        button {
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            cursor: pointer;
-        }
+	.container .btn {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 10px;
+		}
+		
+		.container .btn>div {
+			background-color: gray;
+			border-radius: 3px;
+			color: white;
+			transition: all 0.3s ease;
+			padding: 5px;
+		}
+		
+		.container .btn>div:hover {
+			background-color: lightgray;
+		}
+		
+		.container .btn > div > a {
+			text-decoration: none;
+			color: white;
+		}
+		
+		.container .btn > div > a:hover {
+			color: black;
+			cursor: pointer;
+		}
     </style>
     <script>
     	function commentCreate() {
@@ -344,7 +314,6 @@
     		event.preventDefault();
     		
     		var commmentList = document.getElementsByClassName("comm");
-
     		for (var comm of commmentList) {
     			personContent = comm.getElementsByClassName("person-content");
     			personContent[0].style.display = "inline-block";
@@ -505,8 +474,16 @@
                 <span>${article.accHolder }</span>
                 <span>${article.accNum }</span>
             </div>
+			
 
-            <button>후원하기</button>
+	            <div class="btn">
+					<div>
+						<a href="<c:url value='/donation' >
+				  				<c:param name='articleId' value='${article.articleId}'/>
+				  				<c:param name='category' value='${article.category}'/>
+				  		</c:url>">Donate now</a>
+					</div>
+				</div>
         </div>
 
         <hr>
@@ -515,64 +492,22 @@
             <h2 class="info-title">후원금 입금 내역</h2>
 
             <table>
-                <tr>
+            	<tr>
                     <th>이름</th>
                     <th>후원금액(단위 : 원)</th>
                 </tr>
-
+            
+            	<c:forEach var="donator" items="${donatorList}">
+            		<tr>
+	                    <td>${donator.userId }</td>
+	                    <td>${donator.amount }</td>
+                	</tr>
+            	</c:forEach>
+                
                 <tr>
-                    <td>김민수</td>
-                    <td>15,000</td>
+                    <th colspan="2">총액 : ${article.totalAmount }</th>
                 </tr>
-
-                <tr>
-                    <td>박지운</td>
-                    <td>1,000</td>
-                </tr>
-
-                <tr>
-                    <td>이진우</td>
-                    <td>50,000</td>
-                </tr>
-
-                <tr>
-                    <td>김민지</td>
-                    <td>10,000</td>
-                </tr>
-
-                <tr>
-                    <td>이예진</td>
-                    <td>55,000</td>
-                </tr>
-
-                <tr>
-                    <td>최수하</td>
-                    <td>1,000</td>
-                </tr>
-
-                <tr>
-                    <td>임지민</td>
-                    <td>500</td>
-                </tr>
-
-                <tr>
-                    <td>이경원</td>
-                    <td>35,000</td>
-                </tr>
-
-                <tr>
-                    <td>박지은</td>
-                    <td>10,000</td>
-                </tr>
-
-                <tr>
-                    <td>이주원</td>
-                    <td>15,000</td>
-                </tr>
-
-                <tr>
-                    <th colspan="2">총액 : 500,000</th>
-                </tr>
+                
             </table>
         </div>
 

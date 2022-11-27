@@ -5,10 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+//import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import model.DonationArticle;
 import model.Donator;
+import model.MyDonation;
 import model.User;
 
 /**
@@ -133,7 +134,6 @@ public class UserDAO {
 		sb.append("SELECT article_id, title, category, TO_CHAR(create_date, 'YYYY-MM-DD') create_date, total_amount, receipt_check ");
 		sb.append("FROM donation_article ");
 		sb.append("WHERE user_id = ? ");
-		
 		String sql = sb.toString();
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});
@@ -162,6 +162,37 @@ public class UserDAO {
 		return null;
 	}
 
+	public List<MyDonation> findMyDonationList(String userId) throws SQLException{
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT a.title AS \"title\", a.user_id AS \"user_id\", d.amount AS \"amount\", a.category AS \"category\", a.article_id AS \"article_id\" ");
+		sb.append("FROM donation d JOIN donation_article a on d.article_id = a.article_id ");
+		sb.append("WHERE d.user_id = ? ");
+		String sql = sb.toString();
+		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});
+		List<MyDonation> list = new ArrayList<MyDonation>();
+		
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();	
+			while(rs.next()) {
+				MyDonation donation = new MyDonation(
+						rs.getString("title"),
+						rs.getString("user_id"),
+						rs.getInt("amount"),
+						rs.getString("category"),
+						rs.getInt("article_id")
+						);
+				list.add(donation);
+			}
+			return list;
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
+	}
+		
 	public boolean existingUser(String userId) throws SQLException {
 		String sql = "SELECT count(*) FROM USER_INFO WHERE user_id=?";      
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정

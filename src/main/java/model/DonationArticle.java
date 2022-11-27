@@ -19,7 +19,7 @@ public class DonationArticle {
 	private String receiptCheck;
 	private String userId;
 	private int totalAmount;
-	private List<DonationImage> images;
+	private List<DonationImage> imageList;
 	
 	public DonationArticle() {};
 
@@ -216,6 +216,14 @@ public class DonationArticle {
 	public void setTotalAmount(int totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+	
+	public List<DonationImage> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<DonationImage> imageList) {
+        this.imageList = imageList;
+    }
 
 	@Override
 	public String toString() {
