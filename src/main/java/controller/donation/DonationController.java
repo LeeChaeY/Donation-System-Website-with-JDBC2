@@ -8,9 +8,11 @@ import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.AnimalArticle;
 import model.Donation;
+import model.SocialGroupArticle;
 import model.User;
 import model.service.AnimalManager;
 import model.service.DonationManager;
+import model.service.SocialGroupManager;
 import model.service.UserManager;
 import model.service.UserNotFoundException;
 
@@ -32,17 +34,21 @@ public class DonationController implements Controller{
 			String category = request.getParameter("category");
 			int articleId = Integer.parseInt(articleIdStr);
 			
-//			if(category.equals("animal")) {
+			if(category.equals("animal")) {
 				AnimalManager animalManager = AnimalManager.getInstance();
 				AnimalArticle article = animalManager.findAnimalArticleByArticleId(articleId);
-				UserManager manager = UserManager.getInstance();
-				User user = manager.findUser(userId);
-//			}else if(category.equals("socialGroup")) {
-//				
-//			}else {
-//				
-//			}
-			request.setAttribute("article", article);
+				request.setAttribute("article", article);
+			}else if(category.equals("socialGroup")) {
+				SocialGroupManager socialGroupManager = SocialGroupManager.getInstance();
+				SocialGroupArticle article = socialGroupManager.findSocialGroupArticleByArticleId(articleId);
+				request.setAttribute("article", article);
+			}else { // 이후에 disaster로 바꾸기
+				AnimalManager animalManager = AnimalManager.getInstance();
+				AnimalArticle article = animalManager.findAnimalArticleByArticleId(articleId);
+				request.setAttribute("article", article);
+			}
+			UserManager manager = UserManager.getInstance();
+			User user = manager.findUser(userId);
 			request.setAttribute("user", user);
 			return "/donationList/donation.jsp";  
 	    }
