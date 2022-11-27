@@ -13,18 +13,15 @@
             width: 70%;
             margin: 0 auto;
         }
-
         h2 {
             color: indianred;
         }
-
         table {
             margin: 0 auto;
             margin-top: 50px;
             width: 60%;
             text-align: center;
         }
-
         input[type="button"] {
             border: none;
             background-color: gray;
@@ -33,7 +30,6 @@
             padding: 7px;
             transition: all 0.3s ease;
         }
-
         input[type="button"]:hover {
             cursor: pointer;
             background-color: lightgray;

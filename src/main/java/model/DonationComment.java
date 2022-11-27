@@ -82,5 +82,13 @@ public class DonationComment {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
+	@Override
+	public String toString() {
+		return "DonationComment [commentId=" + commentId + ", content=" + content + ", createDate=" + createDate
+				+ ", updateDate=" + updateDate + ", articleId=" + articleId + ", userId=" + userId + "]";
+	}
+	
+	
 	
 }

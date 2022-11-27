@@ -6,13 +6,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import controller.Controller;
 import model.AnimalArticle;
 import model.DonationComment;
+
+import model.DonationReceipt;
+
 import model.Donator;
 import model.service.AnimalManager;
 import model.service.CommentManager;
 import model.service.DonationManager;
+
+import model.service.DonationReceiptManager;
+
 import model.service.UserNotFoundException;
 
 public class ViewAnimalArticleController implements Controller{
@@ -20,6 +29,7 @@ public class ViewAnimalArticleController implements Controller{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
+		 final Logger log = LoggerFactory.getLogger(ViewAnimalArticleController.class);
 		
 		try {
 			HttpSession session = request.getSession();	
@@ -38,6 +48,14 @@ public class ViewAnimalArticleController implements Controller{
 			List<Donator> donatorList = donationMan.latest10Donors(articleId);
 			request.setAttribute("donatorList", donatorList);
 			
+
+			if (article.getReceiptCheck().equals("Y")) {
+				DonationReceiptManager receipt_man = DonationReceiptManager.getInstance();
+				DonationReceipt receipt = receipt_man.findByArticleId(articleId);
+				request.setAttribute("donationReceipt", receipt);
+				log.debug("receipt: {}", receipt);
+			}
+
 			return "/donationList/animalArticle.jsp";
 		}catch (ArithmeticException e) {
 			// TODO: handle exception

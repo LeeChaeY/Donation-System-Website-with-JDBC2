@@ -93,5 +93,13 @@ public class Donation {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
+	@Override
+	public String toString() {
+		return "Donation [donationId=" + donationId + ", amount=" + amount + ", donationDate=" + donationDate
+				+ ", payBankName=" + payBankName + ", payUserName=" + payUserName + ", payCardNum=" + payCardNum
+				+ ", articleId=" + articleId + ", userId=" + userId + "]";
+	}
+	
 	
 }

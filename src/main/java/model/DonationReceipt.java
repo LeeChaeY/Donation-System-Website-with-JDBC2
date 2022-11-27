@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 public class DonationReceipt {
 	private int receiptId;
@@ -8,10 +9,21 @@ public class DonationReceipt {
 	private Date createDate;
 	private Date updateDate;
 	private int articleId;
+	private List<ReceiptImage> imageList;
 	
 	public DonationReceipt() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public DonationReceipt(int receiptId, String content, Date createDate, Date updateDate, int articleId, List<ReceiptImage> imageList) {
+		super();
+		this.receiptId = receiptId;
+		this.content = content;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+		this.articleId = articleId;
+		this.imageList = imageList;
 	}
 	
 	public DonationReceipt(int receiptId, String content, Date createDate, Date updateDate, int articleId) {
@@ -63,5 +75,18 @@ public class DonationReceipt {
 		this.articleId = articleId;
 	}
 	
+	public List<ReceiptImage> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<ReceiptImage> imageList) {
+		this.imageList = imageList;
+	}
+
+	@Override
+	public String toString() {
+		return "DonationReceipt [receiptId=" + receiptId + ", content=" + content + ", createDate=" + createDate
+				+ ", updateDate=" + updateDate + ", articleId=" + articleId + ", imageList=" + imageList + "]";
+	}
 	
 }

@@ -1,6 +1,6 @@
 =\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=refs/remotes/origin/develop
+=HEAD
+=refs/remotes/origin/develop
 eclipse.preferences.version=1
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=16

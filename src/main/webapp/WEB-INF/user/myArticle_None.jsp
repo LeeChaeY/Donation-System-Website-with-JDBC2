@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +14,6 @@
             margin: 0 auto;
             text-align: center;
         }
-
         button {
             border: none;
             background-color: gray;
@@ -23,7 +22,6 @@
             border-radius: 3px;
             transition: all 0.3s ease;
         }
-
         button:hover {
             background-color: lightgray;
             color: black;
@@ -36,7 +34,7 @@
     <jsp:include page="./../navigation.jsp"/>
 
     <div class="container">
-        <h2>¾ÆÁ÷ »ı¼ºÇÑ DonationÀÌ ¾ø½À´Ï´Ù</h2>
+        <h2>Â¾Ã†ÃÃ· Â»Ã½Â¼ÂºÃ‡Ã‘ DonationÃ€ÃŒ Â¾Ã¸Â½Ã€Â´ÃÂ´Ã™</h2>
 
         <img src="../img/no.jpg" alt="">
 

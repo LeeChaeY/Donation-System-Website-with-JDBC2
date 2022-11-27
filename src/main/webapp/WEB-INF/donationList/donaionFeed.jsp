@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -151,6 +152,11 @@
             margin: 10px;
         }
     </style>
+     <script>
+	function ViewArticle(targetUri) {
+		location.href = targetUri;
+	}
+	</script>
 </head>
 
 <body>
@@ -168,74 +174,24 @@
         </div>
 
         <hr>
-
-        <table>
-            <tr>
-                <td>
-                    <div>力格</div>
-                    <img src="../img/cat.jpg" alt="">
-                </td>
-
-                <td>
-                    <div>力格</div>
-                    <img src="../img/disaster.jpg" alt="">
-                </td>
-
-                <td>
-                    <div>力格</div>
-                    <img src="../img/animal.png" alt="">
-                </td>
-
-                <td>
-                    <div>力格</div>
-                    <img src="../img/rain.jpg" alt="">
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div>力格</div>
-                    <img src="../img/animal.png" alt="">
-                </td>
-
-                <td>
-                    <div>力格</div>
-                    <img src="../img/cat.jpg" alt="">
-                </td>
-
-                <td>
-                    <div>力格</div>
-                    <img src="../img/volunteer.jpg" alt="">
-                </td>
-
-                <td>
-                    <div>力格</div>
-                    <img src="../img/rain.jpg" alt="">
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div>力格</div>
-                    <img src="../img/rain.jpg" alt="">
-                </td>
-
-                <td>
-                    <div>力格</div>
-                    <img src="../img/animal.png" alt="">
-                </td>
-
-                <td>
-                    <div>力格</div>
-                    <img src="../img/disaster.jpg" alt="">
-                </td>
-
-                <td>
-                    <div>力格</div>
-                    <img src="../img/cat.jpg" alt="">
-                </td>
-            </tr>
+		
+		<table>
+			    <tr>
+			    <c:forEach var="article" items="${articleList}" varStatus="status">
+			    	<c:if test="${status.index % 4 == 0}">
+			    		</tr><tr>
+			    	</c:if>
+			    	
+			    		<td onclick="location.href='<c:url value='/donationList/${article.category}' >
+			  							<c:param name='articleId' value='${article.articleId}'/>
+			  						</c:url>'">
+                			<div>${article.title}</div>
+                    		<img src="../img/cat.jpg" alt="">
+                		</td>
+			    </c:forEach>
+				</tr>
         </table>
+        
     </div>
 </body>
 

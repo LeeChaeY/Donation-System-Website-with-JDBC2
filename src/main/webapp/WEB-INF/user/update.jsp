@@ -15,24 +15,19 @@
             width: 70%;
             margin: 0 auto;
         }
-
         h2 {
             color: indianred;
         }
-
         form {
             width: 100%;
             margin: 0 auto;
         }
-
         form>div {
             margin: 10px;
         }
-
         span {
             color: orange;
         }
-
         input[type="text"],
         input[type="password"],
         input[type="email"] {
@@ -41,16 +36,12 @@
             height: 30px;
             margin: 10px;
         }
-
-
         .txtarea {
             width: 30%;
         }
-
         .phone input {
             width: 10%;
         }
-
         .btn {
             margin: 0 auto;
             display: flex;
@@ -58,7 +49,6 @@
             align-items: center;
             text-align: center;
         }
-
         .btn>input {
             border: none;
             background-color: gray;
@@ -67,7 +57,6 @@
             border-radius: 3px;
             transition: all 0.3s ease;
         }
-
         .btn>input:hover {
             background-color: lightgray;
             color: black;
