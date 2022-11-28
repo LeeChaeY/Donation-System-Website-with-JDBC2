@@ -18,6 +18,11 @@ public class DonationImage
         this.fileName = fileName;
         this.article = article;
     }
+    
+    public DonationImage(int fileOrder, String fileName) {
+        this.fileOrder = fileOrder;
+        this.fileName = fileName;
+    }
 
     public int getArticleId() {
         return articleId;

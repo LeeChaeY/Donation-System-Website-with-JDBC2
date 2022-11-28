@@ -14,6 +14,7 @@ public class AnimalArticle extends DonationArticle{
 	private String healthStatus;
 	private String personality;
 	
+	public AnimalArticle() {}
 	
 	public AnimalArticle(int articleId, String title, String category, String deadline, String bankName,
 			String accHolder, String accNum, String idCheck, String dueDate, String usePlan, String otherText,

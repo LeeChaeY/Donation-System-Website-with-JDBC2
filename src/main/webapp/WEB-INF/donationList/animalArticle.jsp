@@ -103,12 +103,10 @@
        		text-align: right;
             font-style: italic;
         }
-
         .container .update {
             text-align: right;
             margin: 10px;
         }
-
         .container .update>a {
             background-color: cadetblue;
             color: white;
@@ -116,19 +114,16 @@
             border-radius: 3px;
             text-decoration: none;
         }
-
         .container .declare {
             text-align: right;
             margin: 10px;
         }
-
         .container .declare>button {
             background-color: red;
             color: white;
             border: none;
             border-radius: 3px;
         }
-
         .container .declare>a {
             background-color: lightcoral;
         }
@@ -221,7 +216,6 @@
             font-weight: bold;
             width: 15%;
         }
-
         .container .receipt .receipt-info >div {
         	text-align: left;
             padding: 5px;
@@ -269,25 +263,20 @@
         .container .comment>.comm>.line>.person-content {
             margin: 10px;
         }
-
-
         .container .comment>.comm>.line>button {
             border: none;
             padding: 5px;
             border-radius: 3px;
             float: right;
         }
-
         button {
             transition: all 0.3s ease;
         }
-
         button:hover {
             cursor: pointer;
         }
         
         .container .btn {
-
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -455,8 +444,12 @@
 
         <hr>
 
-        <div class="imgPost">
-            <img src="../img/cat.jpg" alt="">
+         <div class="imgPost">
+            <c:forEach var="image" items="${article.imageList}">
+                <img src="<c:url value='/upload/${image.fileName}'/>"><br>
+            </c:forEach>
+            <!-- 첫번째 이미지파일 -->
+            <%-- <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/> --%>
         </div>
         
         <%-- <div class="imgPost">
