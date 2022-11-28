@@ -18,9 +18,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
 		<attributes>
-			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
@@ -84,10 +83,5 @@
 	<classpathentry kind="lib" path="E:/강의자료/2022(4학년)/4-2 데베프/플젝_에이클/jar_files/re2j-1.6.jar"/>
 	<classpathentry kind="lib" path="E:/강의자료/2022(4학년)/4-2 데베프/플젝_에이클/jar_files/threetenbp-1.6.4.jar"/>
 	<classpathentry kind="lib" path="E:/강의자료/2022(4학년)/4-2 데베프/플젝_에이클/jar_files (1)/protobuf-java-3.21.9.jar"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
-		<attributes>
-			<attribute name="owner.project.facets" value="jst.web"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
