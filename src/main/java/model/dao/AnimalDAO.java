@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.User;
 import model.AnimalArticle;
+import model.DonationImage;
 
 public class AnimalDAO {
 	private JDBCUtil jdbcUtil = null;
@@ -26,7 +27,7 @@ public class AnimalDAO {
 			jdbcUtil.executeUpdate(key);
 			ResultSet rs = jdbcUtil.getGeneratedKeys(); // 생성된 PK 값을 포함한 result set 객체 반환
 			int generatedKey = 0;
-			 if(rs.next()) {
+			if(rs.next()) {
 				 generatedKey = rs.getInt(1);     //  PK 값을 읽음
 				 String insert2 = "INSERT INTO ANIMAL_ARTICLE VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				 Object[] param2 = new Object[] {generatedKey, animal.getName(), animal.getArea(), animal.getType(), 
@@ -44,17 +45,15 @@ public class AnimalDAO {
 			jdbcUtil.commit();
 			jdbcUtil.close();	// resource 반환
 		}		
-		return -1;			
+		return 0;			
 	}
 	
-	public AnimalArticle findAnimalArticleByArticleId(int article_id) throws SQLException{
-		
-		String sql = "SELECT title, category, deadline, bank_name, acc_holder, acc_num, due_date, use_plan, other_text, TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') \"create_date\", TO_CHAR(UPDATE_DATE, 'YYYY-MM-DD') \"update_date\", receipt_check, user_id, total_amount, name, area, type, age, weight, gender, neutering, current_status, health_status, personality "
-				+"FROM animal_article a JOIN donation_article d ON a.article_id = d.article_id "
-				+"WHERE a.article_id=? ";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {article_id});
-		
+	public AnimalArticle findAnimalArticleByArticleId(int article_id) throws SQLException{	
 		try {
+			String sql1 = "SELECT title, category, deadline, bank_name, acc_holder, acc_num, due_date, use_plan, other_text, TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') \"create_date\", TO_CHAR(UPDATE_DATE, 'YYYY-MM-DD') \"update_date\", receipt_check, user_id, total_amount, name, area, type, age, weight, gender, neutering, current_status, health_status, personality "
+					+"FROM animal_article a JOIN donation_article d ON a.article_id = d.article_id "
+					+"WHERE a.article_id=? ";
+			jdbcUtil.setSqlAndParameters(sql1, new Object[] {article_id});
 			ResultSet rs = jdbcUtil.executeQuery();
 			if(rs.next()) {
 				AnimalArticle article = new AnimalArticle(
@@ -84,6 +83,27 @@ public class AnimalDAO {
 												rs.getString("health_status"),
 												rs.getString("personality")
 												);
+				//이미지 추가
+				StringBuilder sb = new StringBuilder();
+				sb.append("SELECT img_order, img_link ");
+				sb.append("FROM donation_image ");
+				sb.append("WHERE article_id = ?");
+				sb.append("ORDER BY img_order ");
+				String sql2 = sb.toString();
+				jdbcUtil.setSqlAndParameters(sql2, new Object[] {article_id});
+				
+				List<DonationImage> images = new ArrayList<DonationImage>();
+				
+				rs = jdbcUtil.executeQuery();	
+				while(rs.next()) {
+					DonationImage image = new DonationImage(
+							rs.getInt("img_order"), 
+							rs.getString("img_link")
+							);
+					images.add(image);
+				}
+				article.setImageList(images);
+				
 				return article;
 			}
 		}catch (Exception ex) {
@@ -146,4 +166,28 @@ public class AnimalDAO {
         }
 		return 0;
 	}
+	
+	public int create_image(DonationImage image) throws SQLException {
+        try {
+            //DONATION_IMAGE
+            String sql3 = "INSERT INTO DONATION_IMAGE VALUES (?, ?, ?)";
+            System.out.println(image.getArticleId());
+            Object[] param3 = new Object[] {
+            					image.getArticleId(),
+                                image.getFileOrder(),
+                                image.getFileName()
+                                };
+            jdbcUtil.setSqlAndParameters(sql3, param3); // JDBCUtil 에 insert문과 매개 변수 설정
+            int result = jdbcUtil.executeUpdate(); // insert 문 실행
+            //System.out.println("DONATION_IMAGE table " + result + "개 등록 성공");
+            return result;
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {     
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }       
+        return 0;
+    }
 }

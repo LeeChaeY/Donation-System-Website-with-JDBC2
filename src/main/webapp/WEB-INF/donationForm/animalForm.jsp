@@ -181,7 +181,7 @@
 
         <hr>
 
-        <form name="form" method="POST" action="<c:url value='/donationForm/animal' />">
+        <form name="form" method="POST" action="<c:url value='/donationForm/animal' />" enctype="multipart/form-data">
             <div>
                 <label for="title">제목<span>*</span></label>
                 <br>
