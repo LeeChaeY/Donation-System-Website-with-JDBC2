@@ -32,6 +32,8 @@ public class RequestMapping {
         //1126 by 채연
         mappings.put("/user/report", new UserReportController());
 
+        //Feed 에서 idCard from으로
+        mappings.put("/donationForm/idCard", new IdCardController());
         
         //donation Article Create
         mappings.put("/donationForm/animal", new AnimalArticleController());
