@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -139,6 +140,7 @@ public class IdCardController implements Controller{
 	                request.setAttribute("createFailed", true);
 	                request.setAttribute("exception", res.getError());
 	                
+	                request.setAttribute("category", category);
 	                return "/donationForm/idCard.jsp";
 			    }
 			    	
@@ -154,17 +156,49 @@ public class IdCardController implements Controller{
 				}*/
 	    	}
 			System.out.println(textList);
-			//user
+			
+			// 현재 접속하고 있는 userId로 user 객체를 반환하기
         	HttpSession session = request.getSession();
         	String userId = UserSessionUtils.getLoginUserId(session);
         	UserManager userMan = UserManager.getInstance();
         	User user = userMan.findUser(userId);
         	
-			if (textList.get(1).split(" ")[0].equals(user.getName()) && textList.get(2).split("-")[0].equals(user.getBirthday().substring(2).replace("-", ""))) {
+        	// 신분증은 주민등록증이나 자동차운전면허증만 가능
+        	String userName = null;
+        	String userBirthday = null; // 생년월일
+        	
+        	// 주민등록번호 정규표현식
+        	String pattern = "\\d{2}([0]\\d|[1][0-2])([0][1-9]|[1-2]\\d|[3][0-1])[-]*[1-4]\\d{6}";  
+        	int i;
+        	
+        	// 이 코드는 신분증에서 이름이 나오고 바로 바로 다음줄에 주민등록번호가 나올것이라고 가정하여 구현한 코드임.
+    		for (i=0; i<textList.size(); i++) { // 주민등록번호이면 
+    			if (Pattern.matches(pattern, textList.get(i))) {
+    				// 주민등록증: 보통 주민등록번호 앞에 이름, '보통 이름 (한자)' 로 되어있어서 공백으로 split
+    				// 자동차운전면허증은 한글 이름만 표기되어있지만 상관없음
+    				userName = textList.get(i - 1).split(" ")[0]; 
+    				userBirthday = textList.get(i).split("-")[0]; // 생년월일
+    			}
+    		}
+        	
+    		log.debug("userName: {}, userBirthday: {}", userName, userBirthday);
+    		// 신분증에서 이름과 생년월일을 추출해서 사용자의 정보와 비교
+    		// DB의 사용자 birthday는 '1999-03-08' 이런 식으로 되어있음
+    		// 1999-03-08 -> 990308 바꾸어서 신분증에서 추출한 생년월일과 비교
+			if (userName.equals(user.getName()) && userBirthday.equals(user.getBirthday().substring(2).replace("-", ""))) {
 				return "redirect:/donationForm/"+category;
 			}
 			else {
-				return "/donationForm/idCard.jsp";
+				request.setAttribute("category", category);
+				
+				String msg = "신분증 인식이 안됩니다. \n 다시 업로드 해주세요.";
+				String url = "/donationForm/idCard";
+				request.setAttribute("msg", "신분증 인식이 안됩니다. \n 다시 업로드 해주세요.");
+				request.setAttribute("url", "/donationForm/idCard");
+				log.debug("finish");
+//				return "/donationForm/alert.jsp";
+				return "redirect:/donationForm/alert?category="+category+"&url="+url;
+//				return "/donationForm/idCard.jsp";
 			}
 			// 비교
 			
@@ -172,6 +206,7 @@ public class IdCardController implements Controller{
             e.printStackTrace();
             request.setAttribute("createFailed", true);
             request.setAttribute("exception", e);
+            request.setAttribute("category", category);
             
             return "/donationForm/idCard.jsp";
         }
