@@ -181,7 +181,6 @@
 			    	<c:if test="${status.index % 4 == 0}">
 			    		</tr><tr>
 			    	</c:if>
-			    	
 			    		<td onclick="location.href='<c:url value='/donationList/${article.category}' >
 			  							<c:param name='articleId' value='${article.articleId}'/>
 			  						</c:url>'">

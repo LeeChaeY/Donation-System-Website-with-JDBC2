@@ -7,10 +7,12 @@ import javax.servlet.http.HttpSession;
 import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.AnimalArticle;
+import model.DisasterArticle;
 import model.Donation;
 import model.SocialGroupArticle;
 import model.User;
 import model.service.AnimalManager;
+import model.service.DisasterManager;
 import model.service.DonationManager;
 import model.service.SocialGroupManager;
 import model.service.UserManager;
@@ -43,8 +45,8 @@ public class DonationController implements Controller{
 				SocialGroupArticle article = socialGroupManager.findSocialGroupArticleByArticleId(articleId);
 				request.setAttribute("article", article);
 			}else { // 이후에 disaster로 바꾸기
-				AnimalManager animalManager = AnimalManager.getInstance();
-				AnimalArticle article = animalManager.findAnimalArticleByArticleId(articleId);
+				DisasterManager disasterManager = DisasterManager.getInstance();
+				DisasterArticle article = disasterManager.findDisasterArticleByArticleId(articleId);
 				request.setAttribute("article", article);
 			}
 			UserManager manager = UserManager.getInstance();

@@ -19,7 +19,7 @@ public class AnimalDAO {
 			Object[] param1 = new Object[] {animal.getTitle(), animal.getCategory(), animal.getDeadline(), animal.getBankName(),
 					animal.getAccHolder(), animal.getAccNum(), animal.getIdCheck(), animal.getDueDate(), animal.getUsePlan(), animal.getOtherText(),
 					animal.getUpdateDate(), animal.getReceiptCheck(), animal.getTotalAmount(), animal.getUserId()};
-			System.out.println("AdnimalDAO: "+animal);
+			System.out.println("AnimalDAO: "+animal);
 			jdbcUtil.setSqlAndParameters(insert1, param1);
 			String key[]= {"article_id"}; // DONATION_ARTICLE PK
 			jdbcUtil.executeUpdate(key);
@@ -132,8 +132,6 @@ public class AnimalDAO {
 					article.getCurrentStatus(), article.getHealthStatus(), article.getPersonality(), article.getArticleId()};
 			jdbcUtil.setSqlAndParameters(update2, param2);
 			jdbcUtil.executeUpdate();
-//			jdbcUtil.commit();
-			
 			return 1;
 		}catch (Exception ex) {
 			jdbcUtil.rollback();

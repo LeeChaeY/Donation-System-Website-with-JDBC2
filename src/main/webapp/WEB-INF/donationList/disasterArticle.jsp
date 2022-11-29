@@ -428,9 +428,7 @@
 
         <div class="writer">작성자 id : ${article.userId }</div>
         
-        <c:if test="${empty article.updateDate }">
-        	<div class="updateDate">작성된 날짜: ${article.createDate }</div>
-        </c:if>
+        <div class="updateDate">작성된 날짜: ${article.createDate }</div>
         
         <c:if test="${not empty article.updateDate}">
         	<div class="updateDate">수정된 날짜: ${article.updateDate }</div>	
@@ -439,11 +437,14 @@
 		<!-- [20221120] insert, delete 추가, 신고 수정(글쓴이는 자신을 신고x) from 나현  -->
 		<c:if test="${sessionScope.userId eq article.userId }">
 			<div class="update">
-			  	<a href="<c:url value='/donationForm/animalArticleUpdate' >
+			  	<a href="<c:url value='/donationForm/disasterArticleUpdate' >
 			  				<c:param name='userId' value='${article.userId}'/>
 			  				<c:param name='articleId' value='${article.articleId}'/>
 			  			</c:url>">수정하기</a>
-			  	<a href="<c:url value='/donationForm/animalArticleDELTE' />">삭제하기</a>		  
+			  	<a href="<c:url value='/donationList/disasterArticleDelete' >
+			  				<c:param name='userId' value='${article.userId}'/>
+			  				<c:param name='articleId' value='${article.articleId}'/>
+			  			</c:url>">삭제하기</a>
 			</div>
 		</c:if>
 
@@ -459,17 +460,13 @@
 
         <hr>
 
-        <div class="imgPost">
-            <img src="../img/rain.jpg" alt="">
-        </div>
-        
-        <%-- <div class="imgPost">
-            <c:forEach var="image" items="${socialGroupArticle.imageList}">
+         <div class="imgPost">
+            <c:forEach var="image" items="${article.imageList}">
                 <img src="<c:url value='/upload/${image.fileName}'/>"><br>
             </c:forEach>
             <!-- 첫번째 이미지파일 -->
-            <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/>
-        </div> --%>
+            <%-- <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/> --%>
+        </div>
 
         <div>
             <h2 class="info-title">후원 기본 정보</h2>
@@ -477,66 +474,30 @@
             <div class="info">
                 <div class="info1">
                     <div>
-
-                        <div class="basic">이름</div>
-                        <div>${article.name }</div>
-                    </div>
-
-                    <div>
                         <div class="basic">지역</div>
                         <div>${article.area }</div>
                     </div>
-
+                    
                     <div>
-                        <div class="basic">종</div>
+                        <div class="basic">재난 재해 종류</div>
                         <div>${article.type }</div>
                     </div>
 
                     <div>
-                        <div class="basic">나이</div>
-                        <div>${article.age }</div>
+                        <div class="basic">재난 재해 명칭</div>
+                        <div>${article.name }</div>
                     </div>
-
-                    <div>
-                        <div class="basic">몸무게</div>
-                        <div>${article.weight }</div>
+					
+					<div>
+                        <div class="basic">피해 금액</div>
+                        <div>${article.damageAmount }</div>
                     </div>
-
-                    <div>
-                        <div class="basic">성별</div>
-                        <div>${article.gender }</div>
-                    </div>
-
-                    <div>
-                        <div class="basic">중성화 유무</div>
-                        <div>${article.gender }</div>
-                    </div>
-
+                    
                     <div>
                         <div class="basic">현재 상황</div>
-                        <div>${article.currentStatus }</div>
-
+                        <div>${article.situation }</div>
                     </div>
-                </div>
-
-                <div class="info2">
-                    <div>
-
-                        <div class="basic">건강 상태</div>
-                        <div>
-                            ${article.healthStatus }
-
-                        </div>
-                    </div>
-
-                    <div>
-
-                        <div class="basic">성격</div>
-                        <div>
-                            ${article.personality }
-                        </div>
-
-                    </div>
+                   
                 </div>
             </div>
 
@@ -563,10 +524,7 @@
                 <div>
                     <div class="basic">사용 예산안</div>
                     <div>
-
                         ${article.usePlan }
-
-
                     </div>
                 </div>
 
