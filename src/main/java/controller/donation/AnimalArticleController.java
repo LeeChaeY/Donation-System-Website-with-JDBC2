@@ -78,13 +78,10 @@ public class AnimalArticleController implements Controller{
                     if (item.isFormField()) {  // item이 일반 데이터인 경우                      
                     	 if(item.getFieldName().equals("title"))
                          	animal.setTitle(value);
-                             // parameter 이름이 title이면 title 변수에 값을 저장한다.
                          else if(item.getFieldName().equals("deadline"))
                          	animal.setDeadline(value);
-                             // parameter 이름이 deadline이면 deadline 변수에 값을 저장한다.
                          else if(item.getFieldName().equals("bank_name"))
                          	animal.setBankName(value);
-                             // parameter 이름이 bank_name이면 bankName 변수에 값을 저장한다.
                          else if(item.getFieldName().equals("acc_holder"))
                          	animal.setAccHolder(value);
                          else if(item.getFieldName().equals("acc_num"))
@@ -138,7 +135,7 @@ public class AnimalArticleController implements Controller{
                             
                             //DonationImage 생성 후 List<DonationImage>에 저장 
                             DonationImage image = new DonationImage();
-                            image.setArticleId(0); //manager.create(article); 후 설정 가능
+                            image.setArticleId(0); 
                             image.setFileOrder(fileOrder++);
                             image.setFileName(filename);
                             image.setArticle(animal);
@@ -162,25 +159,16 @@ public class AnimalArticleController implements Controller{
                 e.printStackTrace();
             }
             
-            //request.setAttribute("filename", filename); //마지막 파일
-            //System.out.println("filname: "+filename);
+            animal.setArticleId(0);
+            animal.setCategory("animal"); 
+            animal.setIdCheck("Y"); 
+            animal.setCreateDate(null);
+            animal.setUpdateDate(null);
+            animal.setReceiptCheck("N");
+            animal.setTotalAmount(0); 
+            animal.setUserId(userId); 
             
-            //defualt값으로 지정할 필드
-            animal.setArticleId(0); //추후 변경
-            animal.setCategory("animal"); //고정
-            animal.setIdCheck("Y"); //추후 변경
-            animal.setCreateDate(null); //추후 변경
-            animal.setUpdateDate(null); //추후 변경
-            animal.setReceiptCheck("N"); //추후 변경
-            animal.setTotalAmount(0); //추후 변경
-            animal.setUserId(userId); //session값, 고정
-            
-            //SoicalGroupArticle.imageList에 위에서 생성한 imageList 저장
             animal.setImageList(imageList);
-//            System.out.println("imgList 출력");
-//            for (DonationImage list : article.getImageList()) {
-//                System.out.println(list);
-//            }
             
             log.debug("ANimalArticle Controller: {}", animal);
         }      
@@ -196,9 +184,7 @@ public class AnimalArticleController implements Controller{
              //DONATION_IMAGE 테이블에 레코드 생성
              for (int i=0; i<imageList.size(); i++)
                  manager.create_image(imageList.get(i));
-		
-    		 request.setAttribute("article", animal);
-    		 return "/donationList/animalArticle.jsp";
+    		 return "redirect:/donationList/animal?articleId="+articleId; 
     	 }catch (Exception e) {
     		 request.setAttribute("createFailed", true);
     		 request.setAttribute("exception", e);

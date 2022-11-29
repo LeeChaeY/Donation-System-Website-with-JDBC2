@@ -1,8 +1,11 @@
 package model;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Date;
 
+=======
+>>>>>>> branch 'develop' of https://github.com/Journey5873/donationSystem.git
 public class DisasterArticle extends DonationArticle {
    //DisasterDto
    private String type;
@@ -10,7 +13,39 @@ public class DisasterArticle extends DonationArticle {
    private String area;
    private int damageAmount;
    private String situation;
-   private ArrayList<DonationImage> images;
+   
+   public DisasterArticle() {}
+   
+   public DisasterArticle(int articleId, String title, String category, String deadline, String bankName,
+	         String accHolder, String accNum, String idCheck, String dueDate, String usePlan, String otherText,
+	         String createDate, String updateDate, String receiptCheck, String userId, int totalAmount, String type,
+	         String name, String area, int damageAmount, String situation) {
+	      
+	      super(articleId, title, category, deadline, bankName, accHolder, accNum, idCheck, dueDate, usePlan, otherText,
+	            createDate, updateDate, receiptCheck, totalAmount, userId);
+	      
+	      this.type = type;
+	      this.name = name;
+	      this.area = area;
+	      this.damageAmount = damageAmount;
+	      this.situation = situation;
+	   }
+
+	   public DisasterArticle(int articleId, String title, String category, String deadline, String bankName,
+	         String accHolder, String accNum, String dueDate, String usePlan, String otherText, String createDate,
+	         String updateDate, String receiptCheck, String userId, int totalAmount, String type, String name,
+	         String area, int damageAmount, String situation) {
+	      
+	      super(articleId, title, category, deadline, bankName, accHolder, accNum, dueDate, usePlan, otherText,
+	            createDate, updateDate, receiptCheck, userId, totalAmount);
+	      
+	      this.type = type;
+	      this.name = name;
+	      this.area = area;
+	      this.damageAmount = damageAmount;
+	      this.situation = situation;
+	   }
+	   
    
    public String getType() {
       return type;
@@ -52,6 +87,7 @@ public class DisasterArticle extends DonationArticle {
       this.situation = situation;
    }   
    
+<<<<<<< HEAD
    public DisasterArticle(int articleId, String title, String category, String deadline, String bankName,
          String accHolder, String accNum, String idCheck, String dueDate, String usePlan, String otherText,
          Date createDate, Date updateDate, String receiptCheck, String userId, int totalAmount, String type,
@@ -66,7 +102,10 @@ public class DisasterArticle extends DonationArticle {
       this.damageAmount = damageAmount;
       this.situation = situation;
    }
+=======
+>>>>>>> branch 'develop' of https://github.com/Journey5873/donationSystem.git
 
+<<<<<<< HEAD
    public DisasterArticle(int articleId, String title, String category, String deadline, String bankName,
          String accHolder, String accNum, String dueDate, String usePlan, String otherText, Date createDate,
          Date updateDate, String receiptCheck, String userId, int totalAmount, String type, String name,
@@ -82,6 +121,8 @@ public class DisasterArticle extends DonationArticle {
       this.situation = situation;
    }
    
+=======
+>>>>>>> branch 'develop' of https://github.com/Journey5873/donationSystem.git
    
    @Override
    public String toString() {

@@ -412,9 +412,13 @@
 
         <div class="writer">작성자 id : ${article.userId }</div>
         
+<<<<<<< HEAD
         <c:if test="${empty article.updateDate }">
         	<div class="updateDate">작성된 날짜: <fmt:formatDate value="${article.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>
         </c:if>
+=======
+        <div class="updateDate">작성된 날짜: ${article.createDate }</div>
+>>>>>>> branch 'develop' of https://github.com/Journey5873/donationSystem.git
         
         <c:if test="${not empty article.updateDate}">
         	<div class="updateDate">수정된 날짜: <fmt:formatDate value="${article.updateDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>	
@@ -453,14 +457,6 @@
             <!-- 첫번째 이미지파일 -->
             <%-- <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/> --%>
         </div>
-        
-        <%-- <div class="imgPost">
-            <c:forEach var="image" items="${socialGroupArticle.imageList}">
-                <img src="<c:url value='/upload/${image.fileName}'/>"><br>
-            </c:forEach>
-            <!-- 첫번째 이미지파일 -->
-            <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/>
-        </div> --%>
 
         <div>
             <h2 class="info-title">후원 기본 정보</h2>
