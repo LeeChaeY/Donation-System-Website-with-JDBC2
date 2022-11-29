@@ -61,7 +61,10 @@ public class DisasterDAO {
 	}
 
 	public DisasterArticle findDisasterArticle(int article_id) throws SQLException {
-		String sql = "SELECT title, cateory, deadline, bank_name, acc_holder, acc_num, due_date, use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, type, name, area, damage_amount, situation, disaster_id "
+		String sql = "SELECT title, category, TO_CHAR(deadline, 'YYYY-MM-DD') \"deadline\", "
+				+ "bank_name, acc_holder, acc_num, TO_CHAR(due_date, 'YYYY-MM-DD') \"due_date\", "
+				+ "use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, "
+				+" type, name, area, damage_amount, situation, disaster_id "
 				+ "FROM disaster_article a JOIN donation_article d ON a.disaster_id = d.disaster_id "
 				+ "WHERE a.disaster_id=? ";
 
@@ -74,8 +77,8 @@ public class DisasterDAO {
 				DisasterArticle article = new DisasterArticle(article_id, rs.getString("title"),
 						rs.getString("category"), rs.getString("deadline"), rs.getString("bank_name"),
 						rs.getString("acc_holder"), rs.getString("acc_num"), rs.getString("due_date"),
-						rs.getString("use_plan"), rs.getString("other_text"), rs.getString("create_date"),
-						rs.getString("update_date"), rs.getString("receipt_check"), rs.getString("user_id"),
+						rs.getString("use_plan"), rs.getString("other_text"), rs.getDate("create_date"),
+						rs.getDate("update_date"), rs.getString("receipt_check"), rs.getString("user_id"),
 						rs.getInt("total_amount"), rs.getString("type"), rs.getString("name"), rs.getString("area"),
 						rs.getInt("damage_amount"), rs.getString("situation"));
 

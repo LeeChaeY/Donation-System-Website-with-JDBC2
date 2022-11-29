@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.util.List;
 
 public class DonationArticle {
@@ -14,8 +15,8 @@ public class DonationArticle {
 	private String dueDate; // 사용 마감일
 	private String usePlan;
 	private String otherText;
-	private String createDate;
-	private String updateDate;
+	private Date createDate;
+	private Date updateDate;
 	private String receiptCheck;
 	private String userId;
 	private int totalAmount;
@@ -25,7 +26,7 @@ public class DonationArticle {
 
 	public DonationArticle(int articleId, String title, String category, String deadline, String bankName,
 			String accHolder, String accNum, String idCheck, String dueDate, String usePlan, String otherText,
-			String createDate, String updateDate, String receiptCheck, int totalAmount, String userId) {
+			Date createDate, Date updateDate, String receiptCheck, int totalAmount, String userId) {
 		super();
 		this.articleId = articleId;
 		this.title = title;
@@ -47,7 +48,7 @@ public class DonationArticle {
 	
 	public DonationArticle(int articleId, String title, String category, String deadline, String bankName,
 			String accHolder, String accNum, String dueDate, String usePlan, String otherText,
-			String createDate, String updateDate, String receiptCheck, String userId, int totalAmount) {
+			Date createDate, Date updateDate, String receiptCheck, String userId, int totalAmount) {
 		super();
 		this.articleId = articleId;
 		this.title = title;
@@ -67,7 +68,7 @@ public class DonationArticle {
 	}
 	
 	public DonationArticle(int articleId, String title, String category, String deadline, 
-			String createDate, String updateDate, int totalAmount, String userId) {
+			Date createDate, Date updateDate, int totalAmount, String userId) {
 		super();
 		this.articleId = articleId;
 		this.title = title;
@@ -79,7 +80,7 @@ public class DonationArticle {
 		this.userId = userId;
 	}
 	
-	public DonationArticle(int article_id, String title, String category, String createDate, int totalAmount, String receiptCheck, String userId) {
+	public DonationArticle(int article_id, String title, String category, Date createDate, int totalAmount, String receiptCheck, String userId) {
 		this.articleId = article_id;
 		this.title = title;
 		this.category = category;
@@ -177,19 +178,19 @@ public class DonationArticle {
 		this.otherText = otherText;
 	}
 
-	public String getCreateDate() {
+	public Date getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-	public String getUpdateDate() {
+	public Date getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(String updateDate) {
+	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
 

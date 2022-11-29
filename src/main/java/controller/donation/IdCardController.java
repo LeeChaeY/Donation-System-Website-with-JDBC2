@@ -38,35 +38,35 @@ import model.User;
 import model.service.UserManager;
 
 public class IdCardController implements Controller{
-   private static final Logger log = LoggerFactory.getLogger(IdCardController.class);
+	private static final Logger log = LoggerFactory.getLogger(IdCardController.class);
 
-   @Override
-   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-      String filename = null;
-       String oriFilename = null;
-       String category = request.getParameter("category");
-       String path = null;
-       
-       if (request.getMethod().equals("GET")) {
-          request.setAttribute("category", category);
-          
-          return "/donationForm/idCard.jsp";
-       }
-       
-      try {
-         // POST request (정보가 parameter로 전송됨)
-      
-          boolean check = ServletFileUpload.isMultipartContent(request);              
-          if(check) {    // 전송된 요청 메시지의 타입이 multipart 인지 여부를 체크한다. (multipart/form-data)
-               // 아래와 같이 하면 Tomcat 내부에 복사된 프로젝트 밑에 upload 폴더가 생성됨 
-               ServletContext context = request.getServletContext();
-               path = context.getRealPath("/upload");
-               File dir = new File(path);
-                  
-               // Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함
-               // File dir = new File("C:/Temp");
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String filename = null;
+    	String oriFilename = null;
+	    String category = request.getParameter("category");
+	    String path = null;
+	    
+	    if (request.getMethod().equals("GET")) {
+	    	request.setAttribute("category", category);
+	    	
+	    	return "/donationForm/idCard.jsp";
+	    }
+	    
+		try {
+			// POST request (정보가 parameter로 전송됨)
+		
+		    boolean check = ServletFileUpload.isMultipartContent(request);              
+		    if(check) {    // 전송된 요청 메시지의 타입이 multipart 인지 여부를 체크한다. (multipart/form-data)
+	            // 아래와 같이 하면 Tomcat 내부에 복사된 프로젝트 밑에 upload 폴더가 생성됨 
+	            ServletContext context = request.getServletContext();
+	            path = context.getRealPath("/upload");
+	            File dir = new File(path);
+		            
+	            // Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함
+	            // File dir = new File("C:/Temp");
                         
-               if (!dir.exists()) dir.mkdir();  // 전송된 파일을 저장할 폴더 생성
+            	if (!dir.exists()) dir.mkdir();  // 전송된 파일을 저장할 폴더 생성
             
             
                 DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -101,10 +101,10 @@ public class IdCardController implements Controller{
                         log.debug("{}", filename);
                         File file = new File(dir, filename);
                         item.write(file);
-                  }
+            		}
                 }
-          }
-      } catch(SizeLimitExceededException e) {
+		    }
+		} catch(SizeLimitExceededException e) {
             // 업로드 되는 파일의 크기가 지정된 최대 크기를 초과할 때 발생하는 예외처리
             e.printStackTrace();           
         } catch(FileUploadException e) {
@@ -113,15 +113,14 @@ public class IdCardController implements Controller{
         } catch(Exception e) {            
             e.printStackTrace();
         }
-      
-      try {
+		
+		try {
             // API 시작, 파일 경로 필요 - oriFilename 사용
             // for문은 oriFilename를 구하기 위함임
             List<AnnotateImageRequest> requestImage = new ArrayList<>();
             
             log.debug("path: {}", path + "\\" + filename);
             String imageFilePath = path + "\\" + filename;
-<<<<<<< HEAD
 			ByteString imgBytes = ByteString.readFrom(new FileInputStream(imageFilePath));
 			
 			Image img = Image.newBuilder().setContent(imgBytes).build();
@@ -191,95 +190,11 @@ public class IdCardController implements Controller{
 			}
 			else {
 				request.setAttribute("category", category);
-				
-				String msg = "신분증 인식이 안됩니다. \n 다시 업로드 해주세요.";
-				String url = "/donationForm/idCard";
-				request.setAttribute("msg", "신분증 인식이 안됩니다. \n 다시 업로드 해주세요.");
-				request.setAttribute("url", "/donationForm/idCard");
-				log.debug("finish");
-//				return "/donationForm/alert.jsp";
-				return "redirect:/donationForm/alert?category="+category+"&url="+url;
-//				return "/donationForm/idCard.jsp";
+				return "/donationForm/idCard.jsp";
 			}
 			// 비교
 			
 		} catch(Exception e) {            
-=======
-         ByteString imgBytes = ByteString.readFrom(new FileInputStream(imageFilePath));
-         
-         Image img = Image.newBuilder().setContent(imgBytes).build();
-         Feature feat = Feature.newBuilder().setType(Type.TEXT_DETECTION).build();
-         AnnotateImageRequest requestImage2 = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
-         requestImage.add(requestImage2);
-         
-         ImageAnnotatorClient client = ImageAnnotatorClient.create();
-         
-         BatchAnnotateImagesResponse responseImage = client.batchAnnotateImages(requestImage);
-          List<AnnotateImageResponse> responseImage2 = responseImage.getResponsesList();
-             
-          List<String> textList = new ArrayList<String>();
-         for (AnnotateImageResponse res : responseImage2) {
-             if (res.hasError()) { // 에러 발생 시 다시 idCard로 forward
-                System.out.printf("Error: %s\n", res.getError().getMessage());
-                   request.setAttribute("createFailed", true);
-                   request.setAttribute("exception", res.getError());
-                   
-                   request.setAttribute("category", category);
-                   return "/donationForm/idCard.jsp";
-             }
-                
-             // 에러가 나지 않았다면 텍스트 추출, for문 - 한줄씩 출력??, 단위마다 출력
-             //System.out.println(res.getTextAnnotationsList().get(0).getDescription());
-             textList = Arrays.asList(res.getTextAnnotationsList().get(0).getDescription().split("\n"));
-             
-             // For full list of available annotations, see http://g.co/cloud/vision/docs
-             /*for (EntityAnnotation annotation : res.getTextAnnotationsList()) {
-                  
-               //System.out.printf("Text: %s\n", annotation.getDescription());
-               //System.out.printf("Position : %s\n", annotation.getBoundingPoly());
-            }*/
-          }
-         System.out.println(textList);
-         
-         // 현재 접속하고 있는 userId로 user 객체를 반환하기
-           HttpSession session = request.getSession();
-           String userId = UserSessionUtils.getLoginUserId(session);
-           UserManager userMan = UserManager.getInstance();
-           User user = userMan.findUser(userId);
-           
-           // 신분증은 주민등록증이나 자동차운전면허증만 가능
-           String userName = null;
-           String userBirthday = null; // 생년월일
-           
-           // 주민등록번호 정규표현식
-           String pattern = "\\d{2}([0]\\d|[1][0-2])([0][1-9]|[1-2]\\d|[3][0-1])[-]*[1-4]\\d{6}";  
-           int i;
-           
-           // 이 코드는 신분증에서 이름이 나오고 바로 바로 다음줄에 주민등록번호가 나올것이라고 가정하여 구현한 코드임.
-          for (i=0; i<textList.size(); i++) { // 주민등록번호이면 
-             if (Pattern.matches(pattern, textList.get(i))) {
-                // 주민등록증: 보통 주민등록번호 앞에 이름, '보통 이름 (한자)' 로 되어있어서 공백으로 split
-                // 자동차운전면허증은 한글 이름만 표기되어있지만 상관없음
-                userName = textList.get(i - 1).split(" ")[0]; 
-                userBirthday = textList.get(i).split("-")[0]; // 생년월일
-             }
-          }
-           
-          log.debug("userName: {}, userBirthday: {}", userName, userBirthday);
-          // 신분증에서 이름과 생년월일을 추출해서 사용자의 정보와 비교
-          // DB의 사용자 birthday는 '1999-03-08' 이런 식으로 되어있음
-          // 1999-03-08 -> 990308 바꾸어서 신분증에서 추출한 생년월일과 비교
-         if (userName.equals(user.getName()) && userBirthday.equals(user.getBirthday().substring(2).replace("-", ""))) {
-            return "redirect:/donationForm/"+category;
-         }
-         else {
-            request.setAttribute("category", category);
-            return "/donationForm/idCard.jsp";
-         }
-         // 비교
-         
-      } catch(Exception e) {            
->>>>>>> branch 'develop' of https://github.com/Journey5873/donationSystem.git
             e.printStackTrace();
             request.setAttribute("createFailed", true);
             request.setAttribute("exception", e);
@@ -288,6 +203,6 @@ public class IdCardController implements Controller{
             return "/donationForm/idCard.jsp";
         }
         
-   }
+	}
     
 }

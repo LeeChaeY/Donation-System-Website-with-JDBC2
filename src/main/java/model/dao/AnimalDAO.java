@@ -48,7 +48,10 @@ public class AnimalDAO {
 	
 	public AnimalArticle findAnimalArticleByArticleId(int article_id) throws SQLException{	
 		try {
-			String sql1 = "SELECT title, category, deadline, bank_name, acc_holder, acc_num, due_date, use_plan, other_text, TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') \"create_date\", TO_CHAR(UPDATE_DATE, 'YYYY-MM-DD') \"update_date\", receipt_check, user_id, total_amount, name, area, type, age, weight, gender, neutering, current_status, health_status, personality "
+			String sql1 = "SELECT title, category, TO_CHAR(deadline, 'YYYY-MM-DD') \"deadline\", "
+					+ "bank_name, acc_holder, acc_num, TO_CHAR(due_date, 'YYYY-MM-DD') \"due_date\", "
+					+ "use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, "
+					+ "name, area, type, age, weight, gender, neutering, current_status, health_status, personality "
 					+"FROM animal_article a JOIN donation_article d ON a.article_id = d.article_id "
 					+"WHERE a.article_id=? ";
 			jdbcUtil.setSqlAndParameters(sql1, new Object[] {article_id});
@@ -65,8 +68,8 @@ public class AnimalDAO {
 												rs.getString("due_date"),
 												rs.getString("use_plan"), 
 												rs.getString("other_text"),
-												rs.getString("create_date"), 
-												rs.getString("update_date"), 
+												rs.getDate("create_date"), 
+												rs.getDate("update_date"), 
 												rs.getString("receipt_check"),
 												rs.getString("user_id"), 
 												rs.getInt("total_amount"),

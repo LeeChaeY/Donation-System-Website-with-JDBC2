@@ -72,7 +72,6 @@ public class RequestMapping {
         mappings.put("/donationList/receiptDelete", new DeleteDonationReceiptController());
         mappings.put("/donationForm/receiptUpdate", new UpdateDonationReceiptController());
         
-        mappings.put("/donationForm/alert", new ForwardController("/donationForm/alert.jsp"));
         logger.info("Initialized Request Mapping!");
     }
 

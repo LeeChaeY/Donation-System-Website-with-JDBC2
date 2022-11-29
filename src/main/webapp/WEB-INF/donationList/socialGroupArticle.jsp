@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -438,6 +439,14 @@
 
         <div class="writer">작성자 id : ${socialGroupArticle.userId}</div>
         
+        <c:if test="${empty article.updateDate }">
+        	<div class="updateDate">작성된 날짜: <fmt:formatDate value="${socialGroupArticle.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>
+        </c:if>
+        
+        <c:if test="${not empty article.updateDate}">
+        	<div class="updateDate">수정된 날짜: <fmt:formatDate value="${socialGroupArticle.updateDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>	
+        </c:if>
+        
         <!-- [20221120] insert, delete 추가, 신고 수정(글쓴이는 자신을 신고x) from 나현  -->
         <c:if test="${sessionScope.userId eq socialGroupArticle.userId}">
             <div class="update">
@@ -671,10 +680,14 @@
 	                    	</c:if>
 	                    	
 	                    	<c:if test="${empty comm.updateDate }">
-	                    		<div class="person-time">${comm.createDate}</div>
+	                    		<div class="person-time">
+	                    			<fmt:formatDate value="${comm.createDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+	                    		</div>
 	                    	</c:if>
 	                    	<c:if test="${not empty comm.updateDate }">
-	                    		<div class="person-time">${comm.updateDate}</div>
+	                    		<div class="person-time">
+	                    			<fmt:formatDate value="${comm.updateDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+	                    		</div>
 	                    	</c:if>
 	                	</div>
 						

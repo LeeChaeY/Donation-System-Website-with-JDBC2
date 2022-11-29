@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DisasterArticle extends DonationArticle {
    //DisasterDto
@@ -53,7 +54,7 @@ public class DisasterArticle extends DonationArticle {
    
    public DisasterArticle(int articleId, String title, String category, String deadline, String bankName,
          String accHolder, String accNum, String idCheck, String dueDate, String usePlan, String otherText,
-         String createDate, String updateDate, String receiptCheck, String userId, int totalAmount, String type,
+         Date createDate, Date updateDate, String receiptCheck, String userId, int totalAmount, String type,
          String name, String area, int damageAmount, String situation) {
       
       super(articleId, title, category, deadline, bankName, accHolder, accNum, idCheck, dueDate, usePlan, otherText,
@@ -67,8 +68,8 @@ public class DisasterArticle extends DonationArticle {
    }
 
    public DisasterArticle(int articleId, String title, String category, String deadline, String bankName,
-         String accHolder, String accNum, String dueDate, String usePlan, String otherText, String createDate,
-         String updateDate, String receiptCheck, String userId, int totalAmount, String type, String name,
+         String accHolder, String accNum, String dueDate, String usePlan, String otherText, Date createDate,
+         Date updateDate, String receiptCheck, String userId, int totalAmount, String type, String name,
          String area, int damageAmount, String situation) {
       
       super(articleId, title, category, deadline, bankName, accHolder, accNum, dueDate, usePlan, otherText,
