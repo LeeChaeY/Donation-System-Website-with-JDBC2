@@ -47,7 +47,6 @@ public class ViewAnimalArticleController implements Controller{
 			DonationManager donationMan = DonationManager.getInstance();
 			List<Donator> donatorList = donationMan.latest10Donors(articleId);
 			request.setAttribute("donatorList", donatorList);
-			
 
 			if (article.getReceiptCheck().equals("Y")) {
 				DonationReceiptManager receipt_man = DonationReceiptManager.getInstance();

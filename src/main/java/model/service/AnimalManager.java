@@ -3,6 +3,7 @@ package model.service;
 import java.sql.SQLException;
 
 import model.AnimalArticle;
+import model.DonationImage;
 import model.dao.AnimalDAO;
 
 public class AnimalManager {
@@ -35,5 +36,9 @@ public class AnimalManager {
 	
 	public int remove(int articleId) throws SQLException{
 		return animalDAO.remove(articleId);
+	}
+	
+	public int create_image(DonationImage image) throws SQLException, ExistingUserException {
+	    return animalDAO.create_image(image);
 	}
 }

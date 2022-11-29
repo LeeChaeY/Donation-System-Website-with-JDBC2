@@ -23,7 +23,7 @@
                 return false;
     		}
     		if(form.age.value==""){
-    			alert("나이를 입력하십시오.");
+    			alert("나이를 입력하십시오.");z
                 form.age.focus();
                 return false;
     		}
