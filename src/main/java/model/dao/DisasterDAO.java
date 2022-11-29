@@ -49,19 +49,6 @@ public class DisasterDAO {
 		}
 		return 0;
 	}
-<<<<<<< HEAD
-
-	public DisasterArticle findDisasterArticle(int article_id) throws SQLException {
-		String sql = "SELECT title, category, TO_CHAR(deadline, 'YYYY-MM-DD') \"deadline\", "
-				+ "bank_name, acc_holder, acc_num, TO_CHAR(due_date, 'YYYY-MM-DD') \"due_date\", "
-				+ "use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, "
-				+" type, name, area, damage_amount, situation, disaster_id "
-				+ "FROM disaster_article a JOIN donation_article d ON a.disaster_id = d.disaster_id "
-				+ "WHERE a.disaster_id=? ";
-
-		jdbcUtil.setSqlAndParameters(sql, new Object[] { article_id });
-
-=======
 	
 	public int create_image(DonationImage image) throws SQLException {
         try {
@@ -87,25 +74,17 @@ public class DisasterDAO {
     }
 	
 	public DisasterArticle findDisasterArticleByArticleId(int article_id) throws SQLException{	
->>>>>>> branch 'develop' of https://github.com/Journey5873/donationSystem.git
 		try {
 			StringBuilder sql1 = new StringBuilder();
-			sql1.append("SELECT title, category, deadline, bank_name, acc_holder, acc_num, due_date, use_plan, other_text, TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') \"create_date\", TO_CHAR(UPDATE_DATE, 'YYYY-MM-DD') \"update_date\", receipt_check, user_id, total_amount, type, name, area, damage_amount, situation ");
+			sql1.append("SELECT title, category, TO_CHAR(deadline, 'YYYY-MM-DD') \"deadline\", "
+					+ "bank_name, acc_holder, acc_num, TO_CHAR(due_date, 'YYYY-MM-DD') \"due_date\", "
+					+ "use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, "
+					+ "type, name, area, damage_amount, situation, disaster_id ");
 			sql1.append("FROM disaster_article dis JOIN donation_article d ON dis.article_id = d.article_id ");
 			sql1.append("WHERE dis.article_id=? ");
 			jdbcUtil.setSqlAndParameters(sql1.toString(), new Object[] {article_id});
 			ResultSet rs = jdbcUtil.executeQuery();
 			if (rs.next()) {
-<<<<<<< HEAD
-				DisasterArticle article = new DisasterArticle(article_id, rs.getString("title"),
-						rs.getString("category"), rs.getString("deadline"), rs.getString("bank_name"),
-						rs.getString("acc_holder"), rs.getString("acc_num"), rs.getString("due_date"),
-						rs.getString("use_plan"), rs.getString("other_text"), rs.getDate("create_date"),
-						rs.getDate("update_date"), rs.getString("receipt_check"), rs.getString("user_id"),
-						rs.getInt("total_amount"), rs.getString("type"), rs.getString("name"), rs.getString("area"),
-						rs.getInt("damage_amount"), rs.getString("situation"));
-
-=======
 				DisasterArticle article = new DisasterArticle(article_id,
 										rs.getString("title"),
 										rs.getString("category"),
@@ -116,8 +95,8 @@ public class DisasterDAO {
 										rs.getString("due_date"),
 										rs.getString("use_plan"),
 										rs.getString("other_text"), 
-										rs.getString("create_date"),
-										rs.getString("update_date"), 
+										rs.getDate("create_date"),
+										rs.getDate("update_date"), 
 										rs.getString("receipt_check"),
 										rs.getString("user_id"),
 										rs.getInt("total_amount"),
@@ -147,7 +126,6 @@ public class DisasterDAO {
 					images.add(image);
 				}
 				article.setImageList(images);
->>>>>>> branch 'develop' of https://github.com/Journey5873/donationSystem.git
 				return article;
 			}
 		}catch (Exception ex) {

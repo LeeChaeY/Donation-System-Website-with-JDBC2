@@ -412,13 +412,9 @@
 
         <div class="writer">작성자 id : ${article.userId }</div>
         
-<<<<<<< HEAD
         <c:if test="${empty article.updateDate }">
         	<div class="updateDate">작성된 날짜: <fmt:formatDate value="${article.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>
         </c:if>
-=======
-        <div class="updateDate">작성된 날짜: ${article.createDate }</div>
->>>>>>> branch 'develop' of https://github.com/Journey5873/donationSystem.git
         
         <c:if test="${not empty article.updateDate}">
         	<div class="updateDate">수정된 날짜: <fmt:formatDate value="${article.updateDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>	
