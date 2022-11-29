@@ -1,5 +1,6 @@
 package controller.donation;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +29,10 @@ public class ViewDisasterController implements Controller{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		final Logger log = LoggerFactory.getLogger(ViewAnimalArticleController.class);
 		try {
-			HttpSession session = request.getSession();	
 			int articleId = Integer.parseInt(request.getParameter("articleId"));
+			
+			LocalDate now  = LocalDate.now();
+			request.setAttribute("cTime", now);
 			
 			DisasterManager manager = DisasterManager.getInstance();
 			DisasterArticle article = manager.findDisasterArticleByArticleId(articleId);
