@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DisasterForm</title>
+    <script type="text/javascript" src="./../js/disasterForm.js"></script>
     <style>
         .container {
             width: 70%;
@@ -69,22 +70,13 @@
         }
     </style>
 </head>
-
-<script>
-	function DisasterArticleCreate() {
-		form.submit();
-	}
-</script>
-
 <body>
     <jsp:include page="./../navigation.jsp"/>
 
     <div class="container">
         <h2>CREATE DONATION(Disaster)</h2>
-
         <hr>
-
-        <form name="form" method="POST" action="<c:url value='/donationForm/disaster' />">
+        <form name="form" method="POST" action="<c:url value='/donationForm/disaster' />" enctype="multipart/form-data">
             <div>
                 <label for="title">제목<span>*</span></label>
                 <br>
@@ -100,7 +92,7 @@
             <div>
                 <div>재난 재해 종류<span>*</span></div>
                 <br>
-                <input type="radio" name="type" value="태풍" id="type1"><label for="type1">태풍</label>
+                <input type="radio" name="type" value="태풍" id="type1" checked="checked"><label for="type1">태풍</label>
                 <input type="radio" name="type" value="지진" id="type2"><label for="type2">지진</label>
                 <input type="radio" name="type" value="가뭄" id="type3"><label for="type3">가뭄</label>
                 <input type="radio" name="type" value="홍수" id="type4"><label for="type4">홍수(폭우)</label>
@@ -126,9 +118,9 @@
             </div>
 
             <div>
-                <label for="img">사진<span>*</span></label>
+                <label for="image">사진<span>*</span></label>
                 <br>
-                <input type="file" id="img" name="img">
+                <input type="file" id="image" name="image" multiple="multiple">
             </div>
 
             <div>
@@ -136,7 +128,6 @@
                 <br>
                 <input type="date" id="deadline" name="deadline">
             </div>
-
             <div>
                 <label for="bank_name">후원 계좌 은행<span>*</span></label>
                 <br>

@@ -10,96 +10,6 @@
     <title>AnimalForm</title>
     <script type="text/javascript" src="./../js/animalUpdateForm.js"></script>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        nav {
-            background-color: antiquewhite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        nav>div {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 70%;
-        }
-
-        .title {
-            font-weight: bold;
-            font-size: xx-large;
-            color: brown;
-            margin: 30px 0px;
-        }
-
-        #main-menu {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #main-menu,
-        #sub-menu {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-        }
-
-        #main-menu>li {
-            padding: 15px;
-        }
-
-        #main-menu>li>a {
-            color: black;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        #main-menu>li>a:hover {
-            cursor: pointer;
-            color: gray;
-        }
-
-        #sub-menu {
-            height: 0;
-            visibility: hidden;
-            transition: all 0.15s ease;
-            position: relative;
-            z-index: 10;
-        }
-
-        #sub-menu>li {
-            width: 115px;
-            padding: 10px 0px;
-            margin: 0 auto;
-            text-align: center;
-            background: brown;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-        }
-
-        #sub-menu>li>a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-        }
-
-        #main-menu>li:hover #sub-menu {
-            visibility: visible;
-        }
-
-        #sub-menu>li>a:hover {
-            cursor: pointer;
-            color: lightgray;
-        }
-
         .container {
             width: 70%;
             margin: 0 auto;
@@ -177,7 +87,7 @@
     <jsp:include page="./../navigation.jsp"/>
 
     <div class="container">
-        <h2>CREATE DONATION(Animal)</h2>
+        <h2>Update DONATION(Animal)</h2>
 
         <hr>
 
@@ -315,9 +225,9 @@
             </div>
 
             <div>
-                <label for="img">사진<span>*</span></label>
+                <label for="image">사진<span>*</span></label>
                 <br>
-                <input type="file" id="img" name="img">
+                <input type="file" id="image" name="image" multiple="multiple">
             </div>
 
             <div>
@@ -333,9 +243,8 @@
             </div>
 
             <div>
-                <label for="deadline">후원 마감일<span>*</span></label>
-                <br>
-                <input type="date" id="deadline" name="deadline" value="${article.deadline }" readonly="readonly">
+                <label for="deadline">후원 마감일: ${article.deadline }</label>
+                <input type="hidden" id="deadline" name="deadline" value="${article.deadline }">
             </div>
 
             <div>
