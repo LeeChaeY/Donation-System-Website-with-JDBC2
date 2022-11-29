@@ -144,7 +144,7 @@ public class UserDAO {
 						rs.getInt("article_id"),
 						rs.getString("title"),
 						rs.getString("category"),
-						rs.getString("create_date"),
+						rs.getDate("create_date"),
 						rs.getInt("total_amount"),
 						rs.getString("receipt_check"),
 						userId

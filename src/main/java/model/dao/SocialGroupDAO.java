@@ -116,10 +116,12 @@ public class SocialGroupDAO {
      * article 도메인 클래스에 저장하여 반환
      */
     public SocialGroupArticle findSocialGroupArticleByArticleId(int articleId) throws SQLException{
-        String sql = "SELECT title, category, deadline, bank_name, acc_holder, acc_num, id_check, due_date, use_plan, other_text, create_date, update_date, receipt_check, total_amount, user_id, "
-                   + "age, gender, type, area, situation "
-                   + "FROM donation_article d JOIN socialgroup_article s ON d.article_id = s.article_id "
-                   + "WHERE s.article_id=? ";
+        String sql = "SELECT title, category, TO_CHAR(deadline, 'YYYY-MM-DD') \"deadline\", "
+				+ "bank_name, acc_holder, acc_num, id_check, TO_CHAR(due_date, 'YYYY-MM-DD') \"due_date\", "
+				+ "use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, "
+				+ "age, gender, type, area, situation "
+                + "FROM donation_article d JOIN socialgroup_article s ON d.article_id = s.article_id "
+                + "WHERE s.article_id=? ";
         jdbcUtil.setSqlAndParameters(sql, new Object[] {articleId});
         try {
            ResultSet rs = jdbcUtil.executeQuery();
@@ -136,8 +138,8 @@ public class SocialGroupDAO {
                               rs.getString("due_date"),
                               rs.getString("use_plan"), 
                               rs.getString("other_text"),
-                              rs.getString("create_date"), 
-                              rs.getString("update_date"), 
+                              rs.getDate("create_date"), 
+                              rs.getDate("update_date"), 
                               rs.getString("receipt_check"),
                               rs.getInt("total_amount"),
                               rs.getString("user_id"), 

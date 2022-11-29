@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.util.List;
 
 public class AnimalArticle extends DonationArticle{
@@ -18,7 +19,7 @@ public class AnimalArticle extends DonationArticle{
 	
 	public AnimalArticle(int articleId, String title, String category, String deadline, String bankName,
 			String accHolder, String accNum, String idCheck, String dueDate, String usePlan, String otherText,
-			String createDate, String updateDate, String receiptCheck, String userId, int totalAmount, String name,
+			Date createDate, Date updateDate, String receiptCheck, String userId, int totalAmount, String name,
 			String area, String type, String age, String weight, String gender, String neutering, String currentStatus,
 			String healthStatus, String personality) {
 		super(articleId, title, category, deadline, bankName, accHolder, accNum, idCheck, dueDate, usePlan, otherText,
@@ -37,7 +38,7 @@ public class AnimalArticle extends DonationArticle{
 	
 	public AnimalArticle(int articleId, String title, String category, String deadline, String bankName,
 			String accHolder, String accNum, String dueDate, String usePlan, String otherText,
-			String createDate, String updateDate, String receiptCheck, String userId, int totalAmount, String name,
+			Date createDate, Date updateDate, String receiptCheck, String userId, int totalAmount, String name,
 			String area, String type, String age, String weight, String gender, String neutering, String currentStatus,
 			String healthStatus, String personality) {
 		super(articleId, title, category, deadline, bankName, accHolder, accNum, dueDate, usePlan, otherText,
