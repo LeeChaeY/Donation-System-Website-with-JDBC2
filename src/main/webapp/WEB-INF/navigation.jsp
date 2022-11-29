@@ -113,9 +113,15 @@
 	               <c:when test="${sessionScope.userId ne null}">
 	                  <li><a href="#">CREATE DONATION</a>
 	                          <ul id="sub-menu">
-	                              <li><a href="<c:url value='/donationForm/animal' />">동물</a></li>
-	                              <li><a href="<c:url value='/donationForm/disaster' />">재난재해</a></li>
-	                               <li><a href="<c:url value='/donationForm/socialGroup' />">사회취약계층</a></li>
+	                              <li><a href="<c:url value='/donationForm/idCard' > 
+	                              			<c:param name='category' value='animal'/>
+	                              	</c:url>">동물</a></li>
+	                              <li><a href="<c:url value='/donationForm/idCard' > 
+	                              			<c:param name='category' value='disaster'/>
+	                              	</c:url>">재난재해</a></li>
+	                               <li><a href="<c:url value='/donationForm/idCard' > 
+	                              			<c:param name='category' value='socialGroup'/>
+	                              	</c:url>">사회취약계층</a></li>
 	                          </ul>
 	                      </li>
 	                      <li><a href="#">MY PAGE</a>

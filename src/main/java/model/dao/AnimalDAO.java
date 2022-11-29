@@ -11,9 +11,7 @@ import model.DonationImage;
 public class AnimalDAO {
 	private JDBCUtil jdbcUtil = null;
 	
-	public AnimalDAO() {
-		jdbcUtil = new JDBCUtil();
-	}
+	public AnimalDAO() {jdbcUtil = new JDBCUtil();}
 
 	public int create(AnimalArticle animal) throws SQLException {			
 		try {		
