@@ -20,6 +20,7 @@ public class DonationArticle {
 	private String receiptCheck;
 	private String userId;
 	private int totalAmount;
+	DonationImage donationImage;
 	private List<DonationImage> imageList;
 	
 	public DonationArticle() {};
@@ -225,8 +226,16 @@ public class DonationArticle {
     public void setImageList(List<DonationImage> imageList) {
         this.imageList = imageList;
     }
+    
+    public DonationImage getDonationImage() {
+		return donationImage;
+	}
 
-    @Override
+	public void setDonationImage(DonationImage donationImage) {
+		this.donationImage = donationImage;
+	}
+
+	@Override
 	public String toString() {
 		return "DonationArticle [articleId=" + articleId + ", title=" + title + ", category=" + category + ", deadline="
 				+ deadline + ", bankName=" + bankName + ", accHolder=" + accHolder + ", accNum=" + accNum + ", idCheck="

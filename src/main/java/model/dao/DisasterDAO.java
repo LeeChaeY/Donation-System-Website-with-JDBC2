@@ -79,7 +79,7 @@ public class DisasterDAO {
 			sql1.append("SELECT title, category, TO_CHAR(deadline, 'YYYY-MM-DD') \"deadline\", "
 					+ "bank_name, acc_holder, acc_num, TO_CHAR(due_date, 'YYYY-MM-DD') \"due_date\", "
 					+ "use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, "
-					+ "type, name, area, damage_amount, situation, disaster_id ");
+					+ "type, name, area, damage_amount, situation ");
 			sql1.append("FROM disaster_article dis JOIN donation_article d ON dis.article_id = d.article_id ");
 			sql1.append("WHERE dis.article_id=? ");
 			jdbcUtil.setSqlAndParameters(sql1.toString(), new Object[] {article_id});
