@@ -153,7 +153,7 @@ public class IdCardController implements Controller{
 					//System.out.printf("Position : %s\n", annotation.getBoundingPoly());
 				}*/
 	    	}
-			
+			System.out.println(textList);
 			//user
         	HttpSession session = request.getSession();
         	String userId = UserSessionUtils.getLoginUserId(session);
