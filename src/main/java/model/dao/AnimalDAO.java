@@ -19,7 +19,7 @@ public class AnimalDAO {
 			Object[] param1 = new Object[] {animal.getTitle(), animal.getCategory(), animal.getDeadline(), animal.getBankName(),
 					animal.getAccHolder(), animal.getAccNum(), animal.getIdCheck(), animal.getDueDate(), animal.getUsePlan(), animal.getOtherText(),
 					animal.getUpdateDate(), animal.getReceiptCheck(), animal.getTotalAmount(), animal.getUserId()};
-			System.out.println("AdnimalDAO: "+animal);
+			System.out.println("AnimalDAO: "+animal);
 			jdbcUtil.setSqlAndParameters(insert1, param1);
 			String key[]= {"article_id"}; // DONATION_ARTICLE PK
 			jdbcUtil.executeUpdate(key);
@@ -48,7 +48,10 @@ public class AnimalDAO {
 	
 	public AnimalArticle findAnimalArticleByArticleId(int article_id) throws SQLException{	
 		try {
-			String sql1 = "SELECT title, category, deadline, bank_name, acc_holder, acc_num, due_date, use_plan, other_text, TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') \"create_date\", TO_CHAR(UPDATE_DATE, 'YYYY-MM-DD') \"update_date\", receipt_check, user_id, total_amount, name, area, type, age, weight, gender, neutering, current_status, health_status, personality "
+			String sql1 = "SELECT title, category, TO_CHAR(deadline, 'YYYY-MM-DD') \"deadline\", "
+					+ "bank_name, acc_holder, acc_num, TO_CHAR(due_date, 'YYYY-MM-DD') \"due_date\", "
+					+ "use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, "
+					+ "name, area, type, age, weight, gender, neutering, current_status, health_status, personality "
 					+"FROM animal_article a JOIN donation_article d ON a.article_id = d.article_id "
 					+"WHERE a.article_id=? ";
 			jdbcUtil.setSqlAndParameters(sql1, new Object[] {article_id});
@@ -65,8 +68,8 @@ public class AnimalDAO {
 												rs.getString("due_date"),
 												rs.getString("use_plan"), 
 												rs.getString("other_text"),
-												rs.getString("create_date"), 
-												rs.getString("update_date"), 
+												rs.getDate("create_date"), 
+												rs.getDate("update_date"), 
 												rs.getString("receipt_check"),
 												rs.getString("user_id"), 
 												rs.getInt("total_amount"),
@@ -132,8 +135,6 @@ public class AnimalDAO {
 					article.getCurrentStatus(), article.getHealthStatus(), article.getPersonality(), article.getArticleId()};
 			jdbcUtil.setSqlAndParameters(update2, param2);
 			jdbcUtil.executeUpdate();
-//			jdbcUtil.commit();
-			
 			return 1;
 		}catch (Exception ex) {
 			jdbcUtil.rollback();

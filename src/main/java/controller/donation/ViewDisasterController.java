@@ -11,20 +11,18 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import model.AnimalArticle;
+import model.DisasterArticle;
 import model.DonationComment;
-
 import model.DonationReceipt;
-
 import model.Donator;
 import model.service.AnimalManager;
 import model.service.CommentManager;
+import model.service.DisasterManager;
 import model.service.DonationManager;
-
 import model.service.DonationReceiptManager;
-
 import model.service.UserNotFoundException;
 
-public class ViewAnimalArticleController implements Controller{
+public class ViewDisasterController implements Controller{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -33,8 +31,8 @@ public class ViewAnimalArticleController implements Controller{
 			HttpSession session = request.getSession();	
 			int articleId = Integer.parseInt(request.getParameter("articleId"));
 			
-			AnimalManager manager = AnimalManager.getInstance();
-			AnimalArticle article = manager.findAnimalArticleByArticleId(articleId);
+			DisasterManager manager = DisasterManager.getInstance();
+			DisasterArticle article = manager.findDisasterArticleByArticleId(articleId);
 			System.out.println("articleInfo: "+article);
 			request.setAttribute("article", article);
 			
@@ -53,11 +51,11 @@ public class ViewAnimalArticleController implements Controller{
 				log.debug("receipt: {}", receipt);
 			}
 
-			return "/donationList/animalArticle.jsp";
+			return "/donationList/disasterArticle.jsp";
 		}catch (ArithmeticException e) {
 			// TODO: handle exception
 			throw new UserNotFoundException("존재하지 않는 후원글입니다.");
 		}
 	}
-
+	
 }

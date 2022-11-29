@@ -32,8 +32,8 @@ private JDBCUtil jdbcUtil = null;
 						rs.getString("title"), 
 						rs.getString("category"), 
 						rs.getString("deadline"), 
-						rs.getString("create_date"), 
-						rs.getString("update_date"), 
+						rs.getDate("create_date"), 
+						rs.getDate("update_date"), 
 						rs.getInt("total_amount"),
 						rs.getString("user_id"));
 				

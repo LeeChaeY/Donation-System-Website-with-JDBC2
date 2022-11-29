@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,80 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SocialGroupView</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-        }
-        nav {
-            background-color: antiquewhite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        nav>div {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 70%;
-        }
-        .title {
-            font-weight: bold;
-            font-size: xx-large;
-            color: brown;
-            margin: 30px 0px;
-        }
-        #main-menu {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #main-menu,
-        #sub-menu {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-        }
-        #main-menu>li {
-            padding: 15px;
-        }
-        #main-menu>li>a {
-            color: black;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        #main-menu>li>a:hover {
-            cursor: pointer;
-            color: gray;
-        }
-        #sub-menu {
-            height: 0;
-            visibility: hidden;
-            transition: all 0.15s ease;
-            position: relative;
-            z-index: 10;
-        }
-        #sub-menu>li {
-            width: 115px;
-            padding: 10px 0px;
-            margin: 0 auto;
-            background: brown;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-        }
-        #sub-menu>li>a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-        }
-        #main-menu>li:hover #sub-menu {
-            visibility: visible;
-        }
-        #sub-menu>li>a:hover {
-            cursor: pointer;
-            color: lightgray;
-        }
         .container {
             width: 70%;
             margin: 0 auto;
@@ -438,6 +365,14 @@
 
         <div class="writer">작성자 id : ${socialGroupArticle.userId}</div>
         
+        <c:if test="${empty article.updateDate }">
+        	<div class="updateDate">작성된 날짜: <fmt:formatDate value="${socialGroupArticle.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>
+        </c:if>
+        
+        <c:if test="${not empty article.updateDate}">
+        	<div class="updateDate">수정된 날짜: <fmt:formatDate value="${socialGroupArticle.updateDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>	
+        </c:if>
+        
         <!-- [20221120] insert, delete 추가, 신고 수정(글쓴이는 자신을 신고x) from 나현  -->
         <c:if test="${sessionScope.userId eq socialGroupArticle.userId}">
             <div class="update">
@@ -468,8 +403,6 @@
             <c:forEach var="image" items="${socialGroupArticle.imageList}">
                 <img src="<c:url value='/upload/${image.fileName}'/>"><br>
             </c:forEach>
-            <!-- 첫번째 이미지파일 -->
-            <%-- <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/> --%>
         </div>
 
         <div>
@@ -671,10 +604,14 @@
 	                    	</c:if>
 	                    	
 	                    	<c:if test="${empty comm.updateDate }">
-	                    		<div class="person-time">${comm.createDate}</div>
+	                    		<div class="person-time">
+	                    			<fmt:formatDate value="${comm.createDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+	                    		</div>
 	                    	</c:if>
 	                    	<c:if test="${not empty comm.updateDate }">
-	                    		<div class="person-time">${comm.updateDate}</div>
+	                    		<div class="person-time">
+	                    			<fmt:formatDate value="${comm.updateDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+	                    		</div>
 	                    	</c:if>
 	                	</div>
 						

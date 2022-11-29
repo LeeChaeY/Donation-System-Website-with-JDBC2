@@ -1,41 +1,38 @@
 package controller.donation;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import model.AnimalArticle;
+import model.DisasterArticle;
 import model.service.AnimalManager;
+import model.service.DisasterManager;
 import model.service.UserNotFoundException;
 
-public class UpdateAnimalArticleController implements Controller{
-	 private static final Logger log = LoggerFactory.getLogger(UpdateAnimalArticleController.class);
-	 
+public class UpdateDisasterArticleController implements Controller{
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (request.getMethod().equals("GET")) {
 			String articleIdStr = request.getParameter("articleId");
 			int articleId = Integer.parseInt(articleIdStr);
 			
-			AnimalManager manager = AnimalManager.getInstance();
-			AnimalArticle article = manager.findAnimalArticleByArticleId(articleId);
+			DisasterManager manager = DisasterManager.getInstance();
+			DisasterArticle article = manager.findDisasterArticleByArticleId(articleId);
 			request.setAttribute("article", article);
 			
-			log.debug("UpdateForm article : {}", article);
-			return "/donationForm/animalUpdateForm.jsp";  
+			return "/donationForm/disasterUpdateForm.jsp";  
 	    }
 		
 		try {
-			AnimalManager manager = AnimalManager.getInstance();
+			DisasterManager manager = DisasterManager.getInstance();
 			String articleId = request.getParameter("articleId");
-			int id = Integer.parseInt(articleId);
 			
-	    	AnimalArticle animal = new AnimalArticle(id,
+			DisasterArticle disaster = new DisasterArticle(
+					 Integer.parseInt(articleId),
 					request.getParameter("title"),
-					"animal",
+					"disaster",
 					request.getParameter("deadline"),
 					request.getParameter("bank_name"),
 					request.getParameter("acc_holder"),
@@ -49,19 +46,15 @@ public class UpdateAnimalArticleController implements Controller{
 					"N",
 					request.getParameter("userId"),
 					0,
+					request.getParameter("type"),
 					request.getParameter("name"),
 					request.getParameter("area"),
-					request.getParameter("type"),
-					request.getParameter("age"),
-					request.getParameter("weight"),
-					request.getParameter("gender"),
-					request.getParameter("neutering"),
-					request.getParameter("current_status"),
-					request.getParameter("health_status"),
-					request.getParameter("personality"));			
-			manager.update(animal);
-			
-			return "redirect:/donationList/animal?articleId="+articleId; 
+					Integer.parseInt(request.getParameter("damage_amount")),
+					request.getParameter("situation")
+					);
+			System.out.println(disaster);
+			manager.update(disaster);
+			return "redirect:/donationList/disaster?articleId="+articleId; 
 		}catch (ArithmeticException e) {
 			// TODO: handle exception
 			throw new UserNotFoundException("존재하지 않는 후원글입니다.");

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public class SocialGroupArticle extends DonationArticle
 {
   //private int article_id; //부모클래스에 존재
@@ -15,7 +17,7 @@ public class SocialGroupArticle extends DonationArticle
 
     public SocialGroupArticle(int articleId, String title, String category, String deadline, String bankName,
             String accHolder, String accNum, String idCheck, String dueDate, String usePlan, String otherText,
-            String createDate, String updateDate, String receiptCheck, int totalAmount, String userId, int age,
+            Date createDate, Date updateDate, String receiptCheck, int totalAmount, String userId, int age,
             String gender, String type, String area, String situation) {
         super(articleId, title, category, deadline, bankName, accHolder, accNum, idCheck, dueDate, usePlan, otherText,
                 createDate, updateDate, receiptCheck, totalAmount, userId);

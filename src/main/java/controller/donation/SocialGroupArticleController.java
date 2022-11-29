@@ -200,10 +200,7 @@ public class SocialGroupArticleController implements Controller {
           //DONATION_IMAGE 테이블에 레코드 생성
           for (int i=0; i<imageList.size(); i++)
               manager.create_image(imageList.get(i));
-          
-          request.setAttribute("socialGroupArticle", article); //질문: "article"->"socialGroupArticle"로 속성명 변경?
-          
-          return "/donationList/socialGroupArticle.jsp"; // 성공 시 리스트 화면으로 redirect
+          return  "redirect:/donationList/socialGroup?articleId="+articleId; // 성공 시 리스트 화면으로 redirect
         } catch (Exception e) { // 예외 발생 시 form으로 forwarding
             request.setAttribute("createFailed", true);
             request.setAttribute("exception", e);
