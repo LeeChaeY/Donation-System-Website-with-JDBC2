@@ -149,7 +149,7 @@
         td img {
             width: 100%;
             height: 200px;
-        }
+        }   
 
         .bottom {
             display: flex;
