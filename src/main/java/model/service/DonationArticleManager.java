@@ -3,7 +3,9 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import model.ArticleFeed;
 import model.DonationArticle;
+import model.DonationImage;
 import model.dao.DonationArticleDAO;
 
 public class DonationArticleManager {
@@ -22,8 +24,12 @@ public class DonationArticleManager {
 		return articleMan;
 	}
 	
-	public List<DonationArticle> find() throws SQLException {
+	public List<ArticleFeed> find() throws SQLException {
 		return articleDAO.find();
+	}
+	
+	public List<DonationArticle> findArticle() throws SQLException {
+		return articleDAO.findArticle();
 	}
 
 }

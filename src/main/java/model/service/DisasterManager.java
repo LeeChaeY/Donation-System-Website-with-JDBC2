@@ -41,4 +41,8 @@ public class DisasterManager {
 	public int remove(int articleId) throws SQLException{
 		return disasterDAO.remove(articleId);
 	}
+	
+	public int update_image(DonationImage image) throws SQLException{
+		return disasterDAO.update_image(image);
+	}
 }

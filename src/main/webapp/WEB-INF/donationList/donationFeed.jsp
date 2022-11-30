@@ -149,7 +149,7 @@
         td img {
             width: 100%;
             height: 200px;
-        }
+        }   
 
         .bottom {
             display: flex;
@@ -195,7 +195,8 @@
 			  							<c:param name='articleId' value='${article.articleId}'/>
 			  						</c:url>'">
                 			<div>${article.title}</div>
-                    		<img src="../img/cat.jpg" alt="">
+                			<div><img src="/upload/${article.fileName}" alt=""></div>
+                    		<%-- <div><img src="../upload/${article.fileName}" alt=""></div> --%>
                 		</td>
 			    </c:forEach>
 				</tr>

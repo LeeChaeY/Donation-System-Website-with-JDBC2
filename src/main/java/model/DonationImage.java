@@ -19,6 +19,13 @@ public class DonationImage
         this.article = article;
     }
     
+    public DonationImage(int articleId, int fileOrder, String fileName) {
+        super();
+        this.articleId = articleId;
+        this.fileOrder = fileOrder;
+        this.fileName = fileName;
+    }
+    
     public DonationImage(int fileOrder, String fileName) {
         this.fileOrder = fileOrder;
         this.fileName = fileName;
