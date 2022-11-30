@@ -167,7 +167,7 @@
             </div>
 
             <div class="btn">
-                <input type="button" value="Create" onClick="return articleCreate()">
+                <input type="button" value="Create" onClick="SocialGroupArticleCreate()">
             </div>
         </form>
     </div>
