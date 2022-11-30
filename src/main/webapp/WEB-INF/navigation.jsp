@@ -107,7 +107,9 @@
 
             <ul id="main-menu">
                 <li><a href="<c:url value='/homepage' />">HOME</a></li>
-                <li><a href="<c:url value='/donationList/donationFeed' />">VIEW DONATIONS</a></li>
+                <li><a href="<c:url value='/donationList/donationFeed' >
+                				<c:param name='category_feed' value='none'/> 
+                			</c:url>">VIEW DONATIONS</a></li>
                 
                <c:choose>
 	               <c:when test="${sessionScope.userId ne null}">

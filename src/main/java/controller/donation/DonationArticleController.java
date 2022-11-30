@@ -1,6 +1,7 @@
 package controller.donation;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -23,12 +24,21 @@ public class DonationArticleController  implements Controller{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
+		
 		try {
 			DonationArticleManager article_man = DonationArticleManager.getInstance();
-
-			List<ArticleFeed> articleList = article_man.find();
-			request.setAttribute("articleList", articleList);
+			List<ArticleFeed> articleList = new ArrayList<>();
 			
+			String category_feed = request.getParameter("category_feed");
+			log.debug("category_feed: {}", category_feed);
+			if (category_feed.equals("none")) articleList = article_man.find();
+			else if (category_feed.equals("animal")) articleList = article_man.findAnimal();
+			else if (category_feed.equals("disaster")) articleList = article_man.findDisaster();
+			else if (category_feed.equals("socialGroup")) articleList = article_man.findSocialGroup();
+
+				
+			request.setAttribute("articleList", articleList);
+			request.setAttribute("category_feed", category_feed);
 //			List<DonationArticle> articleList = article_man.findArticle();
 //			request.setAttribute("articleList", articleList);
             

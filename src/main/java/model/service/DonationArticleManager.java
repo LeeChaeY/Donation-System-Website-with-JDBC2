@@ -31,5 +31,17 @@ public class DonationArticleManager {
 	public List<DonationArticle> findArticle() throws SQLException {
 		return articleDAO.findArticle();
 	}
+	
+	public List<ArticleFeed> findAnimal() throws SQLException {
+		return articleDAO.findAnimal();
+	}
+	
+	public List<ArticleFeed> findDisaster() throws SQLException {
+		return articleDAO.findDisaster();
+	}
+	
+	public List<ArticleFeed> findSocialGroup() throws SQLException {
+		return articleDAO.findSocialGroup();
+	}
 
 }

@@ -216,9 +216,9 @@ public class AnimalDAO {
 	public int update_image(DonationImage image) throws SQLException{
 		try {
 			String update1 = "UPDATE DONATION_IMAGE "
-							+ "SET img_order = ?, img_link = ? "
+							+ "SET img_link = ? "
 							+ "WHERE article_id=? ";
-			Object[] param1 = new Object[] {image.getFileOrder(), image.getFileName(), image.getArticleId()};
+			Object[] param1 = new Object[] {image.getFileName(), image.getArticleId()};
 			jdbcUtil.setSqlAndParameters(update1, param1);
 			jdbcUtil.executeUpdate();
 			
