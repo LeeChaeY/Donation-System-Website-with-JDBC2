@@ -41,7 +41,7 @@ public class ViewSocialGroupArticleController implements Controller{
 
             SocialGroupArticle article = socialGroupMan.findSocialGroupArticleByArticleId(articleId);
             System.out.println("articleInfo: "+article);
-            request.setAttribute("article", article);
+            request.setAttribute("socialGroupArticle", article);
             
             CommentManager comm_man = CommentManager.getInstance();
             List<DonationComment> comment_l = comm_man.findAllComment(articleId);
@@ -59,7 +59,6 @@ public class ViewSocialGroupArticleController implements Controller{
 				request.setAttribute("donationReceipt", receipt);
 				log.debug("receipt: {}", receipt);
 			}
-
             return "/donationList/socialGroupArticle.jsp";
         } catch (ArithmeticException e) {
             // TODO: handle exception

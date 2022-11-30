@@ -339,16 +339,16 @@
 		if (p == 1) {
 			confirm('신고하시겠습니까?');
 			location.href="<c:url value='/user/report' >
-				<c:param name='reportedId' value='${article.userId}'/>
-				<c:param name='articleId' value='${article.articleId}'/>
-				<c:param name='category' value='${article.category}'/>
+				<c:param name='reportedId' value='${socialGroupArticle.userId}'/>
+				<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+				<c:param name='category' value='${socialGroupArticle.category}'/>
 			</c:url>";
 		}
 		
 	}
 	
 	function createReceipt() {
-		var child = window.open("<c:url value='/donationList/receipt' > <c:param name='articleId' value='${article.articleId}'/> <c:param name='category' value='${article.category}'/> </c:url>", "receiptCreate", "width=640, height=400");
+		var child = window.open("<c:url value='/donationList/receipt' > <c:param name='articleId' value='${socialGroupArticle.articleId}'/> <c:param name='category' value='${socialGroupArticle.category}'/> </c:url>", "receiptCreate", "width=640, height=400");
 		//window.location.reload();
 		//child.close();
 	}
@@ -370,30 +370,40 @@
     <div class="container">
         <h2 class="desc">Donation for Socially vulnerable</h2>
         
-        <h2 class="container-title">${article.title}</h2>
+        <h2 class="container-title">${socialGroupArticle.title}</h2>
 
-        <div class="writer">작성자 id : ${article.userId}</div>
+        <div class="writer">작성자 id : ${socialGroupArticle.userId}</div>
         
         <c:if test="${empty article.updateDate }">
-        	<div class="updateDate">작성된 날짜: <fmt:formatDate value="${article.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>
+        	<div class="updateDate">작성된 날짜: <fmt:formatDate value="${socialGroupArticle.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>
         </c:if>
         
         <c:if test="${not empty article.updateDate}">
-        	<div class="updateDate">수정된 날짜: <fmt:formatDate value="${article.updateDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>	
+        	<div class="updateDate">수정된 날짜: <fmt:formatDate value="${socialGroupArticle.updateDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>	
         </c:if>
         
         <!-- [20221120] insert, delete 추가, 신고 수정(글쓴이는 자신을 신고x) from 나현  -->
-        <c:if test="${sessionScope.userId eq article.userId}">
+        <c:if test="${sessionScope.userId eq socialGroupArticle.userId}">
             <div class="update">
-                <a href="<c:url value='/donationForm/socialGroupArticleUpdate' >
-                            <c:param name='userId' value='${article.userId}'/>
-                            <c:param name='articleId' value='${article.articleId}'/>
+                <a href="<c:url value='/donationList/socialGroupArticleUpdate' >
+                            <c:param name='userId' value='${socialGroupArticle.userId}'/>
+                            <c:param name='articleId' value='${socialGroupArticle.articleId}'/>
                         </c:url>">수정하기</a>
-
+                        
+                <c:if test="${not donatorList.isEmpty() }">
+                	<a onclick="confirm('후원이 있는 후원글은 삭제할 수 없습니다.')">삭제하기</a>     
+                </c:if>
+                
+                <c:if test="${donatorList.isEmpty()}">
+                	 <a href="<c:url value='/donationList/socialGroupArticleDelete' >
+                            <c:param name='userId' value='${socialGroupArticle.userId}'/>
+                            <c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+                        </c:url>" onclick="return articleRemove();">삭제하기</a> &nbsp;     
+                </c:if>       
             </div>
         </c:if>
 
-        <c:if test="${sessionScope.userId ne article.userId}">
+        <c:if test="${sessionScope.userId ne socialGroupArticle.userId}">
             <div class="declare">
                 <button onclick="createDeclare()">신고하기</button>
             </div>
@@ -401,12 +411,16 @@
 
         <hr>
 
-        <h2 class="deadline">[후원 마감일] ${article.deadline}</h2>
+        <h2 class="deadline">[후원 마감일] ${socialGroupArticle.deadline}</h2>
 
         <hr>
 
         <div class="imgPost">
-
+            <c:forEach var="image" items="${socialGroupArticle.imageList}">
+                <div class="item">
+               		<img src="<c:url value='/upload/${image.fileName}'/>"><br>
+            	</div>
+            </c:forEach>
         </div>
 
         <div>
@@ -416,29 +430,29 @@
                 <div class="info1">
                     <div>
                         <div class="basic">성별</div>
-                        <div>${article.gender}</div>
+                        <div>${socialGroupArticle.gender}</div>
                     </div>
 
                     <div>
                         <div class="basic">나이</div>
-                        <div>${article.age}</div>
+                        <div>${socialGroupArticle.age}</div>
                     </div>
 
                     <div>
                         <div class="basic">지역</div>
-                        <div>${article.area}</div>
+                        <div>${socialGroupArticle.area}</div>
                     </div>
                 </div>
 
                 <div class="info2">
                     <div>
                         <div class="basic">현재 상황</div>
-                        <div>${article.situation}</div>
+                        <div>${socialGroupArticle.situation}</div>
                     </div>
 
                     <div>
                         <div class="basic">기타 특징</div>
-                        <div>${article.otherText}</div>
+                        <div>${socialGroupArticle.otherText}</div>
                     </div>
                 </div>
             </div>
@@ -453,17 +467,17 @@
             <div class="info info3">
                 <div>
                     <div class="basic">사용 마감일</div>
-                    <div>${article.dueDate}</div>
+                    <div>${socialGroupArticle.dueDate}</div>
                 </div>
 
                 <div>
                     <div class="basic">사용 예산안</div>
-                    <div>${article.usePlan}</div>
+                    <div>${socialGroupArticle.usePlan}</div>
                 </div>
 
                 <div>
                     <div class="basic">기타</div>
-                    <div>${article.otherText}</div>
+                    <div>${socialGroupArticle.otherText}</div>
                 </div>
             </div>
         </div>
@@ -473,9 +487,9 @@
         <div class="donation">
             <div class="account">
                 <span>후원 계좌 : </span>
-                <span>${article.bankName}</span>
-                <span>${article.accHolder}</span>
-                <span>${article.accNum}</span>
+                <span>${socialGroupArticle.bankName}</span>
+                <span>${socialGroupArticle.accHolder}</span>
+                <span>${socialGroupArticle.accNum}</span>
             </div>
 
             <c:if test="${cTime > article.deadline  }">
@@ -517,7 +531,7 @@
             	</c:forEach>
                 
                 <tr>
-                    <th colspan="2">총액 : ${article.totalAmount }</th>
+                    <th colspan="2">총액 : ${socialGroupArticle.totalAmount }</th>
                 </tr>
                 
             </table>
@@ -528,13 +542,13 @@
         <div class="receipt">
             <h2 class="info-title">후원금 사용 내역</h2>
             <c:if test="${empty donationReceipt.receiptId }">
-            	<c:if test="${sessionScope.userId eq article.userId }">
+            	<c:if test="${sessionScope.userId eq socialGroupArticle.userId }">
             		<div>
                 		<button onclick="createReceipt()">인증글 올리기</button>
             		</div>
             	</c:if>
             
-            	<c:if test="${sessionScope.userId ne article.userId }">
+            	<c:if test="${sessionScope.userId ne socialGroupArticle.userId }">
             		<div>
                 		<img src="../img/receipt.jpg" alt="">
             		</div>
@@ -542,16 +556,16 @@
             </c:if>
             
             <c:if test="${not empty donationReceipt.receiptId }">
-            	<c:if test="${sessionScope.userId eq article.userId }">
+            	<c:if test="${sessionScope.userId eq socialGroupArticle.userId }">
 					<div class="update">
 			  			<a href="#" onclick="updateReceipt('<c:url value='/donationForm/receiptUpdate' > 
 			  										<c:param name='receiptId' value='${donationReceipt.receiptId}'/> 
-			  										<c:param name='articleId' value='${article.articleId}'/> 
-			  										<c:param name='category' value='${article.category}'/> 
+			  										<c:param name='articleId' value='${socialGroupArticle.articleId}'/> 
+			  										<c:param name='category' value='${socialGroupArticle.category}'/> 
 			  										</c:url>')">수정하기</a>
 			  			<a href="<c:url value='/donationList/receiptDelete' >
-			  					<c:param name='articleId' value='${article.articleId}'/>
-			  					<c:param name='category' value='${article.category}'/>
+			  					<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+			  					<c:param name='category' value='${socialGroupArticle.category}'/>
 			  				</c:url>" onclick="confirm('인증글을 삭제하시겠습니까?')">삭제하기</a>		  
 					</div>
 				</c:if>
@@ -580,8 +594,8 @@
             <div class="comment-title">댓글</div>
 			  			
             <form name="form" method="POST" action="<c:url value='/donationList/comment' >
-			  				<c:param name='articleId' value='${article.articleId}'/>
-			  				<c:param name='category' value='${article.category}'/>
+			  				<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+			  				<c:param name='category' value='${socialGroupArticle.category}'/>
 			  			</c:url>">
                 <textarea name="com_text" style="width: 100%;" rows="5"></textarea>
                 
@@ -595,9 +609,9 @@
 						  	<a href="#" onclick="commUpdateEdit()">수정</a>
 						  		
 						  	<a href="<c:url value='/donationList/commentDelete' >
-						  				<c:param name='articleId' value='${article.articleId}'/>
-						  				<c:param name='category' value='${article.category}'/>
-						  				<c:param name='commentId' value='${article.commentId}'/>
+						  				<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+						  				<c:param name='category' value='${socialGroupArticle.category}'/>
+						  				<c:param name='commentId' value='${socialGroupArticle.commentId}'/>
 						  			</c:url>" onclick="confirm('댓글을 삭제하시겠습니까?')">삭제</a>		  
 						</div>
 					</c:if>
@@ -610,10 +624,10 @@
 					
 					<div class="line">
 	                	<div class="person">
-	                		<c:if test="${sessionScope.userId eq article.userId }">
+	                		<c:if test="${sessionScope.userId eq socialGroupArticle.userId }">
 	                    		<div class="person-id">${comm.userId}[작성자]</div>
 	                    	</c:if>
-	                    	<c:if test="${sessionScope.userId ne article.userId }">
+	                    	<c:if test="${sessionScope.userId ne socialGroupArticle.userId }">
 	                    		<div class="person-id">${comm.userId}[후원자]</div>
 	                    	</c:if>
 	                    	
@@ -632,8 +646,8 @@
 	                	<div class="person-content">${comm.content}</div>
 	                	
 	                	<form name="form" class="person-content" method="POST" action="<c:url value='/donationList/commentUpdate' >
-						  				<c:param name='articleId' value='${article.articleId}'/>
-						  				<c:param name='category' value='${article.category}'/>
+						  				<c:param name='articleId' value='${socialGroupArticle.articleId}'/>
+						  				<c:param name='category' value='${socialGroupArticle.category}'/>
 						  				<c:param name='commentId' value='${comm.commentId}'/>
 						  			</c:url>" style="display:none;">
 						  			
