@@ -1,7 +1,9 @@
 package controller.donation;
 
+import java.io.File;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,11 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import model.AnimalArticle;
+import model.ArticleFeed;
 import model.DonationArticle;
-import model.DonationComment;
-import model.service.AnimalManager;
-import model.service.CommentManager;
 import model.service.DonationArticleManager;
 import model.service.UserNotFoundException;
 
@@ -27,9 +26,12 @@ public class DonationArticleController  implements Controller{
 		try {
 			DonationArticleManager article_man = DonationArticleManager.getInstance();
 
-			List<DonationArticle> articleList = article_man.find();
+			List<ArticleFeed> articleList = article_man.find();
 			request.setAttribute("articleList", articleList);
 			
+//			List<DonationArticle> articleList = article_man.findArticle();
+//			request.setAttribute("articleList", articleList);
+            
 			return "/donationList/donationFeed.jsp";
 		}catch (ArithmeticException e) {
 			// TODO: handle exception

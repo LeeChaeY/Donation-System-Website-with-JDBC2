@@ -48,4 +48,8 @@ public class SocialGroupManager
         return this.socialGroupDAO;
     }
     
+    public int update_image(DonationImage image) throws SQLException{
+		return socialGroupDAO.update_image(image);
+	}
+    
 }

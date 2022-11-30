@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DisasterForm</title>
-    <script type="text/javascript" src="./../js/disasterUpdateForm.js"></script>
+    <title>SocialGroupUpdateForm</title>
+    <script type="text/javascript" src="./../js/socialGroupUpdateForm.js"></script>
     <style>
         .container {
             width: 70%;
@@ -70,13 +70,14 @@
         }
     </style>
 </head>
+
 <body>
     <jsp:include page="./../navigation.jsp"/>
 
     <div class="container">
-        <h2>Update DONATION(Disaster)</h2>
+        <h2>Update DONATION(SocialGroup)</h2>
         <hr>
-        <form name="form" method="POST" action="<c:url value='/donationForm/disasterArticleUpdate' />" enctype="multipart/form-data">
+        <form name="form" method="POST" action="<c:url value='/donationForm/socialGroupArticleUpdate' />" enctype="multipart/form-data">
             <input type="hidden" id="articleId" name="articleId" value="${article.articleId }">
         	<input type="hidden" name="userId" value="${article.userId }">
         	<input type="hidden" name="createDate" value="${article.createDate }">
@@ -86,63 +87,37 @@
                 <br>
                 <input type="text" id="title" name="title" value="${article.title }">
             </div>
+            
+            <div>
+                <div>성별<span>*</span></div>
+                <br>
+                <c:if test="${'F' eq article.gender }">
+                	<input type="radio" name="gender" id="female" value="F" checked="checked"><label for="female">F</label>
+                	<input type="radio" name="gender" id="male" value="M"><label for="male">M</label>
+                </c:if>
+                <c:if test="${'M' eq article.gender }">
+                	<input type="radio" name="gender" id="female" value="F"><label for="female">F</label>
+                	<input type="radio" name="gender" id="male" value="M" checked="checked"><label for="male">M</label>
+                </c:if>
+                
+            </div>
+
+            <div>
+                <label for="age">나이<span>*</span></label>
+                <br>
+                <input type="number" id="age" name="age" value="${article.age }">(단위: 세, 만 나이)
+            </div>
 
             <div>
                 <label for="area">지역<span>*</span></label>
                 <br>
                 <input type="text" id="area" name="area" value="${article.area }">
             </div>
-            
-            <div>
-                <div>재난 재해 종류<span>*</span></div>
-                <br>
-                <c:if test="${'태풍' eq article.type }">
-	                <input type="radio" name="type" value="태풍" id="type1" checked="checked"><label for="type1">태풍</label>
-	                <input type="radio" name="type" value="지진" id="type2"><label for="type2">지진</label>
-	                <input type="radio" name="type" value="가뭄" id="type3"><label for="type3">가뭄</label>
-	                <input type="radio" name="type" value="홍수" id="type4"><label for="type4">홍수(폭우)</label>
-	                <input type="radio" name="type" value="폭우" id="type5"><label for="type5">기타</label>
-	            </c:if>
-	            <c:if test="${'지진' eq article.type }">
-	                <input type="radio" name="type" value="태풍" id="type1"><label for="type1">태풍</label>
-	                <input type="radio" name="type" value="지진" id="type2" checked="checked"><label for="type2">지진</label>
-	                <input type="radio" name="type" value="가뭄" id="type3"><label for="type3">가뭄</label>
-	                <input type="radio" name="type" value="홍수" id="type4"><label for="type4">홍수(폭우)</label>
-	                <input type="radio" name="type" value="폭우" id="type5"><label for="type5">기타</label>
-	            </c:if>
-	            <c:if test="${'가뭄' eq article.type }">
-	                <input type="radio" name="type" value="태풍" id="type1"><label for="type1">태풍</label>
-	                <input type="radio" name="type" value="지진" id="type2"><label for="type2">지진</label>
-	                <input type="radio" name="type" value="가뭄" id="type3" checked="checked"><label for="type3">가뭄</label>
-	                <input type="radio" name="type" value="홍수" id="type4"><label for="type4">홍수(폭우)</label>
-	                <input type="radio" name="type" value="폭우" id="type5"><label for="type5">기타</label>
-	            </c:if>
-	            <c:if test="${'홍수' eq article.type }">
-	                <input type="radio" name="type" value="태풍" id="type1"><label for="type1">태풍</label>
-	                <input type="radio" name="type" value="지진" id="type2"><label for="type2">지진</label>
-	                <input type="radio" name="type" value="가뭄" id="type3"><label for="type3">가뭄</label>
-	                <input type="radio" name="type" value="홍수" id="type4" checked="checked"><label for="type4">홍수(폭우)</label>
-	                <input type="radio" name="type" value="폭우" id="type5"><label for="type5">기타</label>
-	            </c:if>
-	            <c:if test="${'폭우' eq article.type }">
-	                <input type="radio" name="type" value="태풍" id="type1"><label for="type1">태풍</label>
-	                <input type="radio" name="type" value="지진" id="type2"><label for="type2">지진</label>
-	                <input type="radio" name="type" value="가뭄" id="type3"><label for="type3">가뭄</label>
-	                <input type="radio" name="type" value="홍수" id="type4"><label for="type4">홍수(폭우)</label>
-	                <input type="radio" name="type" value="폭우" id="type5" checked="checked"><label for="type5">기타</label>
-	            </c:if>
-            </div>
 
             <div>
-                <label for="name">재난 재해 명칭<span>*</span></label>
+                <label for="type">취약 계층 유형<span>*</span></label>
                 <br>
-                <input type="text" id="name" name="name" value="${article.name }">
-            </div>
-
-            <div>
-                <label for="damage_amount">피해 금액<span>*</span></label>
-                <br>
-                <input type="number" id="damage_amount" name="damage_amount" value="${article.damageAmount }">(단위: 원)
+                <input type="text" id="type" name="type" value="${article.type }">
             </div>
 
             <div>
@@ -205,7 +180,7 @@
             </div>
 
             <div class="btn">
-                <input type="button" value="Update" onClick="DisasterArticleUpdate()">
+                <input type="button" value="Update" onClick="SocialGroupArticleUpdate()">
             </div>
         </form>
     </div>

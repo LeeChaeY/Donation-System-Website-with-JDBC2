@@ -242,5 +242,26 @@ public class SocialGroupDAO {
          }
          return 0;
      }
+     
+     public int update_image(DonationImage image) throws SQLException{
+ 		try {
+ 			String update1 = "UPDATE DONATION_IMAGE "
+ 							+ "SET img_order = ?, img_link = ? "
+ 							+ "WHERE article_id=? ";
+ 			Object[] param1 = new Object[] {image.getFileOrder(), image.getFileName(), image.getArticleId()};
+ 			jdbcUtil.setSqlAndParameters(update1, param1);
+ 			jdbcUtil.executeUpdate();
+ 			
+ 			return 1;
+ 		}catch (Exception ex) {
+ 			jdbcUtil.rollback();
+ 			ex.printStackTrace();
+ 		}
+ 		finally {
+ 			jdbcUtil.commit();
+ 			jdbcUtil.close();	// resource 반환
+ 		}
+ 		return 0;
+ 	}
 
 }

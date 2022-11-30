@@ -20,25 +20,29 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import controller.user.UserSessionUtils;
-import model.DonationImage;
 import model.AnimalArticle;
+import model.DisasterArticle;
+import model.DonationImage;
+import model.SocialGroupArticle;
 import model.service.AnimalManager;
+import model.service.DisasterManager;
+import model.service.SocialGroupManager;
+import model.service.UserNotFoundException;
 
-public class UpdateAnimalArticleController implements Controller{
-	 private static final Logger log = LoggerFactory.getLogger(UpdateAnimalArticleController.class);
-	 
+public class UpdateSocialGroupController implements Controller{
+	private static final Logger log = LoggerFactory.getLogger(UpdateSocialGroupController.class);
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (request.getMethod().equals("GET")) {
 			String articleIdStr = request.getParameter("articleId");
 			int articleId = Integer.parseInt(articleIdStr);
 			
-			AnimalManager manager = AnimalManager.getInstance();
-			AnimalArticle article = manager.findAnimalArticleByArticleId(articleId);
+			SocialGroupManager manager = SocialGroupManager.getInstance();
+			SocialGroupArticle article = manager.findSocialGroupArticleByArticleId(articleId);
 			request.setAttribute("article", article);
 			
-			log.debug("UpdateForm article : {}", article);
-			return "/donationForm/animalUpdateForm.jsp";  
+			return "/donationForm/socialGroupUpdateForm.jsp";  
 	    }
 		
 		//LocalDate now  = LocalDate.now();
@@ -46,7 +50,7 @@ public class UpdateAnimalArticleController implements Controller{
     	HttpSession session = request.getSession();
 		String userId = UserSessionUtils.getLoginUserId(session);
 		int articleId = 0;
-		AnimalArticle animal = new AnimalArticle();
+		DisasterArticle disaster = new DisasterArticle();
 		List<DonationImage> imageList = new ArrayList<DonationImage>();
 		
 		String filename = null;
@@ -89,45 +93,35 @@ public class UpdateAnimalArticleController implements Controller{
                     if (item.isFormField()) {  // item이 일반 데이터인 경우
                     	 if(item.getFieldName().equals("articleId")) {
                     		articleId = Integer.parseInt(value);
-                         	animal.setArticleId(articleId);
+                         	disaster.setArticleId(articleId);
                     	 }
                     	 else if(item.getFieldName().equals("title"))
-                         	animal.setTitle(value);
+                    		disaster.setTitle(value);
                          else if(item.getFieldName().equals("deadline"))
-                         	animal.setDeadline(value);
+                        	disaster.setDeadline(value);
                          else if(item.getFieldName().equals("bank_name"))
-                         	animal.setBankName(value);
+                        	disaster.setBankName(value);
                          else if(item.getFieldName().equals("acc_holder"))
-                         	animal.setAccHolder(value);
+                        	disaster.setAccHolder(value);
                          else if(item.getFieldName().equals("acc_num"))
-                         	animal.setAccNum(value);
+                        	disaster.setAccNum(value);
                          else if(item.getFieldName().equals("due_date"))
-                         	animal.setDueDate(value);
+                        	disaster.setDueDate(value);
                          else if(item.getFieldName().equals("use_plan"))
-                         	animal.setUsePlan(value);
+                        	disaster.setUsePlan(value);
                          else if(item.getFieldName().equals("other_text"))
-                         	animal.setOtherText(value);
+                        	disaster.setOtherText(value);
                          //AnimalArticle 필드
                          else if(item.getFieldName().equals("name"))
-                         	animal.setName(value);
+                        	disaster.setName(value);
                          else if(item.getFieldName().equals("area"))
-                         	animal.setArea(value);
-                         else if(item.getFieldName().equals("current_status"))
-                         	animal.setCurrentStatus(value);
+                        	disaster.setArea(value);
                          else if(item.getFieldName().equals("type"))
-                         	animal.setType(value);
-                         else if(item.getFieldName().equals("gender"))
-                         	animal.setGender(value);
-                         else if(item.getFieldName().equals("neutering"))
-                         	animal.setNeutering(value);
-                         else if(item.getFieldName().equals("age"))
-                         	animal.setAge(value);
-                         else if(item.getFieldName().equals("weight"))
-                          	animal.setWeight(value);
-                         else if(item.getFieldName().equals("health_status"))
-                         	animal.setHealthStatus(value);
-                         else if(item.getFieldName().equals("personality"))
-                         	animal.setPersonality(value);
+                         	disaster.setType(value);
+                         else if(item.getFieldName().equals("damage_amount"))
+                        	disaster.setDamageAmount(Integer.parseInt(value));
+                         else if(item.getFieldName().equals("situation"))
+                        	disaster.setSituation(value);
                     }
                     else {  // item이 파일인 경우   
                         if (item.getFieldName().equals("image")) {
@@ -153,7 +147,7 @@ public class UpdateAnimalArticleController implements Controller{
                             image.setArticleId(articleId); 
                             image.setFileOrder(fileOrder++);
                             image.setFileName(filename);
-                            image.setArticle(animal);
+                            image.setArticle(disaster);
                             imageList.add(image);
                             log.debug("Image: {}", image);
                             
@@ -175,35 +169,35 @@ public class UpdateAnimalArticleController implements Controller{
                 e.printStackTrace();
             }
             
-            animal.setArticleId(articleId);
-            animal.setCategory("animal"); 
-            animal.setIdCheck("Y"); 
-            animal.setCreateDate(null);
-            animal.setUpdateDate(null);
-            animal.setReceiptCheck("N");
-            animal.setTotalAmount(0); 
-            animal.setUserId(userId); 
+            disaster.setArticleId(articleId);
+            disaster.setCategory("disaster"); 
+            disaster.setIdCheck("Y"); 
+            disaster.setCreateDate(null);
+            disaster.setUpdateDate(null);
+            disaster.setReceiptCheck("N");
+            disaster.setTotalAmount(0); 
+            disaster.setUserId(userId); 
             
-            animal.setImageList(imageList);
+            disaster.setImageList(imageList);
             
-            log.debug("ANimalArticle Controller: {}", animal);
+            log.debug("DisasterArticle Controller: {}", disaster);
         }      
     	 
     	 try {
-    		 AnimalManager manager = AnimalManager.getInstance();
-    		 manager.update(animal);
+    		 DisasterManager manager = DisasterManager.getInstance();
+    		 manager.update(disaster);
              
              //DONATION_IMAGE 테이블에 레코드 생성
              for (int i=0; i<imageList.size(); i++)
                  manager.update_image(imageList.get(i));
-    		 return "redirect:/donationList/animal?articleId="+articleId; 
+    		 return "redirect:/donationList/disaster?articleId="+articleId; 
     	 }catch (Exception e) {
     		 request.setAttribute("createFailed", true);
     		 request.setAttribute("exception", e);
-    		 request.setAttribute("animal", animal);
-    		 return "/donationForm/animalUpdateForm.jsp"; 
+    		 request.setAttribute("disaster", disaster);
+    		 return "/donationForm/disasterUpdateForm.jsp"; 
 		}
-    	 
+		
 	}
 
 }
