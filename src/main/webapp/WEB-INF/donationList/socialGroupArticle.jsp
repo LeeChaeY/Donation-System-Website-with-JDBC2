@@ -548,9 +548,9 @@
             		</div>
             	</c:if>
             
-            	<c:if test="${sessionScope.userId ne socialGroupArticle.userId }">
+            	<c:if test="${sessionScope.userId ne article.userId }">
             		<div>
-                		<img src="../img/receipt.jpg" alt="">
+                		작성자가 아직 인증을 하지 않았습니다. 
             		</div>
             	</c:if>
             </c:if>

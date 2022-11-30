@@ -641,7 +641,7 @@
             
             	<c:if test="${sessionScope.userId ne article.userId }">
             		<div>
-                		<img src="../img/receipt.jpg" alt="">
+                		작성자가 아직 인증을 하지 않았습니다. 
             		</div>
             	</c:if>
             </c:if>
@@ -667,8 +667,6 @@
             			<c:forEach var="receiptImage" items="${donationReceipt.imageList}">
                 			<img src="<c:url value='/upload/${receiptImage.imgLink}'/>"><br>
             			</c:forEach>
-            			<!-- 첫번째 이미지파일 -->
-            			<%-- <img src="<c:url value='/upload/${donationReceipt.imageList[0].fileName}'/>"/><br/> --%>
         			</div>
                     
                     <div class="basic">인증 내역 설명</div>
