@@ -7,7 +7,7 @@ function getFormatDate(date){
     		return year + '-' + month + '-' + day;
     	}
     
-    	function SocialGroupArticleUpdate() {
+    	function SocialGroupArticleCreate() {
     		if(form.title.value==""){
     			alert("제목을 입력하십시오.");
                 form.title.focus();

@@ -31,10 +31,6 @@ public class SocialGroupManager
         return socialGroupDAO.create_image(image);
     }
     
-    public int remove(int articleid) throws SQLException, UserNotFoundException {
-        return socialGroupDAO.remove(articleid);
-    }
-    
     public SocialGroupArticle findSocialGroupArticleByArticleId(int articleId) 
         throws SQLException, ArticleNotFoundException {
         SocialGroupArticle socialGroupArticle = socialGroupDAO.findSocialGroupArticleByArticleId(articleId);
@@ -42,6 +38,14 @@ public class SocialGroupManager
             throw new ArticleNotFoundException(articleId + "는 존재하지 않는 socialGroup article ID입니다.");
         }
         return socialGroupArticle;
+    }
+    
+    public int update(SocialGroupArticle article) throws SQLException{
+        return socialGroupDAO.update(article);
+    }
+
+    public int remove(int articleid) throws SQLException, UserNotFoundException {
+        return socialGroupDAO.remove(articleid);
     }
     
     public SocialGroupDAO getArticleDAO() {

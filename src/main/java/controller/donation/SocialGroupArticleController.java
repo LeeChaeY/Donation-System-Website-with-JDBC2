@@ -51,7 +51,6 @@ public class SocialGroupArticleController implements Controller {
             // 아래와 같이 하면 Tomcat 내부에 복사된 프로젝트 밑에 upload 폴더가 생성됨 
             ServletContext context = request.getServletContext();
             String path = context.getRealPath("/upload");
-            
             File dir = new File(path);          
             
             // Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함
@@ -201,11 +200,11 @@ public class SocialGroupArticleController implements Controller {
           //DONATION_IMAGE 테이블에 레코드 생성
           for (int i=0; i<imageList.size(); i++)
               manager.create_image(imageList.get(i));
-          return  "redirect:/donationList/socialGroup?articleId="+articleId; // 성공 시 리스트 화면으로 redirect
+          return  "redirect:/donationList/socialGroup?articleId="+articleId;
         } catch (Exception e) { // 예외 발생 시 form으로 forwarding
             request.setAttribute("createFailed", true);
             request.setAttribute("exception", e);
-            request.setAttribute("socialGroupArticle", article);
+            request.setAttribute("article", article);
             
             return "/donationForm/socialGroupForm.jsp";
         }
