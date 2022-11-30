@@ -162,8 +162,38 @@
         }
     </style>
     <script>
-   function ViewArticle(targetUri) {
-      location.href = targetUri;
+    
+    window.onload = function() {
+    	const select = document.getElementById('category_feed');
+    	const len = select.options.length;
+ 	  	
+    	for (let i=0; i<len; i++){  
+ 		  	//select box의 option value가 입력 받은 value의 값과 일치할 경우 selected
+ 		    if(select.options[i].value == '${category_feed}'){
+ 		    	select.options[i].selected = true;
+ 		    }
+ 		  }  
+ 	  
+    };
+    
+   function feedView() {
+	   var select = document.getElementById('category_feed');
+	   var option = select.options[select.selectedIndex];
+	   
+	   if (option.value == "none") {
+		   location.href = "<c:url value='/donationList/donationFeed' > <c:param name='category_feed' value='none'/> </c:url>";  
+		} 
+	   else if (option.value == "animal") {
+		   location.href = "<c:url value='/donationList/donationFeed' > <c:param name='category_feed' value='animal'/> </c:url>";
+	   }
+	   else if (option.value == "disaster") {
+		   location.href = "<c:url value='/donationList/donationFeed' > <c:param name='category_feed' value='disaster'/> </c:url>";
+	   }
+	   else {
+		   location.href = "<c:url value='/donationList/donationFeed' > <c:param name='category_feed' value='socialGroup'/> </c:url>";
+	   }
+	   
+	   
    }
    </script>
 </head>
@@ -175,17 +205,17 @@
         <div class="board">
             <div class="post">VIEWS</div>
 
-            <select name="" id="">
-                <option value="">동물</option>
-                <option value="">재난 재해</option>
-                <option value="">사회 취약 계층</option>
+            <select name="category_feed" id="category_feed" onchange="feedView()">
+                <option value="none">전체</option>
+                <option value="animal">동물</option>
+                <option value="disaster">재난 재해</option>
+                <option value="socialGroup">사회 취약 계층</option>
             </select>
         </div>
 
         <hr>
 
         <table>
-<<<<<<< HEAD
 			    <tr>
 			    <c:forEach var="article" items="${articleList}" varStatus="status">
 			    	<c:if test="${status.index % 4 == 0}">
@@ -201,23 +231,7 @@
                 		</td>
 			    </c:forEach>
 				</tr>
-=======
-             <tr>
-             <c:forEach var="article" items="${articleList}" varStatus="status">
-                <c:if test="${status.index % 4 == 0}">
-                   </tr><tr>
-                </c:if>
-                
-                   <td onclick="location.href='<c:url value='/donationList/${article.category}' >
-                                <c:param name='articleId' value='${article.articleId}'/>
-                             </c:url>'">
-                         <div>${article.title}</div>
-                         <div><img src="<c:url value='/upload/${article.fileName}'/>" alt=""></div>
-                          <%-- <div><img src="../upload/${article.fileName}" alt=""></div> --%>
-                      </td>
-             </c:forEach>
-            </tr>
->>>>>>> branch 'develop' of https://github.com/Journey5873/donationSystem.git
+
         </table>
     </div>
 </body>
