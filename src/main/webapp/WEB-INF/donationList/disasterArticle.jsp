@@ -627,17 +627,19 @@
 
         <div class="receipt">
             <h2 class="info-title">후원금 사용 내역</h2>
-
-            <c:if test="${empty donationReceipt.receiptId }">
+			<c:if test="${empty donationReceipt.receiptId }">
             	<c:if test="${sessionScope.userId eq article.userId }">
             		<div>
-                		<button onclick="createReceipt()">인증글 올리기</button>
+                		<button onclick="createReceipt(<c:url value='/donationList/receipt' > 
+                				<c:param name='articleId' value='${article.articleId}'/> 
+                				<c:param name='category' value='${article.category}'/> 
+                			</c:url>)">인증글 올리기</button>
             		</div>
             	</c:if>
             
             	<c:if test="${sessionScope.userId ne article.userId }">
             		<div>
-                		<img src="../img/receipt.jpg" alt="">
+                		작성자가 아직 인증을 하지 않았습니다. 
             		</div>
             	</c:if>
             </c:if>
