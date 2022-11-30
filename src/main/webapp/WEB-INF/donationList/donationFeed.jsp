@@ -195,7 +195,7 @@
 			  							<c:param name='articleId' value='${article.articleId}'/>
 			  						</c:url>'">
                 			<div>${article.title}</div>
-                			<div><img src="/upload/${article.fileName}" alt=""></div>
+                			<div><img src="<c:url value='/upload/${article.fileName}'/>" alt=""></div>
                     		<%-- <div><img src="../upload/${article.fileName}" alt=""></div> --%>
                 		</td>
 			    </c:forEach>

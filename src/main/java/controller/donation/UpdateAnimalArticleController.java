@@ -56,9 +56,7 @@ public class UpdateAnimalArticleController implements Controller{
         if(check) {    // 전송된 요청 메시지의 타입이 multipart 인지 여부를 체크한다. (multipart/form-data)
             // 아래와 같이 하면 Tomcat 내부에 복사된 프로젝트 밑에 upload 폴더가 생성됨 
             ServletContext context = request.getServletContext();
-//            String path = context.getRealPath("/upload");
-            String path = context.getRealPath("");
-            path = path+"..\\..\\..\\..\\..\\..\\donationSystem\\src\\main\\webapp\\upload";
+            String path = context.getRealPath("/upload");
             
             File dir = new File(path);          
             // Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함

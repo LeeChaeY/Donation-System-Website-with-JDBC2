@@ -44,10 +44,7 @@ public class DisasterArticleController implements Controller{
 		boolean check = ServletFileUpload.isMultipartContent(request);
 		if(check) {
 			ServletContext context = request.getServletContext();
-//            String path = context.getRealPath("/upload");
-			
-			String path = context.getRealPath("");
-            path = path+"..\\..\\..\\..\\..\\..\\donationSystem\\src\\main\\webapp\\upload";
+            String path = context.getRealPath("/upload");
             
             File dir = new File(path);      
             
