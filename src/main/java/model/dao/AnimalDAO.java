@@ -166,6 +166,29 @@ public class AnimalDAO {
 		return 0;
 	}
 	
+	public int getMaxOrder(int articleId) throws SQLException{
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT MAX(img_order) AS \"order\" ");
+			sql.append("FROM donation_image ");
+			sql.append("WHERE article_id = ?");
+			jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] { articleId });
+			ResultSet rs = jdbcUtil.executeQuery();
+			if(rs.next()) {
+				int maxOrder = rs.getInt("order");
+				return maxOrder;
+			}
+		} catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {     
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }       
+        return 0;
+	}
+	
+	
 	public int create_image(DonationImage image) throws SQLException {
         try {
             //DONATION_IMAGE
