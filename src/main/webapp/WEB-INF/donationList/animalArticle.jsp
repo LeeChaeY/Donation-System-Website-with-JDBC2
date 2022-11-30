@@ -133,10 +133,21 @@
             color: cadetblue;
             text-align: center;
         }
-        .container .imgPost {
+		.container .imgPost {
+            width: 500px;
+            margin: 0 auto;
+            border: 3px solid black;
+            white-space: nowrap;
+            overflow-x: scroll;
             display: flex;
-            align-items: center;
-            justify-content: center;
+        }
+
+        .container .imgPost>.item {
+            margin: 10px;
+        }
+
+        .container .imgPost>.item>img {
+            height: 400px;
         }
         .container .info-title {
             font-weight: bold;
@@ -427,10 +438,17 @@
 			  				<c:param name='userId' value='${article.userId}'/>
 			  				<c:param name='articleId' value='${article.articleId}'/>
 			  			</c:url>">수정하기</a>
-			  	<a href="<c:url value='/donationList/animalArticleDelete' >
-			  				<c:param name='userId' value='${article.userId}'/>
-			  				<c:param name='articleId' value='${article.articleId}'/>
-			  			</c:url>">삭제하기</a>		  
+			  			
+			  	<c:if test="${not donatorList.isEmpty() }">
+                	<a onclick="confirm('후원이 있는 후원글은 삭제할 수 없습니다.')">삭제하기</a>     
+                </c:if>
+                
+                <c:if test="${donatorList.isEmpty()}">
+                	 <a href="<c:url value='/donationList/socialGroupArticleDelete' >
+                            <c:param name='userId' value='${article.userId}'/>
+                            <c:param name='articleId' value='${article.articleId}'/>
+                        </c:url>" onclick="return articleRemove();">삭제하기</a> &nbsp;     
+                </c:if>   	  
 			</div>
 		</c:if>
 
@@ -448,10 +466,10 @@
 
          <div class="imgPost">
             <c:forEach var="image" items="${article.imageList}">
-                <img src="<c:url value='/upload/${image.fileName}'/>"><br>
+                <div class="item">
+               		<img src="<c:url value='/upload/${image.fileName}'/>"><br>
+            	</div>
             </c:forEach>
-            <!-- 첫번째 이미지파일 -->
-            <%-- <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/> --%>
         </div>
 
         <div>
@@ -560,14 +578,26 @@
                 <span>${article.accHolder }</span>
                 <span>${article.accNum }</span>
             </div>
-            <div class="btn">
+            
+            
+            <c:if test="${cTime > article.deadline  }">
+            	<div class="btn">
+					<div>
+						<a  onclick="confirm('후원기간이 지났습니다.')">Donate now</a>
+					</div>
+				</div>
+            </c:if>
+            
+            <c:if test="${cTime < article.deadline  }">
+            	<div class="btn">
 					<div>
 						<a href="<c:url value='/donation' >
 				  				<c:param name='articleId' value='${article.articleId}'/>
 				  				<c:param name='category' value='${article.category}'/>
 				  		</c:url>">Donate now</a>
 					</div>
-			</div>
+				</div>
+            </c:if>
         </div>
 
         <hr>

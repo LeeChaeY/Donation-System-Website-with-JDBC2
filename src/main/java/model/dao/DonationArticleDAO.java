@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.cloud.vision.v1.Image;
+
 import model.AnimalArticle;
 import model.ArticleFeed;
 import model.DonationArticle;
@@ -59,7 +61,7 @@ public List<DonationArticle> findArticle() throws SQLException{
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
 			List<DonationArticle> list = new ArrayList<DonationArticle>();
-			
+			int articleId;
 			while (rs.next()) {
 				DonationArticle article = new DonationArticle(
 						rs.getInt("article_id"), 
