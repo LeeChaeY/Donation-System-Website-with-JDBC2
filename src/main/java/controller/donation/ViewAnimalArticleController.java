@@ -1,5 +1,6 @@
 package controller.donation;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +30,11 @@ public class ViewAnimalArticleController implements Controller{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		final Logger log = LoggerFactory.getLogger(ViewAnimalArticleController.class);
-		try {
-			HttpSession session = request.getSession();	
+		try {	
 			int articleId = Integer.parseInt(request.getParameter("articleId"));
+			
+			LocalDate now  = LocalDate.now();
+			request.setAttribute("cTime", now);
 			
 			AnimalManager manager = AnimalManager.getInstance();
 			AnimalArticle article = manager.findAnimalArticleByArticleId(articleId);

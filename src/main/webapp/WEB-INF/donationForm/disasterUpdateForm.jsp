@@ -76,8 +76,8 @@
     <div class="container">
         <h2>Update DONATION(Disaster)</h2>
         <hr>
-        <form name="form" method="POST" action="<c:url value='/donationForm/disasterArticleUpdate' />" >
-            <input type="hidden" name="articleId" value="${article.articleId }">
+        <form name="form" method="POST" action="<c:url value='/donationForm/disasterArticleUpdate' />" enctype="multipart/form-data">
+            <input type="hidden" id="articleId" name="articleId" value="${article.articleId }">
         	<input type="hidden" name="userId" value="${article.userId }">
         	<input type="hidden" name="createDate" value="${article.createDate }">
            

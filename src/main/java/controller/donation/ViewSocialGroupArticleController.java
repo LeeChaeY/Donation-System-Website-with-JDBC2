@@ -1,5 +1,6 @@
 package controller.donation;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,8 @@ public class ViewSocialGroupArticleController implements Controller{
         
         try {
             SocialGroupManager socialGroupMan = SocialGroupManager.getInstance();
-            HttpSession session = request.getSession(); 
+            LocalDate now  = LocalDate.now();
+			request.setAttribute("cTime", now);
             
             int articleId = Integer.parseInt(request.getParameter("articleId"));
 
@@ -48,6 +50,7 @@ public class ViewSocialGroupArticleController implements Controller{
             
             DonationManager donationMan = DonationManager.getInstance();
 			List<Donator> donatorList = donationMan.latest10Donors(articleId);
+			
 			request.setAttribute("donatorList", donatorList);
 			
 			if (article.getReceiptCheck().equals("Y")) {
@@ -56,7 +59,7 @@ public class ViewSocialGroupArticleController implements Controller{
 				request.setAttribute("donationReceipt", receipt);
 				log.debug("receipt: {}", receipt);
 			}
-			
+
             return "/donationList/socialGroupArticle.jsp";
         } catch (ArithmeticException e) {
             // TODO: handle exception

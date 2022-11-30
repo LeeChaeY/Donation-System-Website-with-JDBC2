@@ -41,4 +41,8 @@ public class AnimalManager {
 	public int create_image(DonationImage image) throws SQLException, ExistingUserException {
 	    return animalDAO.create_image(image);
 	}
+	
+	public int update_image(DonationImage image) throws SQLException{
+		return animalDAO.update_image(image);
+	}
 }

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.AnimalArticle;
 import model.DisasterArticle;
 import model.DonationImage;
 
@@ -79,7 +80,7 @@ public class DisasterDAO {
 			sql1.append("SELECT title, category, TO_CHAR(deadline, 'YYYY-MM-DD') \"deadline\", "
 					+ "bank_name, acc_holder, acc_num, TO_CHAR(due_date, 'YYYY-MM-DD') \"due_date\", "
 					+ "use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, "
-					+ "type, name, area, damage_amount, situation, disaster_id ");
+					+ "type, name, area, damage_amount, situation ");
 			sql1.append("FROM disaster_article dis JOIN donation_article d ON dis.article_id = d.article_id ");
 			sql1.append("WHERE dis.article_id=? ");
 			jdbcUtil.setSqlAndParameters(sql1.toString(), new Object[] {article_id});
@@ -185,6 +186,27 @@ public class DisasterDAO {
             jdbcUtil.commit();
             jdbcUtil.close(); // resource 반환
         }
+		return 0;
+	}
+	
+	public int update_image(DonationImage image) throws SQLException{
+		try {
+			String update1 = "UPDATE DONATION_IMAGE "
+							+ "SET img_order = ?, img_link = ? "
+							+ "WHERE article_id=? ";
+			Object[] param1 = new Object[] {image.getFileOrder(), image.getFileName(), image.getArticleId()};
+			jdbcUtil.setSqlAndParameters(update1, param1);
+			jdbcUtil.executeUpdate();
+			
+			return 1;
+		}catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}
 		return 0;
 	}
 }
