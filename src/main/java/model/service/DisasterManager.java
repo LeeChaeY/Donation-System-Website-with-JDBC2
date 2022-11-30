@@ -45,4 +45,8 @@ public class DisasterManager {
 	public int update_image(DonationImage image) throws SQLException{
 		return disasterDAO.update_image(image);
 	}
+	
+	public int getMaxOrder(int articleId)throws SQLException{
+		return disasterDAO.getMaxOrder(articleId);
+	}
 }
