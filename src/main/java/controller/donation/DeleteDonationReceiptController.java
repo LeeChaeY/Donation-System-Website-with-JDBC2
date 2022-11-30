@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 import controller.Controller;
+import model.DonationReceipt;
 import model.service.DonationReceiptManager;
 import model.service.UserNotFoundException;
 
@@ -20,7 +21,8 @@ public class DeleteDonationReceiptController implements Controller{
 			 	DonationReceiptManager receipt_man = DonationReceiptManager.getInstance();
 
 				int articleId = Integer.parseInt(request.getParameter("articleId"));
-				int result = receipt_man.remove(articleId);
+				DonationReceipt receipt = receipt_man.findByArticleId(articleId);
+				int result = receipt_man.remove(articleId, receipt.getReceiptId());
 				request.setAttribute("result", result);
 				log.debug("Receipt Delete result: {}", result);
 				

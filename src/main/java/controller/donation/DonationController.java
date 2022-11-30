@@ -67,6 +67,7 @@ public class DonationController implements Controller{
 					request.getParameter("payBankName"),
 					request.getParameter("accHolder"),
 					request.getParameter("accNum"),
+					Integer.parseInt(amountStr)*0.01,
 					Integer.parseInt(articleId),
 					request.getParameter("userId"));
 			DonationManager manager = DonationManager.getInstance();

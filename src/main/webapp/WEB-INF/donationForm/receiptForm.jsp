@@ -92,9 +92,9 @@
 	    function createReceipt() {
 	    	loginCheck();
 			
-	    	if (form.img.value == "") {
+	    	if (form.image.value == "") {
     			alert("인증 내역 사진을 업로드하세요.");
-    			form.img.focus();
+    			form.image.focus();
                 return false;
              }
 	    	
@@ -125,9 +125,9 @@
 					<c:param name='category' value='${category}'/>
 				</c:url>">
         	<div>
-                <label for="img">인증 내역 사진<span>*</span></label>
+                <label for="image">인증 내역 사진<span>*</span></label>
                 <br>
-                <input type="file" id="img" name="img" multiple="multiple">
+                <input type="file" id="image" name="image" multiple="multiple">
             </div>
             
             <div>
@@ -137,7 +137,7 @@
             </div>
             
             <div class="btn">
-                <input type="button" value="업로드" onClick="createReceipt()">
+                <input type="button" value="업로드" onclick="createReceipt()">
                 <input type="button" value="업로드 취소" onclick="window.close()">
             </div>
         

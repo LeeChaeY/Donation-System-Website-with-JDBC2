@@ -78,9 +78,20 @@
             text-align: center;
         }
         .container .imgPost {
+            width: 500px;
+            margin: 0 auto;
+            border: 3px solid black;
+            white-space: nowrap;
+            overflow-x: scroll;
             display: flex;
-            align-items: center;
-            justify-content: center;
+        }
+
+        .container .imgPost>.item {
+            margin: 10px;
+        }
+
+        .container .imgPost>.item>img {
+            height: 400px;
         }
         .container .info-title {
             font-weight: bold;
@@ -401,7 +412,9 @@
 
         <div class="imgPost">
             <c:forEach var="image" items="${article.imageList}">
-                <img src="<c:url value='/upload/${image.fileName}'/>"><br>
+                <div class="item">
+               		<img src="<c:url value='/upload/${image.fileName}'/>"><br>
+            	</div>
             </c:forEach>
         </div>
 
@@ -514,17 +527,20 @@
         <div class="receipt">
             <h2 class="info-title">후원금 사용 내역</h2>
             <c:if test="${empty donationReceipt.receiptId }">
-                <c:if test="${sessionScope.userId eq article.userId }">
-                    <div>
-                        <button onclick="createReceipt()">인증글 올리기</button>
-                    </div>
-                </c:if>
+            	<c:if test="${sessionScope.userId eq article.userId }">
+            		<div>
+                		<button onclick="createReceipt('<c:url value='/donationList/receipt' > 
+                				<c:param name='articleId' value='${article.articleId}'/> 
+                				<c:param name='category' value='${article.category}'/> 
+                			</c:url>')">인증글 올리기</button>
+            		</div>
+            	</c:if>
             
-                <c:if test="${sessionScope.userId ne article.userId }">
-                    <div>
-                        <img src="../img/receipt.jpg" alt="">
-                    </div>
-                </c:if>
+            	<c:if test="${sessionScope.userId ne article.userId }">
+            		<div>
+                		작성자가 아직 인증을 하지 않았습니다. 
+            		</div>
+            	</c:if>
             </c:if>
             
             <c:if test="${not empty donationReceipt.receiptId }">
@@ -542,15 +558,13 @@
                     </div>
                 </c:if>
                 
-                <div class="receipt-info">
+               <div class="receipt-info">
                     <div class="basic">인증 내역 사진</div>
                     <div class="imgPost">
-                        <c:forEach var="receiptImage" items="${donationReceipt.imageList}">
-                            <img src="<c:url value='/upload/${receiptImage.imgLink}'/>"><br>
-                        </c:forEach>
-                        <!-- 첫번째 이미지파일 -->
-                        <%-- <img src="<c:url value='/upload/${donationReceipt.imageList[0].fileName}'/>"/><br/> --%>
-                    </div>
+            			<c:forEach var="receiptImage" items="${receiptImageList}">
+                			<img src="<c:url value='/upload/${receiptImage.imgLink}'/>"><br>
+            			</c:forEach>
+        			</div>
                     
                     <div class="basic">인증 내역 설명</div>
                     <div>${donationReceipt.content}</div>

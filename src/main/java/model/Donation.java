@@ -10,6 +10,7 @@ public class Donation {
 	private String payUserName;
 	private String payCardNum;
 	private int articleId;
+	private double reward;
 	private String userId;
 	
 	public Donation() {
@@ -18,7 +19,7 @@ public class Donation {
 	}
 
 	public Donation(int donationId, int amount, Date donationDate, String payBankName, String payUserName,
-			String payCardNum, int articleId, String userId) {
+			String payCardNum, double reward, int articleId, String userId) {
 		super();
 		this.donationId = donationId;
 		this.amount = amount;
@@ -26,6 +27,7 @@ public class Donation {
 		this.payBankName = payBankName;
 		this.payUserName = payUserName;
 		this.payCardNum = payCardNum;
+		this.reward = reward;
 		this.articleId = articleId;
 		this.userId = userId;
 	}
@@ -92,6 +94,14 @@ public class Donation {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	
+	public double getReward() {
+		return reward;
+	}
+
+	public void setReward(double reward) {
+		this.reward = reward;
 	}
 
 	@Override

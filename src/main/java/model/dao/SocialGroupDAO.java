@@ -2,6 +2,8 @@ package model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.DonationImage;
 import model.SocialGroupArticle;
@@ -87,6 +89,28 @@ public class SocialGroupDAO {
         return 0;
     }
     
+    public int getMaxOrder(int articleId) throws SQLException{
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT MAX(img_order) AS \"order\" ");
+			sql.append("FROM donation_image ");
+			sql.append("WHERE article_id = ?");
+			jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] { articleId });
+			ResultSet rs = jdbcUtil.executeQuery();
+			if(rs.next()) {
+				int maxOrder = rs.getInt("order");
+				return maxOrder;
+			}
+		} catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {     
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }       
+        return 0;
+	}
+    
     public int create_image(DonationImage image) throws SQLException {
         try {
             //DONATION_IMAGE
@@ -115,18 +139,18 @@ public class SocialGroupDAO {
      * 주어진 article ID에 해당하는 article 정보를 데이터베이스에서 찾아
      * article 도메인 클래스에 저장하여 반환
      */
-    public SocialGroupArticle findSocialGroupArticleByArticleId(int articleId) throws SQLException{
-        String sql = "SELECT title, category, TO_CHAR(deadline, 'YYYY-MM-DD') \"deadline\", "
-				+ "bank_name, acc_holder, acc_num, id_check, TO_CHAR(due_date, 'YYYY-MM-DD') \"due_date\", "
-				+ "use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, "
-				+ "age, gender, type, area, situation "
-                + "FROM donation_article d JOIN socialgroup_article s ON d.article_id = s.article_id "
-                + "WHERE s.article_id=? ";
-        jdbcUtil.setSqlAndParameters(sql, new Object[] {articleId});
+    public SocialGroupArticle findSocialGroupArticleByArticleId(int articleId) throws SQLException {
         try {
-           ResultSet rs = jdbcUtil.executeQuery();
-           if(rs.next()) {
-              SocialGroupArticle article = new SocialGroupArticle(
+            String sql = "SELECT title, category, TO_CHAR(deadline, 'YYYY-MM-DD') \"deadline\", "
+                    + "bank_name, acc_holder, acc_num, id_check, TO_CHAR(due_date, 'YYYY-MM-DD') \"due_date\", "
+                    + "use_plan, other_text, create_date, update_date, receipt_check, user_id, total_amount, "
+                    + "age, gender, type, area, situation "
+                    + "FROM donation_article d JOIN socialgroup_article s ON d.article_id = s.article_id "
+                    + "WHERE s.article_id=? ";
+            jdbcUtil.setSqlAndParameters(sql, new Object[] { articleId });
+            ResultSet rs = jdbcUtil.executeQuery();
+            if (rs.next()) {
+                SocialGroupArticle article = new SocialGroupArticle(
                               articleId,
                               rs.getString("title"), 
                               rs.getString("category"), 
@@ -149,17 +173,38 @@ public class SocialGroupDAO {
                               rs.getString("area"),
                               rs.getString("situation")
                               );
+              //이미지 추가
+              StringBuilder sb = new StringBuilder();
+              sb.append("SELECT img_order, img_link ");
+              sb.append("FROM donation_image ");
+              sb.append("WHERE article_id = ?");
+              sb.append("ORDER BY img_order ");
+              String sql2 = sb.toString();
+              jdbcUtil.setSqlAndParameters(sql2, new Object[] {articleId});
+              
+              List<DonationImage> images = new ArrayList<DonationImage>();
+              
+              rs = jdbcUtil.executeQuery();   
+              while(rs.next()) {
+                  DonationImage image = new DonationImage(
+                          rs.getInt("img_order"), 
+                          rs.getString("img_link")
+                          );
+                  images.add(image);
+              }
+              article.setImageList(images);
+
               return article;
-           }
-        }catch (Exception ex) {
-           jdbcUtil.rollback();
-           ex.printStackTrace();
-        } finally {      
-           jdbcUtil.commit();
-           jdbcUtil.close();   // resource 반환
-        }   
-        return null;
-     }
+          }
+      } catch (Exception ex) {
+          jdbcUtil.rollback();
+          ex.printStackTrace();
+      } finally {
+          jdbcUtil.commit();
+          jdbcUtil.close(); // resource 반환
+      }
+      return null;
+  }
     
     /**
      * 기존의 article 정보를 수정

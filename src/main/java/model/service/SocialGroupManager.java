@@ -56,4 +56,7 @@ public class SocialGroupManager
 		return socialGroupDAO.update_image(image);
 	}
     
+    public int getMaxOrder(int articleId)throws SQLException{
+		return socialGroupDAO.getMaxOrder(articleId);
+	}
 }

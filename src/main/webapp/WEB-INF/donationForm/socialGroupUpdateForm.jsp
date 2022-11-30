@@ -75,7 +75,7 @@
     <jsp:include page="./../navigation.jsp"/>
 
     <div class="container">
-        <h2>CREATE DONATION(Socially vulnerable)</h2>
+        <h2>Update DONATION(Socially vulnerable)</h2>
 
         <hr>
 

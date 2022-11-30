@@ -54,7 +54,8 @@ public class DonationReceiptController implements Controller {
             // 아래와 같이 하면 Tomcat 내부에 복사된 프로젝트 밑에 upload 폴더가 생성됨 
             ServletContext context = request.getServletContext();
             String path = context.getRealPath("/upload");
-            File dir = new File(path);          
+            File dir = new File(path); 
+            log.debug("PATH: {}", path);
             
             // Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함
             // File dir = new File("C:/Temp");
@@ -100,7 +101,8 @@ public class DonationReceiptController implements Controller {
                         log.debug("Create receipt : {}", receipt);
                     }
                     else {  // item이 파일인 경우   
-                        if (item.getFieldName().equals("img")) {
+                        if (item.getFieldName().equals("image")) {
+                        	log.debug("imageimage");
                             // parameter 이름이 image이면 파일 저장을 한다.
                             String oriFilename = item.getName();    // 파일 이름 획득 (자동 한글 처리 됨)
                             if (oriFilename == null || oriFilename.trim().length() == 0) continue;

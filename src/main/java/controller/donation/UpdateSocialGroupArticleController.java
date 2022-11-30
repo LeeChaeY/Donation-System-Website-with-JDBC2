@@ -40,9 +40,8 @@ public class UpdateSocialGroupArticleController implements Controller{
 			
 			return "/donationForm/socialGroupUpdateForm.jsp";  
 	    }
-		
-		//LocalDate now  = LocalDate.now();
-    	//String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+		SocialGroupManager manager = SocialGroupManager.getInstance();
     	HttpSession session = request.getSession();
 		String userId = UserSessionUtils.getLoginUserId(session);
 		int articleId = 0;
@@ -87,6 +86,7 @@ public class UpdateSocialGroupArticleController implements Controller{
                     	 if(item.getFieldName().equals("articleId")) {
                     		articleId = Integer.parseInt(value);
                          	article.setArticleId(articleId);
+                         	fileOrder = manager.getMaxOrder(articleId)+1;
                     	 }
                     	 else if(item.getFieldName().equals("title"))
                     	     article.setTitle(value);
@@ -177,12 +177,16 @@ public class UpdateSocialGroupArticleController implements Controller{
         }      
     	 
     	 try {
-    		 SocialGroupManager manager = SocialGroupManager.getInstance();
     		 manager.update(article);
              
+    		 for (int i=0; i<imageList.size(); i++)
+                 imageList.get(i).setArticleId(articleId);
+    		 
              //DONATION_IMAGE 테이블에 레코드 생성
-             for (int i=0; i<imageList.size(); i++)
-                 manager.update_image(imageList.get(i));
+    		 for (int i=0; i<imageList.size(); i++)
+                 manager.create_image(imageList.get(i));
+//             for (int i=0; i<imageList.size(); i++)
+//                 manager.update_image(imageList.get(i));
     		 return "redirect:/donationList/socialGroup?articleId="+articleId; 
     	 }catch (Exception e) {
     		 request.setAttribute("createFailed", true);

@@ -15,6 +15,7 @@ import controller.Controller;
 import model.DonationComment;
 import model.DonationReceipt;
 import model.Donator;
+import model.ReceiptImage;
 import model.SocialGroupArticle;
 import model.service.CommentManager;
 import model.service.DonationManager;
@@ -56,8 +57,12 @@ public class ViewSocialGroupArticleController implements Controller{
 			if (article.getReceiptCheck().equals("Y")) {
 				DonationReceiptManager receipt_man = DonationReceiptManager.getInstance();
 				DonationReceipt receipt = receipt_man.findByArticleId(articleId);
+				
 				request.setAttribute("donationReceipt", receipt);
+				List<ReceiptImage> receiptImageList = receipt_man.findImageByReceiptId(receipt.getReceiptId());
+				request.setAttribute("receiptImageList", receiptImageList);
 				log.debug("receipt: {}", receipt);
+				log.debug("receiptImageList: {}", receiptImageList);
 			}
 
             return "/donationList/socialGroupArticle.jsp";

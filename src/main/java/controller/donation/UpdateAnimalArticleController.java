@@ -88,7 +88,6 @@ public class UpdateAnimalArticleController implements Controller{
                     		articleId = Integer.parseInt(value);
                          	animal.setArticleId(articleId);
                          	fileOrder = manager.getMaxOrder(articleId)+1;
-                         	System.out.println("fileOrder: "+fileOrder);
                     	 }
                     	 else if(item.getFieldName().equals("title"))
                          	animal.setTitle(value);

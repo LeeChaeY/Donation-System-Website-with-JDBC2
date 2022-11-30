@@ -92,9 +92,9 @@
 	    function updateReceipt() {
 	    	loginCheck();
 			
-	    	if (form.img.value == "") {
+	    	if (form.image.value == "") {
     			alert("인증 내역 사진을 업로드하세요.");
-    			form.img.focus();
+    			form.image.focus();
                 return false;
              }
 	    	
@@ -120,25 +120,14 @@
 
         <hr>
         
-        <form name="form" method="POST" action="<c:url value='/donationForm/receiptUpdate' >
-        			<c:param name='receiptId' value='${donationReceipt.receiptId}'/>
-					<c:param name='articleId' value='${articleId}'/>
-					<c:param name='category' value='${category}'/>
-				</c:url>">
+        <form name="form" method="POST" enctype="multipart/form-data"  action="<c:url value='/donationForm/receiptUpdate' />">
+				<input type="hidden" name="articleId" value="${articleId}">
+        		<input type="hidden" name="receiptId" value="${donationReceipt.receiptId}">
+        		<input type="hidden" name="category" value="${category}">
         	<div>
-                <label for="img">기존 이미지<span>*</span></label>
-                <br>
-                <div class="imgPost">
-            	<c:forEach var="receiptImage" items="${donationReceipt.imageList}">
-                	<img src="<c:url value='/upload/${receiptImage.fileName}'/>"><br>
-            	</c:forEach>
-            	<!-- 첫번째 이미지파일 -->
-            	<%-- <img src="<c:url value='/upload/${socialGroupArticle.imageList[0].fileName}'/>"/><br/> --%>
-        		</div>
-        		
         		<label for="img">인증 내역 사진<span>*</span></label>
                 <br>
-                <input type="file" id="img" name="img" multiple="multiple" value="<c:url value='/upload/${image.fileName}'/>">
+                <input type="file" id="image" name="image" multiple="multiple">
             </div>
             
             <div>

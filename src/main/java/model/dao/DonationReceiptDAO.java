@@ -2,7 +2,10 @@ package model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.DonationImage;
 import model.DonationReceipt;
 import model.ReceiptImage;
 
@@ -135,8 +138,8 @@ public class DonationReceiptDAO {
 	//	후원 인증글 수정, id나 createDate는 수정되지 않고 content, updateDate만 수정, 수정한 DonationReceipt 객체 입력
 	public int update(DonationReceipt receipt) throws SQLException {
 		try {
-			String update = "UPDATE DONATION_RECEIPT SET content = ?, update_date = ? WHERE receipt_id = ?";		
-			Object[] param = new Object[] {receipt.getContent(), receipt.getUpdateDate(), receipt.getReceiptId()};
+			String update = "UPDATE DONATION_RECEIPT SET content = ?, update_date = sysdate WHERE receipt_id = ?";		
+			Object[] param = new Object[] {receipt.getContent(), receipt.getReceiptId()};
 			
 			jdbcUtil.setSqlAndParameters(update, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 			jdbcUtil.executeUpdate();
@@ -152,7 +155,7 @@ public class DonationReceiptDAO {
 	}
 	
 	//	후원 인증글 삭제, donation_article이 삭제되면 같이 삭제되므로 article_id로 삭제(입력)
-	public int remove(int articleId) throws SQLException {
+	public int remove(int articleId, int receiptId) throws SQLException {
 		try {
 			String remove = "DELETE FROM DONATION_RECEIPT WHERE article_id = ?";		
 			Object[] param = new Object[] {articleId};
@@ -160,10 +163,16 @@ public class DonationReceiptDAO {
 			jdbcUtil.setSqlAndParameters(remove, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 			jdbcUtil.executeUpdate();
 			
-			String update = "UPDATE DONATION_ARTICLE SET receipt_check = 'N' WHERE article_id = ?";		
-			Object[] param2 = new Object[] {articleId};
+			String remove2 = "DELETE FROM RECEIPT_IMAGE WHERE receipt_id = ?";		
+			Object[] param2 = new Object[] {receiptId};
 			
-			jdbcUtil.setSqlAndParameters(update, param2);	// JDBCUtil 에 insert문과 매개 변수 설정
+			jdbcUtil.setSqlAndParameters(remove2, param2);	// JDBCUtil 에 insert문과 매개 변수 설정
+			jdbcUtil.executeUpdate();
+			
+			String update = "UPDATE DONATION_ARTICLE SET receipt_check = 'N' WHERE article_id = ?";		
+			Object[] param3 = new Object[] {articleId};
+			
+			jdbcUtil.setSqlAndParameters(update, param3);	// JDBCUtil 에 insert문과 매개 변수 설정
 			jdbcUtil.executeUpdate();
 			
 //			String remove2 = "DELETE FROM DONATION_IMAGE WHERE article_id=?";
@@ -178,6 +187,78 @@ public class DonationReceiptDAO {
 			jdbcUtil.close();	// resource 반환
 		}		
 		return 1;			
+	}
+	
+	public int getMaxOrder(int receiptId) throws SQLException{
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT MAX(img_order) AS \"order\" ");
+			sql.append("FROM receipt_image ");
+			sql.append("WHERE receipt_id = ?");
+			jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] { receiptId });
+			ResultSet rs = jdbcUtil.executeQuery();
+			if(rs.next()) {
+				int maxOrder = rs.getInt("order");
+				return maxOrder;
+			}
+		} catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {     
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }       
+        return 0;
+	}
+	
+	public int update_image(ReceiptImage image) throws SQLException{
+		try {
+			String update1 = "UPDATE RECEIPT_IMAGE "
+							+ "SET img_link = ? "
+							+ "WHERE receipt_id=? ";
+			Object[] param1 = new Object[] {image.getImgLink(), image.getReceiptId()};
+			jdbcUtil.setSqlAndParameters(update1, param1);
+			jdbcUtil.executeUpdate();
+			
+			return 1;
+		}catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}
+		return 0;
+	}
+	
+	
+	public List<ReceiptImage> findImageByReceiptId(int receiptId) {
+		try {
+			String query = "SELECT receipt_id, img_order, img_link "
+					+ "FROM RECEIPT_IMAGE "
+					+ "WHERE receipt_id = ?";
+	    	
+	    	Object[] param = new Object[] {receiptId};
+	    	jdbcUtil.setSqlAndParameters(query, param);
+	    	
+			ResultSet rs = jdbcUtil.executeQuery();
+			List<ReceiptImage> receiptImgList = new ArrayList<>();
+			
+			while (rs.next()) {
+				ReceiptImage receiptImg = new ReceiptImage();
+				receiptImg.setReceiptId(rs.getInt("receipt_id"));
+				receiptImg.setImgOrder(rs.getInt("img_order"));
+				receiptImg.setImgLink(rs.getString("img_link"));
+				
+				receiptImgList.add(receiptImg);
+			}
+			return receiptImgList;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		} return null;
 	}
 
 }

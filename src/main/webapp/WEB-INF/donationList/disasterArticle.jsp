@@ -630,10 +630,10 @@
 			<c:if test="${empty donationReceipt.receiptId }">
             	<c:if test="${sessionScope.userId eq article.userId }">
             		<div>
-                		<button onclick="createReceipt(<c:url value='/donationList/receipt' > 
+                		<button onclick="createReceipt('<c:url value='/donationList/receipt' > 
                 				<c:param name='articleId' value='${article.articleId}'/> 
                 				<c:param name='category' value='${article.category}'/> 
-                			</c:url>)">인증글 올리기</button>
+                			</c:url>')">인증글 올리기</button>
             		</div>
             	</c:if>
             
@@ -662,11 +662,9 @@
             	<div class="receipt-info">
             		<div class="basic">인증 내역 사진</div>
                     <div class="imgPost">
-            			<c:forEach var="receiptImage" items="${donationReceipt.imageList}">
+            			<c:forEach var="receiptImage" items="${receiptImageList}">
                 			<img src="<c:url value='/upload/${receiptImage.imgLink}'/>"><br>
             			</c:forEach>
-            			<!-- 첫번째 이미지파일 -->
-            			<%-- <img src="<c:url value='/upload/${donationReceipt.imageList[0].fileName}'/>"/><br/> --%>
         			</div>
                     
                     <div class="basic">인증 내역 설명</div>

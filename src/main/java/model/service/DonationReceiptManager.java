@@ -1,6 +1,7 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import model.DonationReceipt;
 import model.ReceiptImage;
@@ -30,8 +31,16 @@ public class DonationReceiptManager {
 		return receiptDAO.create_image(receiptImage);
 	}
 	
+	public int update_image(ReceiptImage receiptImage) throws SQLException {
+		return receiptDAO.update_image(receiptImage);
+	}
+	
 	public DonationReceipt findByReceiptId(int receiptId) {
 		return receiptDAO.findByReceiptId(receiptId);
+	}
+	
+	public List<ReceiptImage> findImageByReceiptId(int receiptId) {
+		return receiptDAO.findImageByReceiptId(receiptId);
 	}
 	
 	public DonationReceipt findByArticleId(int articleId) {
@@ -42,7 +51,11 @@ public class DonationReceiptManager {
 		return receiptDAO.update(receipt);
 	}
 	
-	public int remove(int articleId) throws SQLException {
-		return receiptDAO.remove(articleId);
+	public int remove(int articleId, int receiptId) throws SQLException {
+		return receiptDAO.remove(articleId, receiptId);
+	}
+	
+	public int getMaxOrder(int articleId)throws SQLException{
+		return receiptDAO.getMaxOrder(articleId);
 	}
 }
