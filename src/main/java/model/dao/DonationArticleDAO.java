@@ -77,7 +77,7 @@ public List<DonationArticle> findArticle() throws SQLException{
 						rs.getDate("create_date"), 
 						rs.getDate("update_date"), 
 						rs.getString("receipt_check"),
-						rs.getString("user_id"), 
+						rs.getString("user_id"),   
 						rs.getInt("total_amount"));
 				list.add(article);
 			}
