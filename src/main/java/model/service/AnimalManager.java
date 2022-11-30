@@ -45,4 +45,8 @@ public class AnimalManager {
 	public int update_image(DonationImage image) throws SQLException{
 		return animalDAO.update_image(image);
 	}
+	
+	public int getMaxOrder(int articleId)throws SQLException{
+		return animalDAO.getMaxOrder(articleId);
+	}
 }
