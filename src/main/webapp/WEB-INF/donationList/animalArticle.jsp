@@ -11,81 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnimalView</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-        }
-        nav {
-            background-color: antiquewhite;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        nav>div {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 70%;
-        }
-        .title {
-            font-weight: bold;
-            font-size: xx-large;
-            color: brown;
-            margin: 30px 0px;
-        }
-        #main-menu {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #main-menu,
-        #sub-menu {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-        }
-        #main-menu>li {
-            padding: 15px;
-        }
-        #main-menu>li>a {
-            color: black;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        #main-menu>li>a:hover {
-            cursor: pointer;
-            color: gray;
-        }
-        #sub-menu {
-            height: 0;
-            visibility: hidden;
-            transition: all 0.15s ease;
-            position: relative;
-            z-index: 10;
-        }
-        #sub-menu>li {
-            width: 115px;
-            padding: 10px 0px;
-            margin: 0 auto;
-            text-align: center;
-            background: brown;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-        }
-        #sub-menu>li>a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-        }
-        #main-menu>li:hover #sub-menu {
-            visibility: visible;
-        }
-        #sub-menu>li>a:hover {
-            cursor: pointer;
-            color: lightgray;
-        }
         .container {
             width: 70%;
             margin: 0 auto;
@@ -641,7 +566,7 @@
             
             	<c:if test="${sessionScope.userId ne article.userId }">
             		<div>
-                		<img src="../img/receipt.jpg" alt="">
+                		작성자가 아직 인증을 하지 않았습니다. 
             		</div>
             	</c:if>
             </c:if>
@@ -667,8 +592,6 @@
             			<c:forEach var="receiptImage" items="${donationReceipt.imageList}">
                 			<img src="<c:url value='/upload/${receiptImage.imgLink}'/>"><br>
             			</c:forEach>
-            			<!-- 첫번째 이미지파일 -->
-            			<%-- <img src="<c:url value='/upload/${donationReceipt.imageList[0].fileName}'/>"/><br/> --%>
         			</div>
                     
                     <div class="basic">인증 내역 설명</div>

@@ -45,7 +45,7 @@
     		var due_date = document.getElementById("due_date").value;
     		var date = new Date();
     		var minDate = getFormatDate(date);
-    		date.setDate(date.getDate() + 20);
+    		date.setDate(date.getDate() + 30);
     		var maxDate = getFormatDate(date);
     		if(due_date < minDate){
     			alert("오늘 이후의 날짜를 선택하십시오.");
@@ -53,7 +53,7 @@
     			return false;
     		}
     		if(due_date > maxDate){
-    			alert("+20일까지 선택 가능합니다.");
+    			alert("+30일까지 선택 가능합니다.");
     			form.due_date.focus();
     			return false;
     		}

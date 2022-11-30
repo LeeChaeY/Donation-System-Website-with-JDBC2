@@ -139,12 +139,12 @@
         }
         
         td a {
-        	color: black;
-        	text-decoration: none;
-        	display: block;
-        	width: 100%;
-        	height: 100%;
-¡¡		} 
+           color: black;
+           text-decoration: none;
+           display: block;
+           width: 100%;
+           height: 100%;
+¡¡      } 
 
         td img {
             width: 100%;
@@ -162,10 +162,10 @@
         }
     </style>
     <script>
-	function ViewArticle(targetUri) {
-		location.href = targetUri;
-	}
-	</script>
+   function ViewArticle(targetUri) {
+      location.href = targetUri;
+   }
+   </script>
 </head>
 
 <body>
@@ -185,21 +185,21 @@
         <hr>
 
         <table>
-			    <tr>
-			    <c:forEach var="article" items="${articleList}" varStatus="status">
-			    	<c:if test="${status.index % 4 == 0}">
-			    		</tr><tr>
-			    	</c:if>
-			    	
-			    		<td onclick="location.href='<c:url value='/donationList/${article.category}' >
-			  							<c:param name='articleId' value='${article.articleId}'/>
-			  						</c:url>'">
-                			<div>${article.title}</div>
-                			<div><img src="/upload/${article.fileName}" alt=""></div>
-                    		<%-- <div><img src="../upload/${article.fileName}" alt=""></div> --%>
-                		</td>
-			    </c:forEach>
-				</tr>
+             <tr>
+             <c:forEach var="article" items="${articleList}" varStatus="status">
+                <c:if test="${status.index % 4 == 0}">
+                   </tr><tr>
+                </c:if>
+                
+                   <td onclick="location.href='<c:url value='/donationList/${article.category}' >
+                                <c:param name='articleId' value='${article.articleId}'/>
+                             </c:url>'">
+                         <div>${article.title}</div>
+                         <div><img src="<c:url value='/upload/${article.fileName}'/>" alt=""></div>
+                          <%-- <div><img src="../upload/${article.fileName}" alt=""></div> --%>
+                      </td>
+             </c:forEach>
+            </tr>
         </table>
     </div>
 </body>
