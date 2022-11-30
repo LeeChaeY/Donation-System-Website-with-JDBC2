@@ -168,14 +168,13 @@ public class SocialGroupDAO {
         try {
             //DONATINO_ARTICLE
             String sql1 = "UPDATE DONATION_ARTICLE "
-                        + "SET title=?, due_date=?, use_plan=?, other_text=?, update_date=?, receipt_check=? "
+                        + "SET title=?, due_date=?, use_plan=?, other_text=?, update_date=SYSDATE, receipt_check=? "
                         + "WHERE article_id=? ";
             Object[] param1 = new Object[] {
                                 article.getTitle(), 
                                 article.getDueDate(), 
                                 article.getUsePlan(),
                                 article.getOtherText(), 
-                                article.getUpdateDate(),
                                 article.getReceiptCheck(), 
                                 article.getArticleId()
                                 };
