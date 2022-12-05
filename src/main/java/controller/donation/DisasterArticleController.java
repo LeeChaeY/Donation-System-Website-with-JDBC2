@@ -146,7 +146,7 @@ public class DisasterArticleController implements Controller{
 			
 			//DONATION_IMAGE 테이블에 레코드 생성
             for (int i=0; i<imageList.size(); i++)
-                manager.create_image(imageList.get(i));
+                manager.createImage(imageList.get(i));
             return "redirect:/donationList/disaster?articleId="+articleId; 
 		}catch (Exception e) {
    		 request.setAttribute("createFailed", true);

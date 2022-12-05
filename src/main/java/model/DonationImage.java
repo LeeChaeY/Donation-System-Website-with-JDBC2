@@ -1,6 +1,9 @@
 package model;
 
-public class DonationImage
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class DonationImage implements Serializable
 {
     private int articleId;
     private int fileOrder;

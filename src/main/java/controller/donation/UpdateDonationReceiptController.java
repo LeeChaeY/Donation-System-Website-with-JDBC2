@@ -24,7 +24,7 @@ import model.AnimalArticle;
 import model.DonationImage;
 import model.DonationReceipt;
 import model.ReceiptImage;
-import model.dao.DonationReceiptDAO;
+import model.dao.jdbc.DonationReceiptDAO;
 import model.service.AnimalManager;
 import model.service.DonationReceiptManager;
 import model.service.UserNotFoundException;

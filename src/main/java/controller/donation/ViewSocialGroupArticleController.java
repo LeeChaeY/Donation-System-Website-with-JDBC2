@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import model.DonationComment;
+import model.DonationImage;
 import model.DonationReceipt;
 import model.Donator;
 import model.ReceiptImage;
@@ -41,6 +42,8 @@ public class ViewSocialGroupArticleController implements Controller{
             int articleId = Integer.parseInt(request.getParameter("articleId"));
 
             SocialGroupArticle article = socialGroupMan.findSocialGroupArticleByArticleId(articleId);
+            List<DonationImage> imageList = socialGroupMan.findImageList(articleId);
+			article.setImageList(imageList);
             System.out.println("articleInfo: "+article);
             request.setAttribute("article", article);
             

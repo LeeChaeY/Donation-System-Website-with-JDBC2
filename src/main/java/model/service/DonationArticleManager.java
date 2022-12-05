@@ -6,7 +6,7 @@ import java.util.List;
 import model.ArticleFeed;
 import model.DonationArticle;
 import model.DonationImage;
-import model.dao.DonationArticleDAO;
+import model.dao.jdbc.DonationArticleDAO;
 
 public class DonationArticleManager {
 	private static DonationArticleManager articleMan = new DonationArticleManager();

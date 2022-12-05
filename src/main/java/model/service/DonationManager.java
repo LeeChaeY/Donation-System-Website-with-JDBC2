@@ -7,8 +7,8 @@ import model.AnimalArticle;
 import model.Donation;
 import model.DonationComment;
 import model.Donator;
-import model.dao.AnimalDAO;
-import model.dao.DonationDAO;
+import model.dao.jdbc.AnimalDAO;
+import model.dao.jdbc.DonationDAO;
 
 public class DonationManager {
 	private static DonationManager donationMan = new DonationManager();

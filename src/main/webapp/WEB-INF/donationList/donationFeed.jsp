@@ -217,21 +217,28 @@
 
         <table>
 			    <tr>
-			    <c:forEach var="article" items="${articleList}" varStatus="status">
-			    	<c:if test="${status.index % 4 == 0}">
-			    		</tr><tr>
-			    	</c:if>
-			    	
-			    		<td onclick="location.href='<c:url value='/donationList/${article.category}' >
-			  							<c:param name='articleId' value='${article.articleId}'/>
-			  						</c:url>'">
-                			<div>${article.title}</div>
-                			<div><img src="<c:url value='/upload/${article.fileName}'/>" alt=""></div>
-                    		<%-- <div><img src="../upload/${article.fileName}" alt=""></div> --%>
-                		</td>
-			    </c:forEach>
+				    <c:forEach var="article" items="${articleList}" varStatus="status">
+				    	<c:if test="${status.index % 4 == 0}">
+				    		</tr><tr>
+				    	</c:if>
+				    	<c:choose>
+		               		<c:when test="${sessionScope.userId ne null}">
+					    		<td onclick="location.href='<c:url value='/donationList/${article.category}' >
+					  							<c:param name='articleId' value='${article.articleId}'/>
+					  						</c:url>'">
+		                			<div>${article.title}</div>
+		                			<div><img src="<c:url value='/upload/${article.fileName}'/>" alt=""></div>
+		                		</td>
+		                	</c:when>
+		               		<c:otherwise>
+		               			<td onclick="confirm('로그인 후 이용가능한 서비스입니다.')">
+		                			<div>${article.title}</div>
+		                			<div><img src="<c:url value='/upload/${article.fileName}'/>" alt=""></div>
+		                		</td>
+		                	</c:otherwise>
+		                </c:choose>
+				    </c:forEach>
 				</tr>
-
         </table>
     </div>
 </body>

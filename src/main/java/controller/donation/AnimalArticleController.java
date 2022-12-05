@@ -171,25 +171,27 @@ public class AnimalArticleController implements Controller{
             
             animal.setImageList(imageList);
             
-            log.debug("ANimalArticle Controller: {}", animal);
+            log.debug("AnimalArticle Controller: {}", animal);
         }      
     	 
     	 try {
     		 AnimalManager manager = AnimalManager.getInstance();
     		 int articleId = manager.create(animal);
     		 animal.setArticleId(articleId);
+    		 log.debug("AnimalArticle Controller-성공: {}", animal);
     		 
     		 for (int i=0; i<imageList.size(); i++)
                  imageList.get(i).setArticleId(articleId);
              
              //DONATION_IMAGE 테이블에 레코드 생성
              for (int i=0; i<imageList.size(); i++)
-                 manager.create_image(imageList.get(i));
-    		 return "redirect:/donationList/animal?articleId="+articleId; 
+                 manager.createImage(imageList.get(i));
+    		 return "redirect:/donationList/animal?articleId="+articleId;
     	 }catch (Exception e) {
     		 request.setAttribute("createFailed", true);
     		 request.setAttribute("exception", e);
     		 request.setAttribute("animal", animal);
+    		 log.debug("AnimalArticle Controller-실패: {}", animal);
     		 return "/donationForm/animalForm.jsp";
 		}
 	}

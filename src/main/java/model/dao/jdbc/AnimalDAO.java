@@ -1,4 +1,4 @@
-package model.dao;
+package model.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -154,7 +154,6 @@ public class AnimalDAO {
 			String sql = sb.toString();
 			jdbcUtil.setSqlAndParameters(sql, new Object[] { articleId });
             int result = jdbcUtil.executeUpdate(); // delete 문 실행
-            System.out.println("DONATION_ARTICLE table " + result + "개 삭제 성공");
             return result;
 		}catch (Exception ex) {
             jdbcUtil.rollback();
@@ -189,7 +188,7 @@ public class AnimalDAO {
 	}
 	
 	
-	public int create_image(DonationImage image) throws SQLException {
+	public int createImage(DonationImage image) throws SQLException {
         try {
             //DONATION_IMAGE
             String sql3 = "INSERT INTO DONATION_IMAGE VALUES (?, ?, ?)";

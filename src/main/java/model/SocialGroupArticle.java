@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SocialGroupArticle extends DonationArticle
+@SuppressWarnings("serial")
+public class SocialGroupArticle extends DonationArticle  implements Serializable
 {
   //private int article_id; //부모클래스에 존재
     private int age;
@@ -11,9 +13,7 @@ public class SocialGroupArticle extends DonationArticle
     private String area;
     private String situation; //현재 상황
     
-    public SocialGroupArticle() {
-    
-    }
+    public SocialGroupArticle() {}
 
     public SocialGroupArticle(int articleId, String title, String category, String deadline, String bankName,
             String accHolder, String accNum, String idCheck, String dueDate, String usePlan, String otherText,

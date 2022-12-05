@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import controller.Controller;
 import model.AnimalArticle;
 import model.DonationComment;
-
+import model.DonationImage;
 import model.DonationReceipt;
 
 import model.Donator;
@@ -39,6 +39,8 @@ public class ViewAnimalArticleController implements Controller{
 			
 			AnimalManager manager = AnimalManager.getInstance();
 			AnimalArticle article = manager.findAnimalArticleByArticleId(articleId);
+			List<DonationImage> imageList = manager.findImageList(articleId);
+			article.setImageList(imageList);
 			System.out.println("articleInfo: "+article);
 			request.setAttribute("article", article);
 			

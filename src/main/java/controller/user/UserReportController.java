@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import model.UserReport;
-import model.dao.UserReportDAO;
+import model.dao.jdbc.UserReportDAO;
 import model.service.UserNotFoundException;
 import model.service.UserReportManager;
 

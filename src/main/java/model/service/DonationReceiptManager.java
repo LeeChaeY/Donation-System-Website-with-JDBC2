@@ -5,7 +5,7 @@ import java.util.List;
 
 import model.DonationReceipt;
 import model.ReceiptImage;
-import model.dao.DonationReceiptDAO;
+import model.dao.jdbc.DonationReceiptDAO;
 
 public class DonationReceiptManager {
 	private static DonationReceiptManager receiptMan = new DonationReceiptManager();

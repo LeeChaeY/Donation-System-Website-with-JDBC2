@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DisasterArticle extends DonationArticle {
+@SuppressWarnings("serial")
+public class DisasterArticle extends DonationArticle implements Serializable{
    //DisasterDto
    private String type;
    private String name;

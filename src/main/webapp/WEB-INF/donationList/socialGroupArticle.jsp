@@ -597,7 +597,7 @@
                             <a href="<c:url value='/donationList/commentDelete' >
                                         <c:param name='articleId' value='${article.articleId}'/>
                                         <c:param name='category' value='${article.category}'/>
-                                        <c:param name='commentId' value='${article.commentId}'/>
+                                        <c:param name='commentId' value='${comm.commentId}'/>
                                     </c:url>" onclick="confirm('댓글을 삭제하시겠습니까?')">삭제</a>       
                         </div>
                     </c:if>

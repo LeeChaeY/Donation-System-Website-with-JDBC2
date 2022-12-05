@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class AnimalArticle extends DonationArticle{
+@SuppressWarnings("serial")
+public class AnimalArticle extends DonationArticle implements Serializable{
 	private String name;
 	private String area;
 	private String type;

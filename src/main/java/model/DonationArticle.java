@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class DonationArticle {
+@SuppressWarnings("serial")
+public class DonationArticle implements Serializable{
 	private int articleId;
 	private String title;
 	private String category;

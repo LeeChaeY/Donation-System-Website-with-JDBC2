@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.DonationComment;
-import model.dao.DonationCommentDAO;
+import model.dao.jdbc.DonationCommentDAO;
 
 public class CommentManager {
 	private static CommentManager commentMan = new CommentManager();

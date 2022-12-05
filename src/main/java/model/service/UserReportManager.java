@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.UserReport;
-import model.dao.UserReportDAO;
+import model.dao.jdbc.UserReportDAO;
 
 public class UserReportManager {
 	
