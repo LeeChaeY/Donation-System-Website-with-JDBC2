@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public class DisasterArticle extends DonationArticle implements Serializable{
+public class DisasterArticle extends DonationArticle{
    //DisasterDto
    private String type;
    private String name;

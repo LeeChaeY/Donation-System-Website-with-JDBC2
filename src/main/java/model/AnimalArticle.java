@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("serial")
-public class AnimalArticle extends DonationArticle implements Serializable{
+public class AnimalArticle extends DonationArticle{
 	private String name;
 	private String area;
 	private String type;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public class SocialGroupArticle extends DonationArticle  implements Serializable
+public class SocialGroupArticle extends DonationArticle 
 {
   //private int article_id; //부모클래스에 존재
     private int age;
