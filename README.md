@@ -6,8 +6,8 @@
 
 <프로젝트 테스트용 ID/PW, 신분증 이미지 파일>    
 1. ID: hks  
-PW: hks  
+   PW: hks  
 2. <img src="https://user-images.githubusercontent.com/114930149/207732063-6b1746ab-0f4f-45ce-8c26-d3d7d2f6f59c.jpg" align="left">
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
- &emsp;&emsp; -> 신분증의 이름, 생년월일 정보가 회원의 이름, 생년월일 정보와 일치하면 신분증 인증이 완료됩니다.
+  <br><br><br><br><br><br><br><br><br><br><br><br><br>&emsp;&emsp; 
+  -> 신분증의 이름, 생년월일 정보가 회원의 이름, 생년월일 정보와 일치하면 신분증 인증이 완료됩니다.
 
