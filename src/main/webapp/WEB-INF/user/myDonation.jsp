@@ -82,15 +82,15 @@
 
            <c:forEach var="donation" items="${donations}">
 				<tr>
-	                <c:if test="${'animal' eq donation.category }">
-						<td><img src="../img/animal.png" alt=""></td>
-					</c:if>	
-					<c:if test="${'disaster' eq donation.category }">
-						<td><img src="../img/disaster.jpg" alt=""></td>
-					</c:if>	
-					<c:if test="${'socialGroup' eq donation.category }">
-						<td><img src="../img/volunteer.jpg" alt=""></td>
-					</c:if>	
+	               <c:if test="${'animal' eq donation.category }">
+	              	 <td><img src="../img/animal.png" alt=""></td>
+	               </c:if>   
+	               <c:if test="${'disaster' eq donation.category }">
+	                  <td><img src="../img/disaster.jpg" alt=""></td>
+	               </c:if>   
+	               <c:if test="${'socialGroup' eq donation.category }">
+	                  <td><img src="../img/volunteer.jpg" alt=""></td>
+	               </c:if>   
 	                <td>${donation.title }</td>
 	                <td>${donation.writer }</td>
 	                <td>${donation.amount }</td>

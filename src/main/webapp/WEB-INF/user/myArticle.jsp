@@ -85,33 +85,31 @@
 
 			<c:forEach var="article" items="${myArticles}">
 				<tr>
-					<c:if test="${'animal' eq article.category }">
-						<td><img src="../img/animal.png" alt=""></td>
-					</c:if>	
-					<c:if test="${'disaster' eq article.category }">
-						<td><img src="../img/disaster.jpg" alt=""></td>
-					</c:if>	
-					<c:if test="${'socialGroup' eq article.category }">
-						<td><img src="../img/volunteer.jpg" alt=""></td>
-					</c:if>	
-		                <td onclick="location.href='<c:url value='/donationList/${article.category}' >
-				  							<c:param name='articleId' value='${article.articleId}'/>
-				  						</c:url>'">
-		                		${article.title }
-		                </td>
-		                <td>${article.createDate }</td>
-		                <td>${article.totalAmount }</td>
-		                <td>${article.receiptCheck }</td>
-		                <td> 
-		                	<span class="update">
-				  				<a href="<c:url value='/donationForm/${article.category }ArticleUpdate' >
-				  					<c:param name='userId' value='${article.userId}'/>
-				  					<c:param name='articleId' value='${article.articleId}'/>
-				  				</c:url>">UPDATE</a> 
-				  			</span>
-				  		</td>
-				
-	                
+	                <c:if test="${'animal' eq donation.category }">
+	              	 <td><img src="../img/animal.png" alt=""></td>
+	               </c:if>   
+	               <c:if test="${'disaster' eq donation.category }">
+	                  <td><img src="../img/disaster.jpg" alt=""></td>
+	               </c:if>   
+	               <c:if test="${'socialGroup' eq donation.category }">
+	                  <td><img src="../img/volunteer.jpg" alt=""></td>
+	               </c:if> 
+	                <td onclick="location.href='<c:url value='/donationList/${article.category}' >
+			  							<c:param name='articleId' value='${article.articleId}'/>
+			  						</c:url>'">
+	                		${article.title }
+	                </td>
+	                <td>${article.createDate }</td>
+	                <td>${article.totalAmount }</td>
+	                <td>${article.receiptCheck }</td>
+	                <td> 
+	                	<span class="update">
+			  				<a href="<c:url value='/donationForm/${article.category }ArticleUpdate' >
+			  					<c:param name='userId' value='${article.userId}'/>
+			  					<c:param name='articleId' value='${article.articleId}'/>
+			  				</c:url>">UPDATE</a> 
+			  			</span>
+			  		</td>
 	            </tr>
 			</c:forEach>
         </table>
