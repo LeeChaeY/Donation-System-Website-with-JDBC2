@@ -282,12 +282,6 @@
                 <br>
                 <textarea name="other_text" id="other_text" rows="7">${article.otherText }</textarea>
             </div>
-            
-            <div>
-                <label for="img">영수증 사진</label>
-                <br>
-                <input type="file" id="receipt_img" name="receipt_img">
-            </div>
 
             <div class="btn">
                 <input type="button" value="Update" onClick="AnimalArticleUpdate()">
