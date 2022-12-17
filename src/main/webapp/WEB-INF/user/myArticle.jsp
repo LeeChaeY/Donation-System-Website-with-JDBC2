@@ -85,13 +85,13 @@
 
 			<c:forEach var="article" items="${myArticles}">
 				<tr>
-	                <c:if test="${'animal' eq donation.category }">
+	               <c:if test="${'animal' eq article.category }">
 	              	 <td><img src="../img/animal.png" alt=""></td>
 	               </c:if>   
-	               <c:if test="${'disaster' eq donation.category }">
+	               <c:if test="${'disaster' eq article.category }">
 	                  <td><img src="../img/disaster.jpg" alt=""></td>
 	               </c:if>   
-	               <c:if test="${'socialGroup' eq donation.category }">
+	               <c:if test="${'socialGroup' eq article.category }">
 	                  <td><img src="../img/volunteer.jpg" alt=""></td>
 	               </c:if> 
 	                <td onclick="location.href='<c:url value='/donationList/${article.category}' >

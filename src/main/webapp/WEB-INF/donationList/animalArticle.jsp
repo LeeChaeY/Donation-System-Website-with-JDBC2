@@ -434,7 +434,7 @@
 
                     <div>
                         <div class="basic">중성화 유무</div>
-                        <div>${article.gender }</div>
+                        <div>${article.neutering }</div>
                     </div>
 
                     <div>
